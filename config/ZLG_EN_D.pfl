@@ -1,0 +1,2818 @@
+MAIN_SEG
+ version "96.063831.002D"
+ baugruppe "MZE1"
+ device "ZLG"
+ devicenumber 01
+ progcycle 25
+ versiondata 500,28
+ numberdata 500,6
+ logoff 10000,0
+ logon 10000,0
+ genres 10000,0
+ baudrate BR38400
+ modulnames "MZE1","MDE102","MDE102","MDE102","MRA200","MRA200","MRA200","MBI200","MUI100","MRA100"
+END_SEG
+
+SET_SEG
+ setwrite 100,0
+END_SEG
+
+PAR_SEG
+; par name,typ,Adr,dim,skal,min,max,nachstellen,off
+
+; Kommunikationsdelays
+ ram_par 200,0
+ default_par 200,0
+ par_write 10000,0
+ par_reset 10000,0
+ par_fix 30000,0
+
+ level "Access level 1",1
+  modul 4,LOGOFF
+   group "PC Vehicle Number",DWORD,10
+    par "PCFNR",VNUM,1,"",0.000015258789,0.00000,9999.00000,5,0
+    help "PC Vehicle Number"
+ level "Access level 2",2
+  modul 1,LOGOFF
+   group "Wheel diameter",DWORD,10
+    par "RDMLDG",VNUM,2,"mm",0.000015258789,580.00000,660.00000,5,0
+    help "Wheel diameter trailer bogie"
+    par "RDMTDG1",VNUM,3,"mm",0.000015258789,580.00000,660.00000,5,0
+    help "Wheel diameter motor bogie 1"
+    par "RDMTDG2",VNUM,4,"mm",0.000015258789,580.00000,660.00000,5,0
+    help "Wheel diameter motor bogie 2"
+ level "Access level 3",3
+  modul 1,LOGOFF
+   group "Customer parameter",DWORD,10
+    par "NSV",VNUM,5,"",0.000015258789,0.00000,10.00000,5,0
+    help "Number of closing attempts"
+    par "TBAUS",VNUM,6,"s",0.000015258789,0.00000,2000.00000,5,0
+    help "Shut-off time interior lighting after power down"
+    par "TFAS",VNUM,11,"s",0.000015258789,0.00000,10.00000,5,0
+    help "Warning time for automatic close"
+    par "TFT",VNUM,10,"s",0.000015258789,0.00000,10.00000,5,0
+    help "Warning time for door release"
+    par "TNDZOE",VNUM,12,"s",0.000015258789,0.00000,10.00000,5,0
+    help "Time delay after Deactivation central opening"
+    par "TOHFF",VNUM,7,"s",0.000015258789,0.00000,60.00000,5,0
+    help "Keep open time for driver's door"
+    par "TOZ",VNUM,8,"s",0.000015258789,0.00000,60.00000,5,0
+    help "Door open time"
+    par "VZS",VNUM,9,"s",0.000015258789,0.00000,10.00000,5,0
+    help "Advance warning time automatic closing"
+ level "Access level 4",4
+  modul 1,LOGOFF
+   group "Logical parameter",BYTE,10
+    par "SPLDC",LOG,9
+    help "Block load shedding DC"
+    par "SPV40",LOG,8
+    help "Block speed limit V40"
+   group "Numerical parameter",DWORD,10
+    par "AFLF1",VNUM,13,"-",0.000015258789,1.00000,10.00000,5,0
+    help "Number of errors for minor malfunctions ESP 1"
+    par "AFLF2",VNUM,14,"-",0.000015258789,1.00000,10.00000,5,0
+    help "Number of errors for minor malfunctions ESP 2"
+    par "RKM",VNUM,15,"",0.000015258789,0.00000,30000.00000,5,0
+    help "Number of km for reset ESP"
+    par "TLF1",VNUM,16,"s",0.000015258789,1.00000,1200.00000,5,0
+    help "Minimum time for minor malfunction 1"
+    par "TLF2",VNUM,17,"s",0.000015258789,1.00000,1200.00000,5,0
+    help "Minimum time for minor malfunction 2"
+    par "TVHZB",VNUM,18,"s",0.000015258789,0.00000,200.00000,5,0
+    help "Delay time for heat operation release"
+   group "Test parameter",BYTE,10
+    par "TESTPT",LOG,10
+    help "Test parameter Test tower"
+    par "TTEST",LOG,11
+    help "Activation of door test function"
+END_SEG
+
+ANZ_SEG
+ anzdata 500,243
+ var "Zykluszähler",NUM,WORD,0,$FFFF,"",1,0,65535,0,0
+ help "Program cycle counter"
+ var "Geräte_Status",HEX,WORD,2,$FFFF,"",1,0,$FFFF,0,0
+ help "Device status"
+ var "LOGIK_EIN",NUM,BYTE,4,$FF,"",1,0,255,0,0
+ help "Logic is switched on"
+ var "AESL_N01",LOG,BYTE,9,$02
+ help "A: Release drive with single control line NOT"
+ var "ASB01",LOG,BYTE,10,$01
+ help "A: Track brake activation"
+ var "ASBF",LOG,BYTE,7,$20
+ help "Track brake request"
+ var "ASTH01",LOG,BYTE,10,$02
+ help "A: Activation Lift current collector"
+ var "ASTS01",LOG,BYTE,11,$01
+ help "A: Activation Lower current collector"
+ var "EBR_N",LOG,BYTE,6,$10
+ help "Single control line Brake NOT"
+ var "EFA",LOG,BYTE,6,$02
+ help "Single control line Drive"
+ var "EFR1",LOG,BYTE,6,$08
+ help "Single control line Travel direction 1"
+ var "EFR2",LOG,BYTE,6,$01
+ help "Single control line Travel direction 2"
+ var "EGBR_N",LOG,BYTE,6,$20
+ help "Single control line Hazard brake NOT"
+ var "ENAB_N",LOG,BYTE,8,$20
+ help "Single control line Emergency shutdown NOT"
+ var "EZBR_N",LOG,BYTE,8,$40
+ help "Single control line Automatic brake NOT"
+ var "FESL_N",LOG,BYTE,6,$40
+ help "Release drive with single control line NOT"
+ var "FHSOK",LOG,BYTE,8,$02
+ help "Fuse monitoring 750V UTA/BNU"
+ var "FNB6",LOG,BYTE,8,$04
+ help "Passenger emergency brake Door 6"
+ var "FNB8",LOG,BYTE,6,$04
+ help "Passenger emergency brake Door 8"
+ var "FOK",LOG,BYTE,8,$01
+ help "Fuse monitoring 24V circuit breakers OK"
+ var "FSZB",LOG,BYTE,6,$80
+ help "Driver's cab train occupied"
+ var "FSZBG01",LOG,BYTE,9,$01
+ help "A: Driver's cab in train is occupied, saved"
+ var "STNA",LOG,BYTE,7,$02
+ help "Emergency lower current collector ON"
+ var "STO",LOG,BYTE,7,$01
+ help "Current collector is above"
+ var "STU",LOG,BYTE,7,$08
+ help "Current collector is below"
+ var "SUSB1",LOG,BYTE,7,$80
+ help "Track brake current monitoring Vehicle section 2, Side 1"
+ var "SUSB2",LOG,BYTE,7,$40
+ help "Track brake current monitoring Vehicle section 2, Side 2"
+ var "SUSB3",LOG,BYTE,7,$10
+ help "Track brake current monitoring Vehicle section 3, Side 2"
+ var "TFL02",LOG,BYTE,5,$04
+ help "A:Delete door release side 2"
+ var "UFAKT",LOG,BYTE,8,$08
+ help "Fuse monitoring active"
+ var "VK3",LOG,BYTE,8,$80
+ help "Speed less than 3 km/h"
+ var "AAT102_",LOG,BYTE,52,$04
+ help "A: Illuminated indicator open all doors side 1, BSM22_BTN2"
+ var "AAT104_",LOG,BYTE,52,$08
+ help "A: Illuminated indicator open all doors side 1, BSM24_BTN4"
+ var "AAT202_",LOG,BYTE,52,$10
+ help "A: Illuminated indicator open all doors side 2, BSM22_BTN2"
+ var "AAT204_",LOG,BYTE,52,$20
+ help "A: Illuminated indicator open all doors side 2, BSM24_BTN4"
+ var "ABLE02_",LOG,BYTE,66,$08
+ help "A: Activation Interior lighting ON, BSM22_BTN2"
+ var "ABLE04_",LOG,BYTE,66,$10
+ help "A: Activation Interior lighting ON, BSM24_BTN4"
+ var "ABPA_",LOG,BYTE,37,$04
+ help "Request operating status prepared by application"
+ var "AEK26_",LOG,BYTE,52,$40
+ help "A: Activation uncouple, BSM27-1_BTN26"
+ var "AEK27_",LOG,BYTE,52,$80
+ help "A: Activation uncouple, BSM27-2_BTN27"
+ var "AESL_N_",LOG,BYTE,38,$40
+ help "Request release drive with single control line NOT"
+ var "AF1_204_",LOG,BYTE,80,$02
+ help "E: Driver Alarm 1/2, BSM24_BTN4"
+ var "AF1_205_",LOG,BYTE,80,$04
+ help "A: Driver Alarm 1/2, BSM25_BTN5"
+ var "AF1_206_",LOG,BYTE,80,$08
+ help "E: Driver Alarm 1/2, BSM26_BTN6"
+ var "AFLE02_",LOG,BYTE,80,$10
+ help "A: Activation High beam light ON, BSM22_BTN2"
+ var "AFLE04_",LOG,BYTE,80,$20
+ help "A: Activation High beam light ON, BSM24_BTN4"
+ var "AFNB03_",LOG,BYTE,80,$40
+ help "A: Illum. indicator passenger emerg. brake controller, BSM23_BTN3"
+ var "AFNB05_",LOG,BYTE,80,$80
+ help "A: Illum. indicator passenger emerg. brake controller, BSM25_BTN5"
+ var "AFREIW_",LOG,BYTE,37,$80
+ help "Application release vehicle bus"
+ var "AFS1_N09_",LOG,BYTE,75,$02
+ help "Request spring loading level 1 NOT BTN 9 (ASM1)"
+ var "AFS1_N10_",LOG,BYTE,75,$04
+ help "Request spring loading level 1 NOT BTN 10 (ASM2)"
+ var "AFS2_N09_",LOG,BYTE,75,$08
+ help "Request spring loading level 2 NOT BTN 9 (ASM1)"
+ var "AFS2_N10_",LOG,BYTE,75,$10
+ help "Request spring loading level 2 NOT BTN 10 (ASM2)"
+ var "AFSBR_",LOG,BYTE,62,$01
+ help "Request spring brake"
+ var "AFSL09_",LOG,BYTE,74,$08
+ help "Request Release spring brake BTN 9 (ASM1)"
+ var "AFSL10_",LOG,BYTE,74,$10
+ help "Request Release spring brake BTN 10 (ASM2)"
+ var "AFT104_",LOG,BYTE,81,$01
+ help "A: Illuminated indicator Open door 1, BSM24_BTN4"
+ var "AFT105_",LOG,BYTE,81,$02
+ help "A: Illuminated indicator Open door 7, BSM25_BTN5"
+ var "AFT202_",LOG,BYTE,81,$04
+ help "A: Illuminated indicator Open door 2, BSM22_BTN2"
+ var "AFZGK_",LOG,BYTE,66,$20
+ help "Couple warning light in vehicle goes out"
+ var "AKH03_",LOG,BYTE,81,$10
+ help "A: Heat outside camera, BSM23_BTN3"
+ var "AKH04_",LOG,BYTE,81,$20
+ help "A: Heat outside camera, BSM24_BTN4"
+ var "AKH_",LOG,BYTE,62,$08
+ help "Heat outside camera ON Vehicle"
+ var "AOK09_",LOG,BYTE,104,$80
+ help "Drive OK BTN 9 (ASM1)"
+ var "ASAND09_",LOG,BYTE,81,$40
+ help "A: Request Sand BTN 9 (ASM1)"
+ var "ASAND10_",LOG,BYTE,81,$80
+ help "A: Request Sand BTN 10 (ASM2)"
+ var "ASB06_",LOG,BYTE,82,$01
+ help "A: Activation Track brake, BSM26_BTN6"
+ var "ASB1_",LOG,BYTE,59,$40
+ help "Request track brake 1"
+ var "ASB2_",LOG,BYTE,59,$80
+ help "Request track brake 2"
+ var "ASBF06_",LOG,BYTE,99,$40
+ help "E: Request Track brake, BSM26_BTN6"
+ var "ASB_",LOG,BYTE,60,$01
+ help "Request track brake"
+ var "ASE03_",LOG,BYTE,82,$02
+ help "A: Activation windshield wiper ON, BSM23_BTN3"
+ var "ASE05_",LOG,BYTE,82,$04
+ help "A: Activation windshield wiper ON, BSM25_BTN5"
+ var "ASST_N02_",LOG,BYTE,82,$08
+ help "A: Buzzer activation malfunction, BSM22_BTN2"
+ var "ASST_N04_",LOG,BYTE,82,$10
+ help "A: Buzzer activation malfunction, BSM24_BTN4"
+ var "ASTH_",LOG,BYTE,58,$80
+ help "Activation Lift current collector"
+ var "ASTS_",LOG,BYTE,59,$01
+ help "Activation Lower current collector"
+ var "AT103_",LOG,BYTE,91,$20
+ help "E: All doors Side 1 open, BSM23_BTN3"
+ var "AT105_",LOG,BYTE,97,$02
+ help "E: All doors Side 1 open, BSM25_BTN5"
+ var "AT203_",LOG,BYTE,91,$40
+ help "E: All doors Side 2 open, BSM23_BTN3"
+ var "ATA02_",LOG,BYTE,82,$20
+ help "A: Door release or all doors open, BSM22_BTN2"
+ var "ATAIBIS_",LOG,BYTE,69,$01
+ help "Door release or all doors open (IBIS)"
+ var "ATA_",LOG,BYTE,53,$20
+ help "Door release and all doors open"
+ var "ATF103_",LOG,BYTE,82,$40
+ help "A: Illuminated indicator door release side 1, BSM23_BTN3"
+ var "ATF203_",LOG,BYTE,82,$80
+ help "A: Illuminated indicator door release side 2, BSM23_BTN3"
+ var "ATF205_",LOG,BYTE,83,$01
+ help "A: Illuminated indicator door release side 2, BSM25_BTN5"
+ var "ATF_",LOG,BYTE,37,$10
+ help "All doors in vehicle are closed (Train bus Slave)"
+ var "ATS1_",LOG,BYTE,50,$10
+ help "All doors closed, side 1"
+ var "ATS2_",LOG,BYTE,50,$20
+ help "All doors closed, side 2"
+ var "ATZ_",LOG,BYTE,114,$10
+ help "All doors in trainset closed"
+ var "AWE02_",LOG,BYTE,83,$02
+ help "A: Illum. indicator alarm on, BSM22_BTN2"
+ var "AWE04_",LOG,BYTE,83,$04
+ help "A: Illum. indicator alarm on, BSM24_BTN4"
+ var "AWE_",LOG,BYTE,65,$80
+ help "Illuminated indicator alarm ON"
+ var "AWHB_",LOG,BYTE,48,$40
+ help "Request warming mode"
+ var "BBB_",LOG,BYTE,47,$10
+ help "Block BISS operation"
+ var "BISSZOK_",LOG,BYTE,41,$80
+ help "BISS Train bus system OK"
+ var "BLE05_",LOG,BYTE,97,$04
+ help "E: Lighting ON, BSM25_BTN5"
+ var "BLR12_",LOG,BYTE,78,$02
+ help "Scroll backwards BTN12 (FERM1)"
+ var "BLR13_",LOG,BYTE,78,$04
+ help "Scroll backwards BTN13 (FERM2)"
+ var "BLSFUG_",LOG,BYTE,55,$08
+ help "Loading level Vehicle invalid"
+ var "BLSO09_",LOG,BYTE,72,$02
+ help "Loading level OK BTN 9 (ASM1)"
+ var "BLSO10_",LOG,BYTE,72,$04
+ help "Loading level OK BTN 10 (ASM2)"
+ var "BLSUG09_",LOG,BYTE,83,$08
+ help "Loading level invalid BTN 9 (ASM1)"
+ var "BLSUG10_",LOG,BYTE,83,$10
+ help "Loading level invalid BTN 10 (ASM2)"
+ var "BLV12_",LOG,BYTE,77,$80
+ help "Scroll forwards BTN12 (FERM1)"
+ var "BLV13_",LOG,BYTE,78,$01
+ help "Scroll forwards BTN13 (FERM2)"
+ var "BRAB_09",LOG,BYTE,14,$04
+ help "E: Bremsablösung, BTN 9 (ASM1)"
+ var "BRAB_10",LOG,BYTE,14,$08
+ help "E: Bremsablösung, BTN 10 (ASM2)"
+ var "BRFF",LOG,BYTE,17,$20
+ help "Max. service brake driving instructor"
+ var "BRF_N02",LOG,BYTE,13,$08
+ help "Driving instructor Service brake NOT BTN 2 (BSM22)"
+ var "BRF_N04",LOG,BYTE,13,$10
+ help "Driving instructor Service brake NOT BTN 4 (BSM24)"
+ var "B_ACFREI07_",LOG,BYTE,70,$08
+ help "AC 400V full power available BTN 7 (BNU524)"
+ var "B_ACFREI08_",LOG,BYTE,70,$10
+ help "AC 400V full power available BTN 8 (BNU524)"
+ var "B_ACST07_",LOG,BYTE,83,$20
+ help "Malfunction AC BNU, BTN 7 (BNU524)"
+ var "B_ACST08_",LOG,BYTE,83,$40
+ help "Malfunction AC BNU, BTN 8 (BNU524)"
+ var "B_BNUOK07_",LOG,BYTE,70,$80
+ help "BNU OK BTN 7 (BNU524)"
+ var "B_BNUOK08_",LOG,BYTE,71,$01
+ help "BNU OK BTN 8 (BNU524)"
+ var "B_DCSPN07_",LOG,BYTE,71,$02
+ help "No economy operation BTN 7 (BNU524)"
+ var "B_DCSPN08_",LOG,BYTE,71,$04
+ help "No economy operation BTN 8 (BNU524)"
+ var "B_DCST07_",LOG,BYTE,83,$80
+ help "Malfunction DC BNU BTN 7 (BNU524)"
+ var "B_DCST08_",LOG,BYTE,84,$01
+ help "Malfunction DC BNU BTN 8 (BNU524)"
+ var "B_FBAT07_",LOG,BYTE,84,$02
+ help "Fuse DC 24V Battery OK BTN 7 (BNU524)"
+ var "B_FBAT08_",LOG,BYTE,84,$04
+ help "Fuse DC 24V Battery OK BTN 8 (BNU524)"
+ var "B_RAC107_",LOG,BYTE,84,$08
+ help "Status signal AC circuit breakers 1, BTN 7 (BNU524)"
+ var "B_RAC108_",LOG,BYTE,84,$10
+ help "Status signal AC circuit breakers 1, BTN 8 (BNU524)"
+ var "B_RAC207",LOG,BYTE,84,$20
+ help "Status signal AC circuit breakers 2, BTN 7 (BNU524)"
+ var "B_RAC208_",LOG,BYTE,84,$40
+ help "Status signal AC circuit breakers 2, BTN 8 (BNU524)"
+ var "B_ST07_",LOG,BYTE,70,$20
+ help "Accumulative failure BNU BTN 7 (BNU524)"
+ var "B_ST08_",LOG,BYTE,70,$40
+ help "Accumulative failure BNU BTN 8 (BNU524)"
+ var "B_UBOK07_",LOG,BYTE,104,$20
+ help "Battery voltage OK BTN 7 (BNU524)"
+ var "B_UBOK08_",LOG,BYTE,104,$40
+ help "Battery voltage OK BTN 8 (BNU524)"
+ var "B_UN007_",LOG,BYTE,84,$80
+ help "No line voltage BTN 7 (BNU524)"
+ var "B_UN008_",LOG,BYTE,85,$01
+ help "No line voltage BTN 8 (BNU524)"
+ var "B_UNOK07_",LOG,BYTE,70,$02
+ help "Line voltage OK BTN 7 (BNU524)"
+ var "B_UNOK08_",LOG,BYTE,70,$04
+ help "Line voltage OK BTN 8 (BNU524)"
+ var "DISD_",LOG,BYTE,66,$01
+ help "Dim text display"
+ var "DROK09_",LOG,BYTE,105,$01
+ help "Speed measurement reference wheel OK BTN 9 (ASM1)"
+ var "DROK10_",LOG,BYTE,105,$04
+ help "Speed measurement reference wheel OK BTN 10 (ASM2)"
+ var "DTL02_",LOG,BYTE,91,$10
+ help "DTL cut-out switch actuated, BSM22_BTN2"
+ var "DTL04_",LOG,BYTE,97,$01
+ help "DTL cut-out switch actuated, BSM24_BTN4"
+ var "DTL_",LOG,BYTE,67,$40
+ help "DTL-cut-out switch operated vehicle 1"
+ var "EBR06_",LOG,BYTE,99,$80
+ help "E: Single control line Brake, BSM26_BTN6"
+ var "EBROK09_",LOG,BYTE,71,$20
+ help "E-Brake OK BTN 9 (ASM1)"
+ var "EBROK10_",LOG,BYTE,71,$40
+ help "E-Brake OK BTN 10 (ASM2)"
+ var "EBR_N06_",LOG,BYTE,53,$02
+ help "E: Single control line Brake NOT, BSM26_BTN6"
+ var "EBR_N09_",LOG,BYTE,75,$80
+ help "Single control line Brake NOT BTN 9 (ASM1)"
+ var "EBR_N10_",LOG,BYTE,76,$01
+ help "Single control line Brake NOT BTN 10 (ASM2)"
+ var "EFA06_",LOG,BYTE,53,$01
+ help "E: Single control line Drive, BSM26_BTN6"
+ var "EFA09_",LOG,BYTE,76,$08
+ help "Single control line Drive BTN 9 (ASM1)"
+ var "EFA10_",LOG,BYTE,76,$10
+ help "Single control line Drive BTN 10 (ASM2)"
+ var "EFA_N06_",LOG,BYTE,100,$01
+ help "E: Single control line Drive NOT, BSM26_BTN6"
+ var "EFR102_",LOG,BYTE,69,$04
+ help "E: Single control line Travel direction 1,BSM22_BTN2"
+ var "EFR106_",LOG,BYTE,100,$02
+ help "E: Single control line Travel direction 1, BSM26_BTN6"
+ var "EFR109_",LOG,BYTE,76,$20
+ help "Single control line Travel direction 1 BTN 9 (ASM1)"
+ var "EFR110_",LOG,BYTE,76,$40
+ help "Single control line Travel direction 1 BTN 10 (ASM2)"
+ var "EFR1_N06_",LOG,BYTE,100,$04
+ help "E: Single control line Travel direction 1 NOT, BSM26_BTN6"
+ var "EFR202_",LOG,BYTE,69,$08
+ help "E: Single control line Travel direction 2,BSM22_BTN2"
+ var "EFR206_",LOG,BYTE,100,$08
+ help "E: Single control line Travel direction 2, BSM26_BTN6"
+ var "EFR209_",LOG,BYTE,76,$80
+ help "Single control line Travel direction 2 BTN 9 (ASM1)"
+ var "EFR210_",LOG,BYTE,77,$01
+ help "Single control line Travel direction 2, BTN 10 (ASM2)"
+ var "EFR2_N06_",LOG,BYTE,100,$10
+ help "E: Single control line Travel direction 2 NOT, BSM26_BTN6"
+ var "EGBR06_",LOG,BYTE,100,$40
+ help "E: Single control line Hazard brake, BSM26_BTN6"
+ var "EGBR_N06_",LOG,BYTE,100,$20
+ help "E: Single control line Hazard brake NOT, BSM26_BTN6"
+ var "EGBR_N09_",LOG,BYTE,76,$02
+ help "Single control line Hazard brake NOT BTN 9 (ASM1)"
+ var "EGBR_N10_",LOG,BYTE,76,$04
+ help "Single control line Hazard brake NOT BTN 10 (ASM2)"
+ var "ENAB06_",LOG,BYTE,100,$80
+ help "E: Single control line Emergency shutdown, BSM26_BTN6"
+ var "ENAB_N03_",LOG,BYTE,91,$80
+ help "Single control line Emergency shutdown NOT, BSM26_BTN6"
+ var "ENAB_N06_",LOG,BYTE,53,$08
+ help "E: Single control line Emergency shutdown NOT, BSM26_BTN6"
+ var "ENAB_N09_",LOG,BYTE,77,$08
+ help "Single control line Emergency shutdown NOT BTN 9 (ASM1)"
+ var "ENAB_N10_",LOG,BYTE,77,$10
+ help "Single control line Emergency shutdown NOT BTN 10 (ASM2)"
+ var "ESLBRAOK_",LOG,BYTE,44,$80
+ help "Single control line Brake OFF OK"
+ var "ESLBREOK_",LOG,BYTE,44,$40
+ help "Single control line Brake ON OK"
+ var "ESLB_",LOG,BYTE,47,$20
+ help "Block ESL operation"
+ var "ESLFAOK_",LOG,BYTE,44,$20
+ help "Single control line Drive OFF OK"
+ var "ESLFEOK_",LOG,BYTE,44,$10
+ help "Single control line Drive ON OK"
+ var "ESLFGAOK_",LOG,BYTE,45,$80
+ help "Single control line Release OFF OK"
+ var "ESLFGEOK_",LOG,BYTE,45,$40
+ help "Single control line Release ON OK"
+ var "ESLFRAAOK_",LOG,BYTE,46,$02
+ help "Single control line Travel direction 1 OFF OK"
+ var "ESLFRAEOK_",LOG,BYTE,46,$01
+ help "Single control line Travel direction 1 ON OK"
+ var "ESLFRBAOK_",LOG,BYTE,46,$08
+ help "Single control line Travel direction 2 OFF OK"
+ var "ESLFRBEOK_",LOG,BYTE,46,$04
+ help "Single control line Travel direction 2 ON OK"
+ var "ESLGBAOK_",LOG,BYTE,45,$02
+ help "Single control line Hazard brake OFF OK"
+ var "ESLGBEOK_",LOG,BYTE,45,$01
+ help "Single control line Hazard brake ON OK"
+ var "ESLNABAOK_",LOG,BYTE,45,$20
+ help "Single control line Emergency shutdown OFF OK"
+ var "ESLNABEOK_",LOG,BYTE,45,$10
+ help "Single control line Emergency shutdown ON OK"
+ var "ESLO09_",LOG,BYTE,105,$02
+ help "Single control lines OK BTN 9 (ASM1)"
+ var "ESLO10_",LOG,BYTE,105,$08
+ help "Single control lines OK BTN 10 (ASM2)"
+ var "ESLS09_",LOG,BYTE,74,$20
+ help "Malfunction single control lines BTN 9 (ASM1)"
+ var "ESLS10_",LOG,BYTE,74,$40
+ help "Malfunction single control lines BTN 10 (ASM2)"
+ var "ESLSG_",LOG,BYTE,47,$02
+ help "Malfunction Single control line saved"
+ var "ESLZBAOK_",LOG,BYTE,45,$08
+ help "Single control line Automatic brake OFF OK"
+ var "ESLZBEOK_",LOG,BYTE,45,$04
+ help "Single control line Automatic brake ON OK"
+ var "ETO",LOG,BYTE,14,$02
+ help "Bresmablösungsmeldung an BSG"
+ var "EZBR03_",LOG,BYTE,92,$01
+ help "E: Single control line Automatic brake, BSM23_BTN3"
+ var "EZBR06_",LOG,BYTE,101,$01
+ help "E: Single control line Automatic brake, BSM26_BTN6"
+ var "EZBR_N06_",LOG,BYTE,53,$04
+ help "E: Single control line Automatic brake NOT, BSM26_BTN6"
+ var "EZBR_N09_",LOG,BYTE,77,$02
+ help "Single control line Automatic brake NOT BTN 9 (ASM1)"
+ var "EZBR_N10_",LOG,BYTE,77,$04
+ help "Single control line Automatic brake NOT BTN 10 (ASM2)"
+ var "F1A06_",LOG,BYTE,101,$02
+ help "E: Spring brake Motor bogie 1 deselected, BSM26_BTN6"
+ var "F2A06_",LOG,BYTE,101,$04
+ help "E: Spring brake Motor bogie 2 deselected, BSM26_BTN6"
+ var "F2ZV_",LOG,BYTE,39,$08
+ help "Vehicle 2 in trainset exists"
+ var "F3A06_",LOG,BYTE,101,$08
+ help "E: Spring brake Bogie 1 deselected, BSM26_BTN6"
+ var "F3ZV_",LOG,BYTE,39,$10
+ help "Vehicle 3 in trainset exists"
+ var "F4ZV_",LOG,BYTE,39,$20
+ help "Vehicle 4 in trainset exists"
+ var "FA04_",LOG,BYTE,94,$04
+ help "E: Side preselection Drive enable, BSM24_BTN4"
+ var "FAG_",LOG,BYTE,62,$02
+ help "Spring brake is deselected"
+ var "FESL06_",LOG,BYTE,101,$20
+ help "E: Release Drive with single control line, BSM26_BTN6"
+ var "FESL_N04_",LOG,BYTE,94,$08
+ help "E: Single control line Release Drive ESL NOT, BSM24_BTN4"
+ var "FESL_N06_",LOG,BYTE,101,$10
+ help "E: Release Drive with single control line NOT, BSM26_BTN6"
+ var "FESL_N09_",LOG,BYTE,75,$20
+ help "ESL Release Drive with ESL NOT BTN 9 (ASM1)"
+ var "FESL_N10_",LOG,BYTE,75,$40
+ help "ESL Release Drive with ESL NOT BTN 10 (ASM2)"
+ var "FFK_",LOG,BYTE,48,$80
+ help "Release cooling operation air-conditioning systems"
+ var "FFN02_",LOG,BYTE,85,$80
+ help "A: Release passenger emergency brake, BSM22_BTN2"
+ var "FFN04_",LOG,BYTE,86,$01
+ help "A: Release passenger emergency brake, BSM24_BTN4"
+ var "FFN_",LOG,BYTE,55,$04
+ help "Release Passenger emergency brake"
+ var "FGB09_",LOG,BYTE,72,$80
+ help "Spring brake applied BTN 9 (ASM1)"
+ var "FGB10_",LOG,BYTE,73,$01
+ help "Spring brake applied BTN 10 (ASM2)"
+ var "FGESP_",LOG,BYTE,37,$01
+ help "Release event memory"
+ var "FGL09_",LOG,BYTE,73,$02
+ help "Spring brake released BTN 9 (ASM1)"
+ var "FGL10_",LOG,BYTE,73,$04
+ help "Spring brake released BTN 10 (ASM2)"
+ var "FHKW_",LOG,BYTE,48,$08
+ help "Release Heating/Air-conditioning warming mode"
+ var "FKA12_",LOG,BYTE,78,$20
+ help "Driver's cab air-conditioning system ON BTN 12 (FERM1)"
+ var "FKA13_",LOG,BYTE,78,$40
+ help "Driver's cab air-conditioning system ON BTN 13 (FERM2)"
+ var "FKB_",LOG,BYTE,69,$10
+ help "Release Coupling activation Vehicle"
+ var "FKEZ_",LOG,BYTE,42,$08
+ help "Vehicle couplings in trainset are in an end position"
+ var "FKE_",LOG,BYTE,85,$40
+ help "Vehicle couplings are in an end position"
+ var "FKLE12_",LOG,BYTE,78,$80
+ help "Func. Air dehumidifier ON BTN 12 (FERM1)"
+ var "FKLE13_",LOG,BYTE,79,$01
+ help "Func. Air dehumidifier ON BTN 13 (FERM2)"
+ var "FKLE_",LOG,BYTE,49,$80
+ help "Request Air dehumidifier driver's cab air-conditioning system"
+ var "FKLFR1_",LOG,BYTE,49,$20
+ help "Release fresh air operation air-conditioning system Veh. section 1"
+ var "FKLFR2_",LOG,BYTE,49,$40
+ help "Release fresh air operation air-conditioning system Veh. section 2"
+ var "FKLK1_",LOG,BYTE,49,$08
+ help "Release driver's cab air-conditioning system Veh. section 1"
+ var "FKLK2_",LOG,BYTE,49,$10
+ help "Release driver's cab air-conditioning system Veh. section 2"
+ var "FLE03_",LOG,BYTE,86,$02
+ help "E: High beam light ON, BSM23_BTN3"
+ var "FLE05_",LOG,BYTE,86,$04
+ help "E: High beam light ON, BSM25_BTN5"
+ var "FNB106_",LOG,BYTE,102,$01
+ help "E: Passenger emergency brake Door 1, BSM26_BTN6"
+ var "FNB206_",LOG,BYTE,101,$40
+ help "E: Passenger emergency brake Door 2, BSM26_BTN6"
+ var "FNB306_",LOG,BYTE,102,$02
+ help "E: Passenger emergency brake Door 3, BSM26_BTN6"
+ var "FNB406_",LOG,BYTE,101,$80
+ help "E: Passenger emergency brake Door 4, BSM26_BTN6"
+ var "FNB505_",LOG,BYTE,97,$08
+ help "E: Passenger emergency brake Door 5, BSM25_BTN5"
+ var "FNB704_",LOG,BYTE,94,$10
+ help "E: Passenger emergency brake Door 7, BSM24_BTN4"
+ var "FNBF_",LOG,BYTE,55,$01
+ help "Passenger emergency brake vehicle"
+ var "FNBZ_",LOG,BYTE,55,$02
+ help "Passenger emergency brake Train"
+ var "FNL05_",LOG,BYTE,97,$10
+ help "E: Monitoring Emergency release spring brake, BSM25_BTN5"
+ var "FOFFA_",LOG,BYTE,37,$02
+ help "Release Shutdown by the application"
+ var "FOK06_",LOG,BYTE,102,$04
+ help "E: Fuse monitoring 24V circuit breakers OK, BSM26_BTN6"
+ var "FR1_",LOG,BYTE,64,$10
+ help "Travel direction 1"
+ var "FR2_",LOG,BYTE,64,$20
+ help "Travel direction 2"
+ var "FRFK12_",LOG,BYTE,79,$20
+ help "Func. Fresh air operation ON BTN 12 (FERM1)"
+ var "FRFK13_",LOG,BYTE,79,$40
+ help "Func. Fresh air operation ON BTN 13 (FERM2)"
+ var "FS1A_",LOG,BYTE,38,$08
+ help "Driver's cab 1 is active"
+ var "FS1B02",LOG,BYTE,13,$80
+ help "Driver's cab 1 occupied BTN 2 (BSM22)"
+ var "FS2A_",LOG,BYTE,38,$10
+ help "Driver's cab 2 is active"
+ var "FS2B04",LOG,BYTE,14,$01
+ help "Driver's cab 2 occupied BTN 4 (BSM24)"
+ var "FSAG09_",LOG,BYTE,86,$08
+ help "E: Spring brake released, BTN 9 (ASM1)"
+ var "FSAG10_",LOG,BYTE,86,$10
+ help "E: Spring brake released, BTN 10 (ASM2)"
+ var "FSA_",LOG,BYTE,62,$04
+ help "Wrong spring brake switched off"
+ var "FSBWF_",LOG,BYTE,54,$80
+ help "Driver's cab in car is occupied Vehicle"
+ var "FSBW_",LOG,BYTE,37,$08
+ help "Driver's cab in car is occupied"
+ var "FSES03_",LOG,BYTE,92,$02
+ help "E: Drive block override switch, BSM23_BTN3"
+ var "FSES05_",LOG,BYTE,97,$20
+ help "E: Drive block override switch, BSM25_BTN5"
+ var "FSESF_",LOG,BYTE,67,$04
+ help "Drive block override switch Vehicle"
+ var "FSG03_",LOG,BYTE,81,$08
+ help "E: Current limit ON, BSM23_BTN3"
+ var "FSG05_",LOG,BYTE,86,$20
+ help "E: Drive block override switch, BSM25_BTN5"
+ var "FSG_",LOG,BYTE,105,$20
+ help "Drive current limit"
+ var "FSPF02",LOG,BYTE,13,$02
+ help "Driving instructor Drive block BTN 2 (BSM22)"
+ var "FSPF04",LOG,BYTE,13,$04
+ help "Driving instructor Drive block BTN 4 (BSM24)"
+ var "FSPFF",LOG,BYTE,17,$10
+ help "Drive block Driving instructor vehicle"
+ var "FSPF_",LOG,BYTE,59,$02
+ help "Drive block vehicle"
+ var "FSVFG_",LOG,BYTE,48,$20
+ help "Release voltage supply HKL passenger compartment"
+ var "FSVF_",LOG,BYTE,48,$10
+ help "Release voltage supply HKL driver's cab"
+ var "FSZB02_",LOG,BYTE,86,$40
+ help "E: Driver's cab Train occupied, BSM22_BTN2"
+ var "FSZB04_",LOG,BYTE,86,$80
+ help "E: Driver's cab Train occupied, BSM24_BTN4"
+ var "FSZBG_",LOG,BYTE,37,$20
+ help "Driver's cab in train is occupied, saved"
+ var "FSZBI03_",LOG,BYTE,87,$01
+ help "A: Drive block, BSM23_BTN3"
+ var "FT105_",LOG,BYTE,97,$40
+ help "E: Open door 7, BSM25_BTN5"
+ var "FT203_",LOG,BYTE,92,$04
+ help "E: Open door 2, BSM23_BTN3"
+ var "FZGK02_",LOG,BYTE,87,$02
+ help "A: Vehicle coupled, BSM22_BTN2"
+ var "GBRFF",LOG,BYTE,17,$40
+ help "Hazard braking Driving instructor Vehicle"
+ var "GBRF_N02",LOG,BYTE,13,$20
+ help "Driving instructor Hazard brake NOT BTN 2 (BSM22)"
+ var "GBRF_N04",LOG,BYTE,13,$40
+ help "Driving instructor Hazard brake NOT BTN 4 (BSM24)"
+ var "GESL_",LOG,BYTE,46,$10
+ help "Good status signal Single control line"
+ var "GUN009_",LOG,BYTE,71,$08
+ help "Line voltage OK BTN 9 (ASM1)"
+ var "GUN010_",LOG,BYTE,71,$10
+ help "Line voltage OK BTN 10 (ASM2)"
+ var "HKLAUS_",LOG,BYTE,48,$02
+ help "Heating/Air-conditioning system OFF"
+ var "HKLSTOP_",LOG,BYTE,69,$20
+ help "HKL emergency stop Vehicle"
+ var "HW_",LOG,BYTE,66,$40
+ help "Stop request (Train bus Slave)"
+ var "IBKZ_",LOG,BYTE,39,$40
+ help "Communication train bus OK"
+ var "IMA12_",LOG,BYTE,87,$04
+ help "Information screen active BTN 12 (FERM1)"
+ var "IMA13_",LOG,BYTE,87,$08
+ help "Information screen active BTN 13 (FERM2)"
+ var "IMBSON_",LOG,BYTE,33,$08
+ help "Intermodule bus OK"
+ var "ISLAVE_",LOG,BYTE,38,$02
+ help "Self = Slave"
+ var "K1B01_",LOG,BYTE,42,$01
+ help "Coupling Driver's cab 1 is occupied"
+ var "K2B01_",LOG,BYTE,42,$02
+ help "Coupling Driver's cab 2 is occupied"
+ var "KGS26_",LOG,BYTE,87,$10
+ help "Coupling is extended and locked, BSM27-1_BTN26"
+ var "KGS27_",LOG,BYTE,87,$20
+ help "Coupling is extended and locked, BSM27-2_BTN27"
+ var "KNG106_",LOG,BYTE,102,$08
+ help "E: Emergency activation Door 1, BSM26_BTN6"
+ var "KNG206_",LOG,BYTE,102,$10
+ help "E: Emergency activation Door 2, BSM26_BTN6"
+ var "KNG306_",LOG,BYTE,102,$20
+ help "E: Emergency activation Door 3, BSM26_BTN6"
+ var "KNG406_",LOG,BYTE,102,$40
+ help "E: Emergency activation Door 4, BSM26_BTN6"
+ var "KNG505_",LOG,BYTE,97,$80
+ help "E: Emergency activation Door 5, BSM25_BTN5"
+ var "KNG605_",LOG,BYTE,98,$01
+ help "E: Emergency activation Door 6, BSM25_BTN5"
+ var "KNG704_",LOG,BYTE,94,$20
+ help "E: Emergency activation Door 7, BSM24_BTN4"
+ var "KNG804_",LOG,BYTE,94,$40
+ help "E: Emergency activation Door 8, BSM24_BTN4"
+ var "LASTAC_",LOG,BYTE,47,$40
+ help "Load shedding AC 400V"
+ var "LASTDC_",LOG,BYTE,47,$80
+ help "Load shedding DC 24V"
+ var "LAT02_",LOG,BYTE,87,$40
+ help "A: Lamp test, BSM22_BTN2"
+ var "LAT04_",LOG,BYTE,87,$80
+ help "A: Lamp test, BSM24_BTN4"
+ var "LMPT02_",LOG,BYTE,89,$01
+ help "E: Lamp test, BSM22_BTN2"
+ var "LMPT04_",LOG,BYTE,89,$02
+ help "E: Lamp test, BSM24_BTN4"
+ var "LMPT_",LOG,BYTE,89,$08
+ help "Lamp test marking lights Vehicle"
+ var "LOGIK_EIN_",LOG,BYTE,33,$01
+ help "Logic On"
+ var "LS_N04_",LOG,BYTE,94,$80
+ help "E: Fan STOP NOT, BSM24_BTN4"
+ var "LS_N06_",LOG,BYTE,102,$80
+ help "E: Fan STOP NOT, BSM26_BTN5"
+ var "MAK1_",LOG,BYTE,40,$02
+ help "Master at coupling 1"
+ var "MAK2_",LOG,BYTE,40,$04
+ help "Master at coupling 2"
+ var "NAB28_",LOG,BYTE,88,$01
+ help "Emergency shutdown detected, BSG_BTN28"
+ var "NAF03_",LOG,BYTE,92,$08
+ help "E: Emergency stop, Driver's cab, BSM23_BTN3"
+ var "NAF05_",LOG,BYTE,98,$02
+ help "E: Emergency stop, Driver's cab, BSM25_BTN5"
+ var "NAF_N03_",LOG,BYTE,88,$02
+ help "E: Emergency stop NOT, Driver's cab, BSM23_BTN3"
+ var "NAF_N05_",LOG,BYTE,88,$04
+ help "E: Emergency stop NOT, Driver's cab, BSM25_BTN5"
+ var "NBE02_",LOG,BYTE,89,$80
+ help "E: Fog tail lamp On, BSM22_BTN2"
+ var "NBE05_",LOG,BYTE,90,$01
+ help "E: Fog tail lamp On, BSM25_BTN5"
+ var "NBE1_",LOG,BYTE,89,$20
+ help "Request Fog tail lamps Vehicle 1"
+ var "NBE2_",LOG,BYTE,89,$40
+ help "Request Fog tail lamps Vehicle 2"
+ var "NMBR1_",LOG,BYTE,115,$40
+ help "New status signal Range 1"
+ var "NMBR2_",LOG,BYTE,115,$80
+ help "New status signal Range 2"
+ var "ONT10_",LOG,BYTE,34,$40
+ help "Bus station 10 is ready for operation (ASM2)"
+ var "ONT11_",LOG,BYTE,51,$80
+ help "Bus station 11 is ready for operation (OTMR)"
+ var "ONT12_",LOG,BYTE,34,$80
+ help "Bus station 12 is ready for operation (Textdisplay1)"
+ var "ONT13_",LOG,BYTE,35,$01
+ help "Bus station 13 is ready for operation (Textdisplay2)"
+ var "ONT14_",LOG,BYTE,35,$02
+ help "Bus station 14 is ready for operation (HKL123-1)"
+ var "ONT15_",LOG,BYTE,35,$04
+ help "Bus station 15 is ready for operation (HKL123-2)"
+ var "ONT16_",LOG,BYTE,35,$08
+ help "Bus station 16 is ready for operation (HKL304-1)"
+ var "ONT17_",LOG,BYTE,35,$10
+ help "Bus station 17 is ready for operation (HKL304-2)"
+ var "ONT18_",LOG,BYTE,35,$20
+ help "Bus station 18 is ready for operation (DOOR2)"
+ var "ONT19_",LOG,BYTE,35,$40
+ help "Bus station 19 is ready for operation (DOOR3)"
+ var "ONT20_",LOG,BYTE,35,$80
+ help "Bus station 20 is ready for operation (DOOR5)"
+ var "ONT21_",LOG,BYTE,36,$01
+ help "Bus station 21 is ready for operation (DOOR7)"
+ var "ONT22_",LOG,BYTE,36,$02
+ help "Bus station 22 is ready for operation (DOOR8)"
+ var "ONT23_",LOG,BYTE,36,$04
+ help "Bus station 23 is ready for operation (DOOR6)"
+ var "ONT24_",LOG,BYTE,36,$08
+ help "Bus station 24 is ready for operation (DOOR4)"
+ var "ONT25_",LOG,BYTE,36,$10
+ help "Bus station 25 is ready for operation (DOOR2)"
+ var "ONT26_",LOG,BYTE,36,$20
+ help "Bus station 26 is ready for operation (BSM27-1)"
+ var "ONT27_",LOG,BYTE,36,$40
+ help "Bus station 27 is ready for operation (BSM27-2)"
+ var "ONT28_",LOG,BYTE,36,$80
+ help "Bus station 28 is ready for operation (BSG)"
+ var "ONT2_",LOG,BYTE,33,$40
+ help "Bus station 2 is ready for operation (BSM2)"
+ var "ONT3_",LOG,BYTE,33,$80
+ help "Bus station 3 is ready for operation (BSM23)"
+ var "ONT4_",LOG,BYTE,34,$01
+ help "Bus station 4 is ready for operation (BSM24)"
+ var "ONT5_",LOG,BYTE,34,$02
+ help "Bus station 5 is ready for operation (BSM25)"
+ var "ONT6_",LOG,BYTE,34,$04
+ help "Bus station 6 is ready for operation (BSM26)"
+ var "ONT7_",LOG,BYTE,34,$08
+ help "Bus station 7 is ready for operation (BNU1)"
+ var "ONT8_",LOG,BYTE,34,$10
+ help "Bus station 8 is ready for operation (BNU2)"
+ var "ONT9_",LOG,BYTE,34,$20
+ help "Bus station 9 is ready for operation (ASM1)"
+ var "REI03_",LOG,BYTE,92,$10
+ help "E: Cleaning switch activated, BSM23_BTN3"
+ var "REI05_",LOG,BYTE,98,$04
+ help "E: Cleaning switch activated, BSM25_BTN5"
+ var "RRS09_",LOG,BYTE,73,$08
+ help "Roll-back inhibit BTN 9 (ASM2)"
+ var "RRS10_",LOG,BYTE,73,$10
+ help "Roll-back inhibit BTN 10 (ASM2)"
+ var "RRSF_",LOG,BYTE,56,$04
+ help "Roll-back inhibit Vehicle"
+ var "RSDMOT",LOG,BYTE,16,$20
+ help "Reset drive wheel diameter"
+ var "S1FS_",LOG,BYTE,55,$10
+ help "Malfunction 1 driver's cab, another driver's cab is occupied"
+ var "S1FZZB_",LOG,BYTE,88,$10
+ help "Self = 1st vehicle in trainset ZB"
+ var "S1FZ_",LOG,BYTE,40,$10
+ help "Self = 1st vehicle in trainset"
+ var "S1GS1_",LOG,BYTE,51,$01
+ help "Side 1 = Side 1"
+ var "S1GS2_",LOG,BYTE,51,$02
+ help "Side 1 = Side 2"
+ var "S2FS_",LOG,BYTE,55,$20
+ help "Malfunc. 2 Driver's cab, key-operated switch actuated during operation"
+ var "S2FZZB_",LOG,BYTE,88,$20
+ help "Self = 2nd vehicle in trainset ZB"
+ var "S2FZ_",LOG,BYTE,40,$20
+ help "Self = 2nd vehicle in trainset"
+ var "S3FS_",LOG,BYTE,55,$40
+ help "Malfunction 3 driver's cab, both FST in vehicle occupied"
+ var "S3FZZB_",LOG,BYTE,88,$40
+ help "Self = 3rd vehicle in trainset ZB"
+ var "S3FZ_",LOG,BYTE,40,$40
+ help "Self = 3rd vehicle in trainset"
+ var "S4FZZB_",LOG,BYTE,88,$80
+ help "Self = 4th vehicle in trainset ZB"
+ var "S4FZ_",LOG,BYTE,40,$80
+ help "Self = 4th vehicle in trainset"
+ var "SA09_",LOG,BYTE,72,$08
+ help "Malfunction Drive BTN 9 (ASM1)"
+ var "SA10_",LOG,BYTE,72,$10
+ help "Malfunction Drive BTN 10 (ASM2)"
+ var "SAL09_",LOG,BYTE,71,$80
+ help "Minor malfunction Drive BTN 9 (ASM1)"
+ var "SAL10_",LOG,BYTE,72,$01
+ help "Minor malfunction Drive BTN 10 (ASM2)"
+ var "SAND09_",LOG,BYTE,74,$80
+ help "Request Sand BTN 9 (ASM1)"
+ var "SAND10_",LOG,BYTE,75,$01
+ help "Request Sand BTN 10 (ASM2)"
+ var "SBA09_",LOG,BYTE,74,$02
+ help "Request Track brake BTN 9 (ASM1)"
+ var "SBA10_",LOG,BYTE,74,$04
+ help "Request Track brake BTN 10 (ASM2)"
+ var "SBE103_",LOG,BYTE,92,$20
+ help "E: Control Lighting ON, BSM23_BTN3"
+ var "SBE204_",LOG,BYTE,95,$01
+ help "E: Control Lighting ON, BSM24_BTN4"
+ var "SBR02",LOG,BYTE,12,$20
+ help "Setpoint device Brake BTN 2 (BSM22)"
+ var "SBR04",LOG,BYTE,12,$40
+ help "Setpoint device Brake BTN 4 (BSM24)"
+ var "SBRA1E1_",LOG,BYTE,60,$02
+ help "Track brake ON, Vehicle section 1, Side 1"
+ var "SBRA1E2_",LOG,BYTE,60,$04
+ help "Track brake ON, Vehicle section 1, Side 2"
+ var "SBRA2E1_",LOG,BYTE,60,$20
+ help "Track brake ON, Vehicle section 2, Side 1"
+ var "SBRA2E2_",LOG,BYTE,60,$40
+ help "Track brake ON, Vehicle section 2, Side 2"
+ var "SBRE11_",LOG,BYTE,61,$02
+ help "Track brake ON, Vehicle section 3, Side 1 LDG1"
+ var "SBRE21_",LOG,BYTE,61,$04
+ help "Track brake ON, Vehicle section 3, Side 2 LDG1"
+ var "SBRF",LOG,BYTE,16,$08
+ help "Setpoint device Brake Vehicle"
+ var "SBRS_",LOG,BYTE,106,$40
+ help "Malfunction SCL BR_N/GBR_N"
+ var "SB_",LOG,BYTE,59,$20
+ help "Track brake ON"
+ var "SCANZ_",LOG,BYTE,40,$01
+ help "Malfunction Train bus interface"
+ var "SDK1_",LOG,BYTE,85,$04
+ help "Malfunction Data channel 1"
+ var "SDK2_",LOG,BYTE,85,$08
+ help "Malfunction Data channel 2"
+ var "SDR09_",LOG,BYTE,72,$20
+ help "Malfunction Speed measurement Reference wheel BTN 9 (ASM1)"
+ var "SDR10_",LOG,BYTE,72,$40
+ help "Malfunction Speed measurement Reference wheel BTN 10 (ASM2)"
+ var "SES03_",LOG,BYTE,92,$40
+ help "E: Signal override switch, BSM23_BTN3"
+ var "SES05_",LOG,BYTE,98,$08
+ help "E: Signal override switch, BSM25_BTN5"
+ var "SESF_",LOG,BYTE,67,$01
+ help "Vehicle override switch Vehicle"
+ var "SESLBRA_",LOG,BYTE,42,$80
+ help "Malfunction Single control line Brake OFF"
+ var "SESLBRE_",LOG,BYTE,42,$40
+ help "Malfunction Single control line Brake ON"
+ var "SESLFA_",LOG,BYTE,42,$20
+ help "Malfunction Single control line Drive OFF"
+ var "SESLFE_",LOG,BYTE,42,$10
+ help "Malfunction Single control line Drive ON"
+ var "SESLFGA_",LOG,BYTE,43,$80
+ help "Malfunction Single control line Release OFF"
+ var "SESLFGE_",LOG,BYTE,43,$40
+ help "Malfunction Single control line Release ON"
+ var "SESLFRAA_",LOG,BYTE,44,$02
+ help "Malfunction Single control line Travel direction 1 OFF"
+ var "SESLFRAE_",LOG,BYTE,44,$01
+ help "Malfunction Single control line Travel direction 1 ON"
+ var "SESLFRBA_",LOG,BYTE,44,$08
+ help "Malfunction Single control line Travel direction 2 OFF"
+ var "SESLFRBE_",LOG,BYTE,44,$04
+ help "Malfunction Single control line Travel direction 2 ON"
+ var "SESLF_",LOG,BYTE,47,$04
+ help "Malfunction Single control lines Vehicle"
+ var "SESLGBRA_",LOG,BYTE,43,$02
+ help "Malfunction Single control line Hazard brake OFF"
+ var "SESLGBRE_",LOG,BYTE,43,$01
+ help "Malfunction Single control line Hazard brake ON"
+ var "SESLNABA_",LOG,BYTE,43,$20
+ help "Malfunction Single control line Emergency shutdown OFF"
+ var "SESLNABE_",LOG,BYTE,43,$10
+ help "Malfunction Single control line Emergency shutdown ON"
+ var "SESLZBA_",LOG,BYTE,43,$08
+ help "Malfunction Single control line Automatic brake OFF"
+ var "SESLZBE_",LOG,BYTE,43,$04
+ help "Malfunction Single control line Automatic brake ON"
+ var "SESL_",LOG,BYTE,46,$20
+ help "Malfunction Single control lines"
+ var "SF24VW1_",LOG,BYTE,63,$20
+ help "Malfunction Fuses DC 24V Vehicle 1"
+ var "SF24VW2_",LOG,BYTE,63,$40
+ help "Malfunction Fuses DC 24V Vehicle 2"
+ var "SFA02",LOG,BYTE,12,$02
+ help "Setpoint device Drive BTN 2 (BSM22)"
+ var "SFA04",LOG,BYTE,12,$04
+ help "Setpoint device Drive BTN 4 (BSM24)"
+ var "SFAF",LOG,BYTE,16,$02
+ help "Setpoint device Drive Vehicle"
+ var "SFB09_",LOG,BYTE,73,$20
+ help "Malfunction Apply spring brake BTN 9 (ASM)"
+ var "SFB10_",LOG,BYTE,73,$40
+ help "Malfunction Apply spring brake BTN 10 (ASM)"
+ var "SFB24VW1_",LOG,BYTE,63,$80
+ help "Malfunction Fuses Brake/Sand DC 24V Vehicle 1"
+ var "SFB24VW2_",LOG,BYTE,64,$01
+ help "Malfunction Fuses Brake/Sand DC 24V Vehicle 2"
+ var "SFHS_",LOG,BYTE,63,$10
+ help "Malfunction main fuse DC 750V"
+ var "SFL09_",LOG,BYTE,73,$80
+ help "Malfunction Release spring brake BTN 9 (ASM)"
+ var "SFL10_",LOG,BYTE,74,$01
+ help "Malfunction Release spring brake BTN 10 (ASM2)"
+ var "SFL_",LOG,BYTE,61,$40
+ help "Malfunction Release spring brake"
+ var "SFUBW1_",LOG,BYTE,63,$01
+ help "Malfunction fuse monitoring Vehicle 1"
+ var "SFUBW2_",LOG,BYTE,63,$02
+ help "Malfunction fuse monitoring Vehicle 2"
+ var "SFZ2_",LOG,BYTE,41,$10
+ help "Malfunction vehicle 2 in trainset"
+ var "SFZ3_",LOG,BYTE,41,$20
+ help "Malfunction vehicle 3 in trainset"
+ var "SFZ4_",LOG,BYTE,41,$40
+ help "Malfunction vehicle 4 in trainset"
+ var "SGBR02",LOG,BYTE,12,$80
+ help "Setpoint device Hazard brake BTN 2 (BSM22)"
+ var "SGBR04",LOG,BYTE,13,$01
+ help "Setpoint device Hazard brake BTN 4 (BSM24)"
+ var "SGBRF",LOG,BYTE,16,$10
+ help "Setpoint device Hazard brake Vehicle"
+ var "SHB103_",LOG,BYTE,92,$80
+ help "E: Distress button actuated, BSM23_BTN3"
+ var "SHB204_",LOG,BYTE,95,$02
+ help "E: Distress button actuated, BSM24_BTN4"
+ var "SLFZ_",LOG,BYTE,42,$04
+ help "Self = last vehicle in trainset"
+ var "SLP03_",LOG,BYTE,93,$01
+ help "E: Tow, BSM23_BTN3"
+ var "SLP05_",LOG,BYTE,98,$10
+ help "E: Tow, BSM25_BTN5"
+ var "SLPF_",LOG,BYTE,67,$02
+ help "Tow vehicle"
+ var "SLSE02_",LOG,BYTE,90,$02
+ help "E: Key-operated switch driver's cab ON, BSM22_BTN2"
+ var "SLSE04_",LOG,BYTE,95,$04
+ help "E: Key-operated switch driver's cab ON, BSM24_BTN4"
+ var "SMA12_",LOG,BYTE,79,$02
+ help "Service screen active BTN 12 (FERM1)"
+ var "SMA13_",LOG,BYTE,79,$04
+ help "Service screen active BTN 13 (FERM2)"
+ var "SNAB_",LOG,BYTE,46,$80
+ help "Malfunction Emergency shutdown"
+ var "SNB103_",LOG,BYTE,93,$02
+ help "E: Emergency call button actuated, BSM23_BTN3"
+ var "SNB204_",LOG,BYTE,95,$08
+ help "E: Emergency call button actuated, BSM24_BTN4"
+ var "SNS02",LOG,BYTE,12,$08
+ help "Setpoint device zero position BTN 2 (BSM22)"
+ var "SNS04",LOG,BYTE,12,$10
+ help "Setpoint device zero position BTN 4 (BSM24)"
+ var "SNS202_",LOG,BYTE,90,$04
+ help "E: Emergency intercom fault Door 2 active, BSM22_BTN2"
+ var "SNS402_",LOG,BYTE,90,$08
+ help "E: Emergency intercom fault Door 4 active, BSM22_BTN2"
+ var "SNS604_",LOG,BYTE,95,$10
+ help "E: Emergency intercom fault Door 6, BSM24_BTN4"
+ var "SNS804_",LOG,BYTE,96,$10
+ help "E: Emergency intercom fault Door 8, BSM24_BTN4"
+ var "SNSB103_",LOG,BYTE,93,$04
+ help "E: Malfunction Disabled person NSS, BSM23_BTN3"
+ var "SNSB204_",LOG,BYTE,95,$20
+ help "E: Malfunction Disabled person NSS, BSM24_BTN4"
+ var "SNSF",LOG,BYTE,16,$04
+ help "Setpoint device Zero position Vehicle"
+ var "SNULL02_",LOG,BYTE,68,$20
+ help "Malfunction zero position vehicle section 1 BTN 2 (BSM22)"
+ var "SNULL04_",LOG,BYTE,68,$40
+ help "Malfunction zero position vehicle section 2 BTN 4 (BSM24)"
+ var "SOK04_",LOG,BYTE,105,$40
+ help "E: SIUS OK, BSM24_BTN4"
+ var "SOLO_",LOG,BYTE,39,$80
+ help "SOLO vehicle"
+ var "SOP_",LOG,BYTE,33,$10
+ help "self = operational"
+ var "SPOP02_",LOG,BYTE,67,$08
+ help "Signalling Logic Off BSM22, BSM22_BTN2"
+ var "SPOP03_",LOG,BYTE,69,$02
+ help "Signalling Logic Off BSM23, BSM23_BTN3"
+ var "SPOP04_",LOG,BYTE,67,$10
+ help "Signalling Logic Off BTN 4 (BSM201)"
+ var "SPOP05_",LOG,BYTE,70,$01
+ help "Signalling Logic Off BTN 5 (BSM203)"
+ var "SPOP06_",LOG,BYTE,104,$10
+ help "Signalling Logic Off BSM26, BSM26_BTN6"
+ var "SPOP09_",LOG,BYTE,77,$20
+ help "Signalling Logic Off ASM1, BTN 9 (ASM1)"
+ var "SPOP10_",LOG,BYTE,77,$40
+ help "Signalling Logic Off ASM2, BTN 10 (ASM2)"
+ var "SPOP_",LOG,BYTE,33,$20
+ help "Signalling Logic Off"
+ var "SSB202_",LOG,BYTE,90,$10
+ help "E: Emergency intercom Door 2 active, BSM22_BTN2"
+ var "SSB402_",LOG,BYTE,90,$20
+ help "E: Emergency intercom Door 4 active, BSM22_BTN2"
+ var "SSB604_",LOG,BYTE,95,$40
+ help "E: Emergency intercom Door 6 active, BSM24_BTN4"
+ var "SSB804_",LOG,BYTE,95,$80
+ help "E: Emergency intercom Door 8 active, BSM24_BTN4"
+ var "SSBB11_",LOG,BYTE,61,$08
+ help "Malfunction Apply Track brake, Vehicle section 3, Side 1 LDG1"
+ var "SSBB21_",LOG,BYTE,61,$10
+ help "Malfunction Apply Track brake, Vehicle section 3, Side 2 LDG1"
+ var "SSBBA1E1_",LOG,BYTE,60,$08
+ help "Malfunction Apply track brake, Vehicle section 1, Side 1"
+ var "SSBBA1E2_",LOG,BYTE,60,$10
+ help "Malfunction Apply track brake, Vehicle section 1, Side 2"
+ var "SSBBA2E1_",LOG,BYTE,60,$80
+ help "Malfunction Apply track brake, Vehicle section 2, Side 1"
+ var "SSBBA2E2_",LOG,BYTE,61,$01
+ help "Malfunction Apply track brake, Vehicle section 2, Side 2"
+ var "SSB_",LOG,BYTE,61,$20
+ help "Malfunction Track brake"
+ var "SSTH_",LOG,BYTE,58,$20
+ help "Malfunction Lift current collector"
+ var "SSTS_",LOG,BYTE,58,$40
+ help "Malfunction Lower current collector"
+ var "STBF_",LOG,BYTE,58,$02
+ help "Current collector in motion Vehicle"
+ var "STFA06_",LOG,BYTE,103,$02
+ help "E: Malfunction drive block, BSM26_BTN6"
+ var "STFA_N06_",LOG,BYTE,103,$01
+ help "E: Malfunction drive block NOT, BSM26_BTN6"
+ var "STH03_",LOG,BYTE,93,$08
+ help "E: Lift current collector, BSM23_BTN3"
+ var "STH05_",LOG,BYTE,98,$20
+ help "E: Lift current collector, BSM25_BTN5"
+ var "STHF_",LOG,BYTE,57,$40
+ help "Lift current collector Vehicle"
+ var "STMUF_",LOG,BYTE,57,$02
+ help "Malfunction Deadman's switch Vehicle"
+ var "STS03_",LOG,BYTE,93,$10
+ help "E: Lower current collector, BSM23_BTN3"
+ var "STS05_",LOG,BYTE,98,$40
+ help "E: Lower current collector, BSM25_BTN5"
+ var "STSF_",LOG,BYTE,58,$01
+ help "Lower current collector Vehicle"
+ var "STU24V_",LOG,BYTE,33,$02
+ help "Undervoltage fault"
+ var "STUAD_",LOG,BYTE,33,$04
+ help "Internal voltage lines fault"
+ var "STZTV_",LOG,BYTE,39,$01
+ help "Start train christening delayed"
+ var "STZT_",LOG,BYTE,113,$40
+ help "Start train christening"
+ var "SUSB106_",LOG,BYTE,103,$04
+ help "E: Current monitoring track brake Vehicle 1 Side 1, BSM26_BTN6"
+ var "SUSB206_",LOG,BYTE,103,$08
+ help "E: Current monitoring track brake Vehicle 1 Side 2, BSM26_BTN6"
+ var "SUSB306_",LOG,BYTE,103,$10
+ help "E: Current monitoring track brake Vehicle 3 Side 1, BSM26_BTN6"
+ var "SVK3_",LOG,BYTE,47,$01
+ help "Malfunction VK3 Line"
+ var "SWB02_",LOG,BYTE,90,$40
+ help "E: Door preselection left and right, BSM22_BTN2"
+ var "SWB04_",LOG,BYTE,96,$01
+ help "E: Door preselection left and right, BSM24_BTN4"
+ var "SWFUG",LOG,BYTE,15,$10
+ help "Setpoint Vehicle invalid"
+ var "SWKHKL_",LOG,BYTE,118,$80
+ help "Softwareconfiguration HKL"
+ var "SWL02_",LOG,BYTE,90,$80
+ help "E: Preselection Doors left, BSM22_BTN2"
+ var "SWL04_",LOG,BYTE,96,$02
+ help "E: Preselection Doors left, BSM24_BTN4"
+ var "SWN1UG",LOG,BYTE,15,$04
+ help "Setpoint Driver's cab 1 invalid"
+ var "SWN2UG",LOG,BYTE,15,$08
+ help "Setpoint Driver's cab 2 invalid"
+ var "SWR02_",LOG,BYTE,91,$01
+ help "E: Preselection Doors right, BSM22_BTN2"
+ var "SWR04_",LOG,BYTE,96,$04
+ help "E: Preselection Doors right, BSM24_BTN4"
+ var "SWUG02_",LOG,BYTE,67,$80
+ help "Setpoint invalid veh. section 1 BTN 2 (BSM22)"
+ var "SWUG04_",LOG,BYTE,68,$01
+ help "Setpoint invalid veh. section 2 BTN 4 (BSM24)"
+ var "SZBR_",LOG,BYTE,46,$40
+ help "Malfunction automatic brake"
+ var "SZB_",LOG,BYTE,41,$02
+ help "Malfunction Train bus"
+ var "SZKV_",LOG,BYTE,39,$04
+ help "Malfunction train configuration delayed"
+ var "SZK_",LOG,BYTE,88,$08
+ help "Malfunction train configuration"
+ var "SZT_",LOG,BYTE,40,$08
+ help "Malfunction train christening"
+ var "T1O1_",LOG,BYTE,66,$80
+ help "Door 7 open Side 1"
+ var "T1O2_",LOG,BYTE,67,$20
+ help "Door 2 open Side 2"
+ var "TA106_",LOG,BYTE,103,$20
+ help "E: Door 1 switched off, BSM26_BTN6"
+ var "TA206_",LOG,BYTE,103,$40
+ help "E: Door 2 switched off, BSM26_BTN6"
+ var "TA306_",LOG,BYTE,103,$80
+ help "E: Door 3 switched off, BSM26_BTN6"
+ var "TA406_",LOG,BYTE,104,$01
+ help "E: Door 4 switched off, BSM26_BTN6"
+ var "TA505_",LOG,BYTE,98,$80
+ help "E: Door 5 switched off, BSM25_BTN5"
+ var "TA605_",LOG,BYTE,99,$01
+ help "E: Door 6 switched off, BSM25_BTN5"
+ var "TA705_",LOG,BYTE,99,$02
+ help "E: Door 7 switched off, BSM25_BTN5"
+ var "TA804_",LOG,BYTE,96,$08
+ help "E: Door 8 switched off, BSM24_BTN4"
+ var "TESTHZ12_",LOG,BYTE,79,$08
+ help "Test operation heat for HKL BTN 12 (FERM1)"
+ var "TESTHZ13_",LOG,BYTE,79,$10
+ help "Test operation heat for HKL BTN 13 (FERM2)"
+ var "TESTHZ_",LOG,BYTE,49,$01
+ help "Test operation heat for HKL"
+ var "TESTKL12_",LOG,BYTE,79,$80
+ help "Test operation cool for HKL BTN 12 (FERM1)"
+ var "TESTKL13_",LOG,BYTE,80,$01
+ help "Test operation cool for HKL BTN 13 (FERM2)"
+ var "TESTKL_",LOG,BYTE,49,$02
+ help "Test operation cool for HKL"
+ var "TF102_",LOG,BYTE,91,$02
+ help "E: Door release Side 1, BSM22_BTN2"
+ var "TF204_",LOG,BYTE,96,$20
+ help "E: Door release Side 2, BSM24_BTN4"
+ var "TFEIN_",LOG,BYTE,53,$10
+ help "Door release is switched on"
+ var "TFFS1_",LOG,BYTE,50,$04
+ help "Door release vehicle Side 1 (right)"
+ var "TFFS2_",LOG,BYTE,50,$08
+ help "Door release vehicle Side 2 (left)"
+ var "TFL1_",LOG,BYTE,57,$10
+ help "Delete door release side 1 Vehicle"
+ var "TFL2_",LOG,BYTE,62,$20
+ help "Delete door release side 2 Vehicle"
+ var "TFOK04_",LOG,BYTE,96,$80
+ help "E: Monitoring deadman's function OK, BSM24_BTN4"
+ var "TFR1_",LOG,BYTE,51,$10
+ help "Door release vehicle Side 1 (right)"
+ var "TFR2_",LOG,BYTE,51,$20
+ help "Door release vehicle Side 2 (left)"
+ var "TMOKF_",LOG,BYTE,57,$04
+ help "Deadman's function OK Vehicle"
+ var "TN_",LOG,BYTE,114,$20
+ help "Door emergency opening actuated"
+ var "TOK1_",LOG,BYTE,53,$40
+ help "Door 1 OK"
+ var "TOK2_",LOG,BYTE,53,$80
+ help "Door 2 OK"
+ var "TOK3_",LOG,BYTE,54,$01
+ help "Door 3 OK"
+ var "TOK4_",LOG,BYTE,54,$02
+ help "Door 4 OK"
+ var "TOK5_",LOG,BYTE,54,$04
+ help "Door 5 OK"
+ var "TOK6_",LOG,BYTE,54,$08
+ help "Door 6 OK"
+ var "TOK7_",LOG,BYTE,54,$10
+ help "Door 7 OK"
+ var "TOK8_",LOG,BYTE,54,$20
+ help "Door 8 OK"
+ var "TOSTH_",LOG,BYTE,58,$08
+ help "Timeout Lift current collector"
+ var "TOSTS_",LOG,BYTE,58,$10
+ help "Timeout Lower current collector"
+ var "TQ12_",LOG,BYTE,78,$08
+ help "Acknowledge text BTN 12 (FERM1)"
+ var "TQ13_",LOG,BYTE,78,$10
+ help "Acknowledge text BTN 13 (FERM2)"
+ var "TQF_",LOG,BYTE,65,$40
+ help "Text acknowledgement vehicle"
+ var "TS1F_",LOG,BYTE,50,$40
+ help "Door side 1 Vehicle (right)"
+ var "TS2F_",LOG,BYTE,50,$80
+ help "Door side 2 Vehicle (left)"
+ var "TSHG_",LOG,BYTE,68,$80
+ help "Door loops hardware closed"
+ var "TSW103_",LOG,BYTE,93,$20
+ help "E: Door loop Vehicle section 1, BSM23_BTN3"
+ var "TSW205_",LOG,BYTE,99,$04
+ help "E: Door loop Vehicle section 2, BSM25_BTN5"
+ var "TZO1_",LOG,BYTE,64,$04
+ help "Central open doors / All doors on side 1 (right)"
+ var "TZO2_",LOG,BYTE,64,$08
+ help "Central open doors / All doors on side 2 (left)"
+ var "TZOF1_",LOG,BYTE,115,$10
+ help "Central open doors / All doors on side 1 Vehicle"
+ var "TZOF2_",LOG,BYTE,115,$20
+ help "Central open doors / All doors on side 2 Vehicle"
+ var "TZS03_",LOG,BYTE,93,$40
+ help "E: Central close doors, BSM23_BTN3"
+ var "TZS05_",LOG,BYTE,99,$08
+ help "E: Central close doors, BSM25_BTN5"
+ var "TZSF_",LOG,BYTE,52,$02
+ help "Automatic close doors vehicle"
+ var "UAFZZB_",LOG,BYTE,85,$02
+ help "Impermissible number of vehicles in trainset ZB"
+ var "UAFZ_",LOG,BYTE,41,$01
+ help "Impermissible number of vehicles in trainset"
+ var "UDCSWGS02_",LOG,BYTE,68,$08
+ help "Undefined Code setpoint device saved Vehicle section 1 BTN 2 (BSM22)"
+ var "UDCSWGS04_",LOG,BYTE,68,$10
+ help "Undefined Code setpoint device saved Vehicle section 2 BTN 4 (BSM24)"
+ var "UFAKT06_",LOG,BYTE,104,$02
+ help "E: Fuse monitoring active, BSM26_BTN6"
+ var "UFAKT_N06_",LOG,BYTE,104,$04
+ help "E: Fuse monitoring active NOT, BSM26_BTN6"
+ var "UFEH03_",LOG,BYTE,93,$80
+ help "E: Monitoring circuit breaker auxiliary inputs, BSM23_BTN3"
+ var "UFEH05_",LOG,BYTE,99,$10
+ help "E: Monitoring circuit breaker auxiliary inputs, BSM25_BTN5"
+ var "UFEHW1_",LOG,BYTE,63,$04
+ help "Malfunction E: Monitoring circuit breaker auxiliary inputs Vehicle 1"
+ var "UFEHW2_",LOG,BYTE,63,$08
+ help "Malfunction E: Monitoring circuit breaker auxiliary inputs Vehicle 2"
+ var "UFSF03_",LOG,BYTE,94,$01
+ help "E: Monit. circuit breaker track brake, sander, spring brake, BSM23_BTN3"
+ var "UFSF05_",LOG,BYTE,99,$20
+ help "E: Monitoring circ. breaker track brake, sander, spring brake, BSM25_BTN"
+ var "ULSWG02_",LOG,BYTE,68,$02
+ help "Overrun setpoint device vehicle section 1 BTN 2 (BSM22)"
+ var "ULSWG04_",LOG,BYTE,68,$04
+ help "Overrun setpoint device vehicle section 2 BTN 4 (BSM24)"
+ var "UNVF_",LOG,BYTE,59,$08
+ help "Line voltage available vehicle"
+ var "UTF03_",LOG,BYTE,94,$02
+ help "E: Monitoring deadman's function, BSM23_BTN3"
+ var "UTF04_",LOG,BYTE,96,$40
+ help "E: Monitoring deadman's function, BSM24_BTN4"
+ var "V20F_",LOG,BYTE,105,$80
+ help "Speed limit 40km/h, vehicle 1"
+ var "V401_",LOG,BYTE,56,$08
+ help "Speed limit 40 km/h Section 1"
+ var "V402_",LOG,BYTE,56,$10
+ help "Speed limit 40 km/h Section 2"
+ var "V40F_",LOG,BYTE,56,$40
+ help "Speed limit 40 km/h vehicle"
+ var "V5F_",LOG,BYTE,57,$01
+ help "Speed limit 5 km/h vehicle"
+ var "VFA_",LOG,BYTE,65,$08
+ help "Side preselection Drive enable vehicle"
+ var "VFUG",LOG,BYTE,18,$02
+ help "Vehicle speed invalid"
+ var "VK302_",LOG,BYTE,91,$04
+ help "E: Speed less than 3 km/h, BSM22_BTN2"
+ var "VK306_",LOG,BYTE,104,$08
+ help "E: Speed less than 3 km/h, BSM26_BTN6"
+ var "VK3_",LOG,BYTE,38,$20
+ help "Speed less than 3km/h"
+ var "VSWB_",LOG,BYTE,65,$20
+ help "Door preselection left and right vehicle"
+ var "VWS1_",LOG,BYTE,65,$01
+ help "Preselection Doors Side 1 (right) vehicle"
+ var "VWS2_",LOG,BYTE,65,$02
+ help "Preselection Doors Side 2 (left) vehicle"
+ var "WA02_",LOG,BYTE,66,$02
+ help "Alarm Off BTN 2 (BSM101)"
+ var "WA04_",LOG,BYTE,66,$04
+ help "Alarm Off BTN 4 (BSM201)"
+ var "WBESLF_",LOG,BYTE,47,$08
+ help "Contradiction between BISS and ESL vehicle"
+ var "WBESLZ_",LOG,BYTE,106,$20
+ help "Contradiction between BISS and ESL train"
+ var "WBESL_",LOG,BYTE,106,$10
+ help "Contradiction between BISS and ESL (Slave)"
+ var "ZBAH_",LOG,BYTE,38,$01
+ help "Stop train bus"
+ var "ZBA_",LOG,BYTE,38,$04
+ help "Train bus is active"
+ var "ZBBR_",LOG,BYTE,55,$80
+ help "BISS brake Train"
+ var "ZBR_",LOG,BYTE,56,$01
+ help "BISS automatic brake vehicle"
+ var "ZBSG02_",LOG,BYTE,91,$08
+ help "E: ZBZ Malfunction, BSM22_BTN2"
+ var "ZFGK_",LOG,BYTE,69,$80
+ help "Passenger compartment air-conditioning system ON Train"
+ var "ZFK_",LOG,BYTE,49,$04
+ help "Driver's cab air-conditioning system ON Train"
+ var "ZFSBW_",LOG,BYTE,54,$40
+ help "Driver's cab in car is occupied Train"
+ var "ZFSP_",LOG,BYTE,59,$04
+ help "Drive block Train"
+ var "ZHKLSTOP_",LOG,BYTE,69,$40
+ help "HKL emergency stop Train"
+ var "ZHW_",LOG,BYTE,51,$40
+ help "Passenger stop request Train"
+ var "ZLMPT_",LOG,BYTE,89,$04
+ help "Lamp test marking lights Train"
+ var "ZNAB_",LOG,BYTE,64,$02
+ help "Emergency shutdown train (vehicle bus)"
+ var "ZNBE_",LOG,BYTE,89,$10
+ help "Fog tail lamp On Train"
+ var "ZRRS_",LOG,BYTE,56,$02
+ help "Roll-back inhibit Train"
+ var "ZSBISS_",LOG,BYTE,37,$40
+ help "Release BISS operation"
+ var "ZSBR",LOG,BYTE,16,$01
+ help "Setpoint device Brake Train"
+ var "ZSFA",LOG,BYTE,15,$80
+ help "Setpoint device Drive Train"
+ var "ZSFL_",LOG,BYTE,61,$80
+ help "Malfunction Release spring brake Train"
+ var "ZSGBR",LOG,BYTE,15,$40
+ help "Setpoint device Hazard brake Train"
+ var "ZSNS",LOG,BYTE,15,$20
+ help "Setpoint device Zero position Train"
+ var "ZSTB_",LOG,BYTE,58,$04
+ help "Current collector in motion Train"
+ var "ZSTH_",LOG,BYTE,57,$20
+ help "Lift current collector Train"
+ var "ZSTS_",LOG,BYTE,57,$80
+ help "Lower current collector Train"
+ var "ZT1_",LOG,BYTE,85,$10
+ help "Train separation Driver's cab 1"
+ var "ZT2_",LOG,BYTE,85,$20
+ help "Train separation Driver's cab 2"
+ var "ZTD1_",LOG,BYTE,48,$01
+ help "Christen train 1"
+ var "ZTD2_",LOG,BYTE,48,$04
+ help "Christen train 2"
+ var "ZTD3_",LOG,BYTE,41,$04
+ help "Christen train 3"
+ var "ZTD4_",LOG,BYTE,41,$08
+ help "Christen train 4"
+ var "ZTDV_",LOG,BYTE,113,$20
+ help "Train christening delayed"
+ var "ZTD_",LOG,BYTE,39,$02
+ help "Train christening completed"
+ var "ZTFL1_",LOG,BYTE,57,$08
+ help "Delete door release side 1 Train"
+ var "ZTFL2_",LOG,BYTE,62,$10
+ help "Delete door release side 2 Train"
+ var "ZTFS1_",LOG,BYTE,51,$04
+ help "Door release side 1 Train"
+ var "ZTFS2_",LOG,BYTE,51,$08
+ help "Door release side 2 Train"
+ var "ZTS1_",LOG,BYTE,50,$01
+ help "Door side 1 (right) Train"
+ var "ZTS2_",LOG,BYTE,50,$02
+ help "Door side 2 (left) Train"
+ var "ZTZO1_",LOG,BYTE,62,$40
+ help "Central open doors / All doors on side 1 Train"
+ var "ZTZO2_",LOG,BYTE,62,$80
+ help "Central open doors / All doors on side 2 Train"
+ var "ZTZS_",LOG,BYTE,52,$01
+ help "Automatic close doors Train"
+ var "ZUNV_",LOG,BYTE,59,$10
+ help "Line voltage available Train"
+ var "ZV40_",LOG,BYTE,56,$20
+ help "Speed limit 40 km/h Train"
+ var "ZV5_",LOG,BYTE,56,$80
+ help "Speed limit 5 km/h Train"
+ var "ZVFA_",LOG,BYTE,65,$04
+ help "Side preselection Drive enable Train"
+ var "ZVSWB_",LOG,BYTE,65,$10
+ help "Door preselection left and right Train"
+ var "ZVWS1_",LOG,BYTE,64,$40
+ help "Preselection Doors Side 1 (right) Train"
+ var "ZVWS2_",LOG,BYTE,64,$80
+ help "Preselection Doors Side 2 (left) Train"
+ var "ZZTD_",LOG,BYTE,38,$80
+ help "Christen train Train"
+ var "Z_AF1_21_",LOG,BYTE,118,$40
+ help "Driver alarm 1/2, vehicle 1"
+ var "Z_AKH1_",LOG,BYTE,116,$20
+ help "Heat outside camera ON, vehicle 1"
+ var "Z_AT_02_",LOG,BYTE,107,$08
+ help "All doors closed Veh. 2"
+ var "Z_AT_03_",LOG,BYTE,107,$10
+ help "All doors closed Veh. 3"
+ var "Z_AT_04_",LOG,BYTE,107,$20
+ help "All doors closed Veh. 4"
+ var "Z_BBR1_",LOG,BYTE,111,$20
+ help "BISS brake Veh. 1"
+ var "Z_BBR_02_",LOG,BYTE,108,$80
+ help "BISS brake Veh. 2"
+ var "Z_BBR_03_",LOG,BYTE,109,$01
+ help "BISS brake Veh. 3"
+ var "Z_BBR_04_",LOG,BYTE,109,$02
+ help "BISS brake Veh. 4"
+ var "Z_BEE1_",LOG,BYTE,117,$20
+ help "Lighting ON, vehicle 1"
+ var "Z_BISS1_",LOG,BYTE,114,$40
+ help "Release BISS operation Veh. 1"
+ var "Z_BR1",LOG,BYTE,14,$80
+ help "Setpoint device Brake Veh. 1"
+ var "Z_FA1",LOG,BYTE,14,$20
+ help "Setpoint device Drive Veh. 1"
+ var "Z_FGK1_",LOG,BYTE,113,$04
+ help "Passenger compartment air-conditioning system ON Veh. 1"
+ var "Z_FK1_",LOG,BYTE,114,$01
+ help "Driver's cab air-conditioning system ON Veh. 1"
+ var "Z_FKB_02_",LOG,BYTE,115,$02
+ help "Release coupling actuation Veh. 2"
+ var "Z_FKB_03_",LOG,BYTE,115,$04
+ help "Release coupling actuation Veh. 3"
+ var "Z_FKB_04_",LOG,BYTE,115,$08
+ help "Release coupling actuation Veh. 4"
+ var "Z_FKE_02_",LOG,BYTE,110,$08
+ help "Vehicle-coupling in end position Veh. 2"
+ var "Z_FKE_03_",LOG,BYTE,110,$10
+ help "Vehicle-coupling in end position Veh. 3"
+ var "Z_FKE_04_",LOG,BYTE,110,$20
+ help "Vehicle-coupling in end position Veh. 4"
+ var "Z_FNB_02_",LOG,BYTE,111,$02
+ help "Passenger emergency brake Veh. 2"
+ var "Z_FNB_03_",LOG,BYTE,111,$04
+ help "Passenger emergency brake Veh. 3"
+ var "Z_FNB_04_",LOG,BYTE,111,$08
+ help "Passenger emergency brake Veh. 4"
+ var "Z_FRFK1_",LOG,BYTE,114,$02
+ help "Fresh air operation passenger compartment air-conditioning system Veh. 1"
+ var "Z_FRL1",LOG,BYTE,15,$02
+ help "Drive instructor command, vehicle 1"
+ var "Z_FSB1_",LOG,BYTE,116,$80
+ help "Drive current limit, vehicle 1"
+ var "Z_FSBW_",LOG,BYTE,117,$40
+ help "Driver´s cab in car is occupied, vehice 1"
+ var "Z_FSES1_",LOG,BYTE,117,$02
+ help "Drive block override switch, vehicle 1"
+ var "Z_FSG_",LOG,BYTE,105,$10
+ help "Drive current limit Train"
+ var "Z_FSP1_",LOG,BYTE,111,$10
+ help "Drive lock Veh. 1"
+ var "Z_GBR1",LOG,BYTE,15,$01
+ help "Setpoint device in hazard brake Veh. 1"
+ var "Z_HKLSTOP1_",LOG,BYTE,116,$08
+ help "HKL emergency stop, vehicle 1"
+ var "Z_HW1_",LOG,BYTE,112,$40
+ help "Stop request Veh. 1"
+ var "Z_HW_02_",LOG,BYTE,107,$01
+ help "Passenger stop request Veh. 2"
+ var "Z_HW_03_",LOG,BYTE,107,$02
+ help "Passenger stop request Veh. 3"
+ var "Z_HW_04_",LOG,BYTE,107,$04
+ help "Passenger stop request Veh. 4"
+ var "Z_LAT1_",LOG,BYTE,118,$10
+ help "Lamp test, vehicle 1"
+ var "Z_NAB_04_",LOG,BYTE,112,$20
+ help "Emergency shutdown Veh. 4"
+ var "Z_NBA_02_",LOG,BYTE,112,$04
+ help "Emergency shutdown Veh. 2"
+ var "Z_NBA_03_",LOG,BYTE,112,$10
+ help "Emergency shutdown Veh. 3"
+ var "Z_NBE1_",LOG,BYTE,118,$08
+ help "Line voltage available Veh. 1"
+ var "Z_NS1",LOG,BYTE,14,$40
+ help "Setpoint device zero position Veh. 1"
+ var "Z_PR1_",LOG,BYTE,118,$20
+ help "Whistle reverse, vehicle 1"
+ var "Z_RRS1_",LOG,BYTE,114,$80
+ help "Roll-back inhibit Veh. 1"
+ var "Z_RRSE_02_",LOG,BYTE,108,$10
+ help "Roll-back inhibit Veh. 2"
+ var "Z_RRSE_03_",LOG,BYTE,108,$20
+ help "Roll-back inhibit Veh. 3"
+ var "Z_RRSE_04_",LOG,BYTE,108,$40
+ help "Roll-back inhibit Veh. 4"
+ var "Z_SES1_",LOG,BYTE,117,$01
+ help "Signal override switch, vehicle 1"
+ var "Z_SESL_02_",LOG,BYTE,110,$01
+ help "Malfunction single control lines Veh. 2"
+ var "Z_SESL_03_",LOG,BYTE,110,$02
+ help "Malfunction single control lines Veh. 3"
+ var "Z_SESL_04_",LOG,BYTE,110,$04
+ help "Malfunction single control lines Veh. 4"
+ var "Z_SFL_02_",LOG,BYTE,109,$20
+ help "Malfunction release spring brake Veh. 2"
+ var "Z_SFL_03_",LOG,BYTE,109,$40
+ help "Malfunction release spring brake Veh. 3"
+ var "Z_SFL_04_",LOG,BYTE,109,$80
+ help "Malfunction release spring brake Veh. 4"
+ var "Z_SLP1_",LOG,BYTE,117,$04
+ help "Towing, vehicle 1"
+ var "Z_STB_02_",LOG,BYTE,108,$02
+ help "Current collector in motion Veh. 2"
+ var "Z_STB_03_",LOG,BYTE,108,$04
+ help "Current collector in motion Veh. 3"
+ var "Z_STB_04_",LOG,BYTE,108,$08
+ help "Current collector in motion Veh. 4"
+ var "Z_STH1_",LOG,BYTE,112,$01
+ help "Lift current collector Veh. 1"
+ var "Z_STNA1_",LOG,BYTE,116,$10
+ help "Emergency lower current collector, vehicle 1"
+ var "Z_STS1_",LOG,BYTE,112,$02
+ help "Lower current collector Veh. 1"
+ var "Z_TF1_",LOG,BYTE,112,$80
+ help "Door release side 1 Veh. 1"
+ var "Z_TF2_",LOG,BYTE,116,$40
+ help "Door release side 2, vehicle 1"
+ var "Z_TFL1_",LOG,BYTE,117,$08
+ help "Delete door release side 1, vehicle 1"
+ var "Z_TFL2_",LOG,BYTE,117,$10
+ help "Delete door release side 2, vehicle 1"
+ var "Z_TQ1_",LOG,BYTE,112,$08
+ help "Acknowledge text Veh. 1"
+ var "Z_TS11_",LOG,BYTE,114,$04
+ help "Door side 1 (right) Veh. 1"
+ var "Z_TS21_",LOG,BYTE,114,$08
+ help "Door side 2 (left) Veh. 1"
+ var "Z_TZ01_",LOG,BYTE,116,$02
+ help "Central open doors / All doors open side 1"
+ var "Z_TZ02_",LOG,BYTE,116,$04
+ help "Central open doors / All doors open side 2"
+ var "Z_TZS1_",LOG,BYTE,113,$01
+ help "Automatic close doors Veh. 1"
+ var "Z_UNV1_",LOG,BYTE,115,$01
+ help "Line voltage available Veh. 1"
+ var "Z_UNV_02_",LOG,BYTE,107,$40
+ help "Line voltage available Veh. 2"
+ var "Z_UNV_03_",LOG,BYTE,107,$80
+ help "Line voltage available Veh. 3"
+ var "Z_UNV_04_",LOG,BYTE,108,$01
+ help "Line voltage available Veh. 4"
+ var "Z_V201_",LOG,BYTE,116,$01
+ help "Speed limit 20km/h, vehicle 1"
+ var "Z_V20_02_",LOG,BYTE,113,$02
+ help "Speed limit 20km/h veh. 2"
+ var "Z_V20_03_",LOG,BYTE,113,$08
+ help "Speed limit 20km/h veh. 3"
+ var "Z_V20_04_",LOG,BYTE,113,$10
+ help "Speed limit 20km/h veh. 4"
+ var "Z_V401_",LOG,BYTE,111,$80
+ help "Speed limit 40 km/h veh. 1"
+ var "Z_V40_02_",LOG,BYTE,109,$04
+ help "Speed limit 40km/h veh. 2"
+ var "Z_V40_03_",LOG,BYTE,109,$08
+ help "Speed limit 40km/h veh. 3"
+ var "Z_V40_04_",LOG,BYTE,109,$10
+ help "Speed limit 40km/h veh. 4"
+ var "Z_V51_",LOG,BYTE,111,$40
+ help "Speed limit 5km/h veh. 1"
+ var "Z_V5_02_",LOG,BYTE,110,$40
+ help "Speed limit 5km/h veh. 2"
+ var "Z_V5_03_",LOG,BYTE,110,$80
+ help "Speed limit 5km/h veh. 3"
+ var "Z_V5_04_",LOG,BYTE,111,$01
+ help "Speed limit 5km/h veh. 4"
+ var "Z_VFA_",LOG,BYTE,117,$80
+ help "Door side selection drive, vehicle 1"
+ var "Z_VSWB_",LOG,BYTE,118,$04
+ help "Door preselection left and right, vehicle 1"
+ var "Z_VWS1_",LOG,BYTE,118,$01
+ help "Preselection doors side 1 (Right), vehicle 1"
+ var "Z_VWS2_",LOG,BYTE,118,$02
+ help "Preselection doors side 2 (Left), vehicle 1"
+ var "Z_WBESL1_",LOG,BYTE,106,$01
+ help "Contradiction between BISS and ESL Vehicle 1"
+ var "Z_WBESL_02_",LOG,BYTE,106,$02
+ help "Contradiction between BISS and ESL Vehicle 2"
+ var "Z_WBESL_03_",LOG,BYTE,106,$04
+ help "Contradiction between BISS and ESL Vehicle 3"
+ var "Z_WBESL_04_",LOG,BYTE,106,$08
+ help "Contradiction between BISS and ESL Vehicle 4"
+ var "Z_ZTD1_",LOG,BYTE,113,$80
+ help "Christen train Veh. 1"
+ var "FNR_",VNUM,WORD,125,$FFFF,"",1.0000000000e+000,0.00000,3500.00000,4,0
+ help "Vehicle number"
+ var "ZVZ",VNUM,WORD,27,$FFFF,"km/h",1.0000000000e+000,0.00000,100.00000,4,0
+ help "Trainset speed"
+ var "BELSF_",VNUM,BYTE,119,$FF,"%",1.0000000000e+000,0.00000,100.00000,4,0
+ help "Vehicle loading level"
+ var "BTN_",VNUM,BYTE,121,$FF,"",1.0000000000e+000,0.00000,256.00000,4,0
+ help "Bus station number"
+ var "COPSTA_",VNUM,BYTE,120,$FF,"",1.0000000000e+000,0.00000,256.00000,4,0
+ help "CANopen-Status"
+ var "FINFOIMB_",VNUM,BYTE,123,$FF,"",1.0000000000e+000,0.00000,256.00000,4,0
+ help "Intermodule bus error info"
+ var "STATIMB_",VNUM,BYTE,124,$FF,"",1.0000000000e+000,0.00000,256.00000,4,0
+ help "Intermodule status"
+ var "SWN1",VNUM,BYTE,21,$FF,"",1.0000000000e+000,-128.00000,100.00000,4,0
+ help "Setpoint Driver's cab 1 numerical"
+ var "SWN2",VNUM,BYTE,20,$FF,"",1.0000000000e+000,-128.00000,100.00000,4,0
+ help "Setpoint Driver's cab 2 numerical"
+ var "SWNF",VNUM,BYTE,22,$FF,"",1.0000000000e+000,-128.00000,100.00000,4,0
+ help "Setpoint vehicle, numerical"
+ var "U24V_",VNUM,BYTE,122,$FF,"V",1.0000000000e+000,0.00000,256.00000,4,0
+ help "Display voltage supply"
+ var "ZSWN",VNUM,BYTE,19,$FF,"",1.0000000000e+000,-128.00000,100.00000,4,0
+ help "Setpoint train, numerical"
+ var "VF",VNUM,DWORD,29,$FFFFFFFF,"km/h",1.5258789063e-005,0.00000,100.00000,4,0
+ help "Speed vehicle"
+END_SEG
+
+ANA_SEG
+ trigdata 100,46
+ trigwrite 100,46
+ trigset 100,0
+ trigreset 100,0
+ anadata 100,243
+END_SEG
+
+ESP_SEG
+ espdata 200,99
+ espdel 200,0
+ espcounter "On"
+
+; Projekt- und Interne Ereignisse 
+ ereig "(reserved for future use) (01909)",909,6
+ ereig "A047  [KES_N26_] A047: Coupling not in end pos., A Car (01083)",83,79
+ ereig "A047  [SEK26_] A047: Decoupling malfunction A Car (01075)",75,71
+ ereig "A047  [SEKV26_] A047: E-coupling malfunction moving forward, A Car (01071)",71,67
+ ereig "A047  [SEKZ26_] A047: E-coupling malfunction moving backwards, A Car (01073)",73,69
+ ereig "A047  [SKAK26_] A047: Coupling malfunction turning A Car (01069)",69,65
+ ereig "A047  [SKS26_] A047: Coupling malfunction extending A Car (01067)",67,63
+ ereig "A047  [SNIM26_] A047: Coupling not in middle position A Car (01138)",138,134
+ ereig "A047  [SVRM26_] A047: Locking bolt malfunction A Car (01081)",81,77
+ ereig "A048  [KES_N27_] A048: Coupling not in end pos., B Car (01084)",84,80
+ ereig "A048  [SEK27_] A048: Decoupling malfunction B Car (01076)",76,72
+ ereig "A048  [SEKV27_] A048: E-coupling malfunction moving forward, B Car (01072)",72,68
+ ereig "A048  [SEKZ27_] A048: E-coupling malfunction moving backwards, B Car (01074)",74,70
+ ereig "A048  [SKAK27_] A048: Coupling malfunction turning B Car (01070)",70,66
+ ereig "A048  [SKS27_] A048: Coupling malfunction extending B Car (01068)",68,64
+ ereig "A048  [SNIM27_] A048: Coupling not in middle position B Car (01139)",139,135
+ ereig "A048  [SVRM27_] A048: Locking bolt malfunction B Car (01082)",82,78
+ ereig "A072  [SFL09_] A072: Spring brake malfunction releasing, A Car (01123)",123,119
+ ereig "A074  [SFL10_] A074: Spring brake malfunction releasing, B Car (01125)",125,121
+ ereig "A076  [SFL28_] A076: Spring brake malfunction releasing, C Car (01127)",127,123
+ ereig "A094  [SBRS_] A094: Malfunction SCL BR_N/GBR_N (01149)",149,52
+ ereig "B002  [ONT2_] B002: BSM22 A Car failed communication BTN02 (01010)",10,7
+ ereig "B003  [ONT3_] B003: BSM23 B Car failed communication BTN03 (01011)",11,8
+ ereig "B004  [ONT4_] B004: BSM24 B Car failed communication BTN04 (01012)",12,9
+ ereig "B005  [ONT5_] B005: BSM25 B Car failed communication BTN05 (01013)",13,10
+ ereig "B006  [ONT6_] B006: BSM26 A Car failed communication BTN06 (01014)",14,11
+ ereig "B007  [B_ST07_] B007: Aux. converter A Car failure, BNU524 device malf. (01111)",111,107
+ ereig "B007  [ONT7_] B007: Aux. converter A Car failed BNU524 commun. BTN07 (01015)",15,12
+ ereig "B008  [B_ST08_] B008: Aux. converter B Car failure, BNU524 device malf. (01112)",112,108
+ ereig "B008  [ONT8_] B008: Aux. converter B Car failed BNU524 commun. BTN08 (01016)",16,13
+ ereig "B009  [ONT9_] B009: ASM A Car failed communication BTN09 (01017)",17,14
+ ereig "B010  [ONT10_] B010: ASM B Car failed communication BTN10 (01018)",18,15
+ ereig "B011  [ONT11_] B011: OTMR failed communication BTN11 (01019)",19,16
+ ereig "B011  [SDS11_] B011: OTMR, memory card malfunction (01062)",62,59
+ ereig "B011  [SDZ11_] B011: OTMR, speed sensor malfunction (01061)",61,57
+ ereig "B012  [ONT12_] B012: Driver display A Car failed commun. BTN12 (01020)",20,17
+ ereig "B013  [ONT13_] B013: Driver display B Car failed commun. BTN13 (01021)",21,18
+ ereig "B026  [ONT26_] C026: BSM27-1 A Car failed communication BTN26 (01034)",34,31
+ ereig "B027  [ONT27_] C027: BSM27-2 B Car failed communication BTN27 (01035)",35,32
+ ereig "B028  [MJF28_] B028: Brake control unit trailer failed, major (01113)",113,109
+ ereig "B028  [ONT28_] B028: Ctrl. unit malf. trailer bogie brake comm. BTN28 (01036)",36,33
+ ereig "B029  [FHSOK_] B029: Main fuse tripped 750V roof (01037)",37,34
+ ereig "B034  [UFSF03_] B034: Track brake/sanding/disk brake MCB tripped A Car (01042)",42,37
+ ereig "B035  [UFSF05_] B035: Track brake/sanding/disk brake MCB tripped B Car (01043)",43,38
+ ereig "B036  [UFAKT_N06_] B036: MCB monitor loop, inputs, auxiliary A Car (01044)",44,39
+ ereig "B037  [UFAKT_] B037: MCB monitor loop, inputs, auxiliary B Car (01045)",45,40
+ ereig "B038  [ESLS09_] B038: Traction/braking signals faulty ASM A Car (01047)",47,44
+ ereig "B038  [ESLS10_] B038: Traction/braking signals faulty ASM B Car (01048)",48,45
+ ereig "B038  [ESLSG_] B038: Traction/braking signals faulty ZLG (01046)",46,43
+ ereig "B041  [SZBR_] B041: Malfunction SCL EZBR_N (01057)",57,53
+ ereig "B042  [SNAB_] B042: Malfunction SCL emerg. shutdown ENAB_N (01058)",58,54
+ ereig "B043  [SVK3_] B043: Malfunction SCL VK3 (01059)",59,55
+ ereig "B064  [STFA06_] B064: ATS malfunction (01115)",115,111
+ ereig "B065  [SSBBA1E1_] B065: Track brake malfunction braking, A Car, side 1 (01116)",116,112
+ ereig "B066  [SSBBA1E2_] B066: Track brake malfunction braking, A Car, side 2 (01117)",117,113
+ ereig "B067  [SSBB11_] B067: Track brake malfunction braking, C Car, side 1 (01118)",118,114
+ ereig "B068  [SSBB21_] B068: Track brake malfunction braking, C Car, side 2 (01119)",119,115
+ ereig "B069  [SSBBA2E1_] B069: Track brake malfunction braking, B Car, side 1 (01120)",120,116
+ ereig "B070  [SSBBA2E2_] B070: Track brake malfunction braking, B Car, side 2 (01121)",121,117
+ ereig "B071  [SFB09_] B071: Spring brake malfunction braking, A Car (01122)",122,118
+ ereig "B073  [SFB10_] B073: Spring brake malfunction braking, B Car (01124)",124,120
+ ereig "B075  [SFB28_] B075: Spring brake malfunction braking, C Car (01126)",126,122
+ ereig "B077  [SA09_] B077: Traction drive 1 malfunction, major (01128)",128,124
+ ereig "B078  [SA10_] B078: Traction drive 2 malfunction, major (01129)",129,125
+ ereig "C014  [ONT14_] C014: Passenger room heating, A Car commun. BTN14 (01022)",22,19
+ ereig "C014  [SFKA14_] C014: Passenger room heating malf., A Car, major (01089)",89,90
+ ereig "C015  [ONT15_] C015: Passenger room heating, B Car commun. BTN15 (01023)",23,20
+ ereig "C015  [SFKA15_] C015: Passenger room heating malf., B Car, major (01090)",90,84
+ ereig "C016  [ONT16_] C016: Driver climate ctrl. A Car failed comm. BTN16 (01024)",24,21
+ ereig "C016  [SFKA16_] C016: Drivers cab climate ctrl. malf., A Car, major (01093)",93,87
+ ereig "C017  [ONT17_] C017: Driver climate ctrl. B Car failed comm. BTN17 (01025)",25,22
+ ereig "C017  [SFKA17_] C017: Drivers cab climate ctrl. malf., B Car, minor (01092)",92,86
+ ereig "C018  [ONT18_] C018: Door 1 failed communication BTN18 (01026)",26,23
+ ereig "C018  [STS18_] C018: Door 1 malfunction, major (01095)",95,91
+ ereig "C019  [ONT19_] C019: Door 3 failed communication BTN19 (01027)",27,24
+ ereig "C019  [STS19_] C019: Door 3 malfunction, major (01097)",97,93
+ ereig "C020  [ONT20_] C020: Door 5 failed communication BTN20 (01028)",28,25
+ ereig "C020  [STS20_] C020: Door 5 malfunction, major (01099)",99,95
+ ereig "C021  [ONT21_] C021: Door 7 failed communication BTN21 (01029)",29,26
+ ereig "C021  [STS21_] C021: Door 7 malfunction, major (01101)",101,97
+ ereig "C022  [ONT22_] C022: Door 8 failed communication BTN22 (01030)",30,27
+ ereig "C022  [STS22_] C022: Door 8 malfunction, major (01102)",102,98
+ ereig "C023  [ONT23_] C023: Door 6 failed communication BTN23 (01031)",31,28
+ ereig "C023  [STS23_] C023: Door 6 malfunction, major (01100)",100,96
+ ereig "C024  [ONT24_] C024: Door 4 failed communication BTN24 (01032)",32,29
+ ereig "C024  [STS24_] C024: Door 4 malfunction, major (01098)",98,94
+ ereig "C025  [ONT25_] C025: Door 2 failed communication BTN25 (01033)",33,30
+ ereig "C025  [STS25_] C025: Door 2 malfunction, major (01096)",96,92
+ ereig "C030  [FOK06_] C030: MCB tripped, A Car (01038)",38,35
+ ereig "C031  [UFEH_N03_] C031: MCB moni. loop,track brake/sand/disk br. A Car (01039)",39,41
+ ereig "C032  [FOK_] C032: MCB tripped, B Car (01040)",40,36
+ ereig "C033  [UFEH_N05_] C033: MCB moni. loop,track brake/sand/disk br. B Car (01041)",41,42
+ ereig "C039  [S1SG02_] C039: TBC malfunct., A Car track overrun (01049)",49,46
+ ereig "C039  [S2SG02_] C039: TBC malfunction, A Car decoding (01051)",51,48
+ ereig "C039  [S3SG02_] C039: TBC malfunction, A Car zero position (01053)",53,50
+ ereig "C040  [S1SG04_] C040: TBC malfunct., B Car track overrun (01050)",50,47
+ ereig "C040  [S2SG04_] C040: TBC malfunction, B Car decoding (01052)",52,49
+ ereig "C040  [S3SG04_] C040: TBC malfunction, B Car zero position (01054)",54,51
+ ereig "C044  [STMUF_] C044: Deadman detector malfunction (01060)",60,56
+ ereig "C045  [SKAH26_] C045: Coupling cover malfunction lifting A Car (01063)",63,58
+ ereig "C045  [SKAS26_] C045: Coupling cover malfunction lowering A Car (01065)",65,61
+ ereig "C045  [SSFO26_] C045: Fault opening side panel A Car (01079)",79,75
+ ereig "C045  [SSFS26_] C045: Fault closing side panel A Car (01077)",77,73
+ ereig "C046  [SKAH27_] C046: Coupling cover malfunction lifting B Car (01064)",64,60
+ ereig "C046  [SKAS27_] C046: Coupling cover malfunction lowering B Car (01066)",66,62
+ ereig "C046  [SSFO27_] C046: Fault opening side panel B Car (01080)",80,76
+ ereig "C046  [SSFS27_] C046: Fault closing side panel B Car (01078)",78,74
+ ereig "C049  [SSTH_] C049: Pantogaph malfunction, raising (01085)",85,83
+ ereig "C050  [SSTS_] C050: Pantograph malfunction lowering (01086)",86,81
+ ereig "C051  [LFKA14_] C051: Passenger room heating malf., A Car, minor (01087)",87,82
+ ereig "C052  [LFKA15_] C052: Passenger room heating malf., B Car, minor (01088)",88,89
+ ereig "C053  [LFKA16_] C053: Drivers cab climate ctrl. malf., A Car, minor (01091)",91,85
+ ereig "C054  [LFKA17_] C054: Drivers cab climate ctrl. malf., B Car, major (01094)",94,88
+ ereig "C055  [STL18_] C055: Door 1 malfunction, minor (01103)",103,99
+ ereig "C056  [STL25_] C056: Door 2 malfunction, minor (01104)",104,100
+ ereig "C057  [STL19_] C057: Door 3 malfunction, minor (01105)",105,101
+ ereig "C058  [STL24_] Door 4 malfunction, minor (01106)",106,102
+ ereig "C059  [STL20_] Door 5 malfunction, minor (01107)",107,103
+ ereig "C060  [STL23_] Door 6 malfunction, minor (01108)",108,104
+ ereig "C061  [STL21_] Door 7 malfunction, minor (01109)",109,105
+ ereig "C062  [STL22_] Door 8 malfunction, minor (01110)",110,106
+ ereig "C063  [MIF28_] C063: Brake control unit trailer failed, minor (01114)",114,110
+ ereig "C079  [SAL09_] C079: Traction drive 1 malfunction, minor (01130)",130,126
+ ereig "C080  [SAL10_] C080: Traction drive 2 malfunction, minor (01131)",131,127
+ ereig "C081  [SNS202_] C081: Passenger intercom malfunction, Door 2, A Car (01132)",132,128
+ ereig "C082  [SNS402_] C082: Passenger intercom malfunction, Door 4, A Car (01133)",133,129
+ ereig "C083  [SNS604_] C083: Passenger intercom malfunction, Door 6, B Car (01134)",134,130
+ ereig "C084  [SNS804_] C084: Passenger intercom malfunction, Door 8, B Car (01135)",135,131
+ ereig "C085  [SESF_] C085: Emergency brake loop cut out switch operated (01136)",136,132
+ ereig "C086  [FSES03_] C086: Safety override switch operated, A Car (01137)",137,133
+ ereig "C087  [FSSG02_] C087: Driver intercom malfunction, A or B Car (01140)",140,136
+ ereig "C088  [ZBSG02_] C088: Train bus control device, PA System malfunction (01141)",141,137
+ ereig "C089  [SNSB103_] C089: Disabled person intercom malfunction, A Car (01142)",142,138
+ ereig "C090  [SNSB204_] C090: Disabled person intercom malfunction, B Car (01143)",143,139
+ ereig "C091  [FAHRL_] C091: Driving instructor command longer 1 minute (01152)",152,140
+ ereig "C092  [SSIUS_] C092: Video surveillance system malfunction (01144)",144,141
+ ereig "C093  [FSES05_] C093: Safety override switch operated, B Car (01145)",145,142
+ ereig "Operating system fault: Division, by zero (01901)",901,1
+ ereig "Operating system fault: Malfunction voltage supply (01908)",908,5
+ ereig "Operating system fault: Undervoltage (01907)",907,4
+ ereig "Operating system fault: Watchdog (01904)",904,2
+ ereig "Operating system fault: Time overrun (01906)",906,3
+
+ var "Zykluszähler",NUM,WORD,0,$FFFF,"",1,0,65535,0,0
+ help "Cycle counter of fastest task"
+ var "Adr_Div0",HEX,DWORD,2,$FFFFFFFF,"",1,0,$FFFFFFFF,0,0
+ help "Address (Offset) Division command on error: Division, by zero"
+
+ ;Zusatzinfos des Projekts
+ var "ATS1_",LOG,BYTE,7,$80
+ help "All doors closed, side 1"
+ var "ATS2_",LOG,BYTE,8,$01
+ help "All doors closed, side 2"
+ var "BENTF16_",LOG,BYTE,50,$80
+ help "TA: Operating mode dehumidify, HKL304-1_BTN16"
+ var "BENTF17_",LOG,BYTE,54,$80
+ help "TA: Operating mode dehumidify, HKL304-2_BTN17"
+ var "BFRG16_",LOG,BYTE,50,$10
+ help "TA: Operation release, HKL304-1_BTN16"
+ var "BFRG17_",LOG,BYTE,54,$10
+ help "TA: Operation release, HKL304-2_BTN17"
+ var "BFRISCH16_",LOG,BYTE,52,$01
+ help "TA: Fresh air operation, HKL304-1_BTN16"
+ var "BFRISCH17_",LOG,BYTE,56,$01
+ help "TA: Fresh air operation, HKL304-2_BTN17"
+ var "BHEIZ14_",LOG,BYTE,44,$04
+ help "Operating mode Heat, HKL123-1_BTN14"
+ var "BHEIZ15_",LOG,BYTE,47,$04
+ help "Operating mode Heat, HKL123-2_BTN15"
+ var "BHEIZ16_",LOG,BYTE,50,$20
+ help "TA: Operating mode Heat, HKL304-1_BTN16"
+ var "BHEIZ17_",LOG,BYTE,54,$20
+ help "TA: Operating mode Heat, HKL304-2_BTN17"
+ var "BKUEHL14_",LOG,BYTE,44,$08
+ help "Operating mode Ventilate, HKL123-1_BTN14"
+ var "BKUEHL15_",LOG,BYTE,47,$08
+ help "Operating mode Ventilate, HKL123-2_BTN15"
+ var "BKUEHL16_",LOG,BYTE,50,$40
+ help "TA: Operating mode Cool, HKL304-1_BTN16"
+ var "BKUEHL17_",LOG,BYTE,54,$40
+ help "TA: Operating mode Cool, HKL304-2_BTN17"
+ var "D1KMAX09_",LOG,BYTE,9,$01
+ help "Wheel diameter Motor 1 > MAX BTN 9 (ASM1)"
+ var "D1KMAX10_",LOG,BYTE,16,$01
+ help "Wheel diameter Motor 1 > MAX BTN 10 (ASM2)"
+ var "D1KMIN09_",LOG,BYTE,9,$02
+ help "Wheel diameter Motor 1 < MIN BTN 9 (ASM1)"
+ var "D1KMIN10_",LOG,BYTE,16,$02
+ help "Wheel diameter Motor 1 < MIN BTN 10 (ASM2)"
+ var "D2KMAX09_",LOG,BYTE,9,$04
+ help "Wheel diameter Motor 2 > MAX BTN 9 (ASM1)"
+ var "D2KMAX10_",LOG,BYTE,16,$04
+ help "Wheel diameter Motor 2 > MAX BTN 10 (ASM2)"
+ var "D2KMIN09_",LOG,BYTE,9,$08
+ help "Wheel diameter Motor 2 < MIN BTN 9 (ASM1)"
+ var "D2KMIN10_",LOG,BYTE,16,$08
+ help "Wheel diameter Motor 2 < MIN BTN 10 (ASM2)"
+ var "DC0118_",LOG,BYTE,57,$01
+ help "Line break door drive motor, Door 1_BTN18"
+ var "DC0119_",LOG,BYTE,63,$01
+ help "Line break door drive motor, Door 3_BTN19"
+ var "DC0120_",LOG,BYTE,69,$01
+ help "Line break door drive motor, Door 5_BTN20"
+ var "DC0121_",LOG,BYTE,75,$01
+ help "Line break door drive motor, Door 7_BTN21"
+ var "DC0122_",LOG,BYTE,78,$01
+ help "Line break door drive motor, Door 8_BTN22"
+ var "DC0123_",LOG,BYTE,72,$01
+ help "Line break door drive motor, Door 6_BTN23"
+ var "DC0124_",LOG,BYTE,66,$01
+ help "Line break door drive motor, Door 4_BTN24"
+ var "DC0125_",LOG,BYTE,60,$01
+ help "Line break door drive motor, Door 2_BTN25"
+ var "DC0218_",LOG,BYTE,57,$04
+ help "Limit switch - Door closed - failure - Impulse, Door 1_BTN18"
+ var "DC0219_",LOG,BYTE,63,$04
+ help "Limit switch - Door closed - failure - Impulse, Door 3_BTN19"
+ var "DC0220_",LOG,BYTE,69,$04
+ help "Limit switch - Door closed - failure - Impulse, Door 5_BTN20"
+ var "DC0221_",LOG,BYTE,75,$04
+ help "Limit switch - Door closed - failure - Impulse, Door 7_BTN21"
+ var "DC0222_",LOG,BYTE,78,$04
+ help "Limit switch - Door closed - failure - Impulse, Door 8_BTN22"
+ var "DC0223_",LOG,BYTE,72,$04
+ help "Limit switch - Door closed - failure - Impulse, Door 6_BTN23"
+ var "DC0224_",LOG,BYTE,66,$04
+ help "Limit switch - Door closed - failure - Impulse, Door 4_BTN24"
+ var "DC0225_",LOG,BYTE,60,$04
+ help "Limit switch - Door closed - failure - Impulse, Door 2_BTN25"
+ var "DC0418_",LOG,BYTE,57,$08
+ help "Door does not unlock, Door 1_BTN18"
+ var "DC0419_",LOG,BYTE,63,$08
+ help "Door does not unlock, Door 3_BTN19"
+ var "DC0420_",LOG,BYTE,69,$08
+ help "Door does not unlock, Door 5_BTN20"
+ var "DC0421_",LOG,BYTE,75,$08
+ help "Door does not unlock, Door 7_BTN21"
+ var "DC0422_",LOG,BYTE,78,$08
+ help "Door does not unlock, Door 8_BTN22"
+ var "DC0423_",LOG,BYTE,72,$08
+ help "Door does not unlock, Door 6_BTN23"
+ var "DC0424_",LOG,BYTE,66,$08
+ help "Door does not unlock, Door 4_BTN24"
+ var "DC0425_",LOG,BYTE,60,$08
+ help "Door does not unlock, Door 2_BTN25"
+ var "DC0518_",LOG,BYTE,57,$10
+ help "Door encoder failure, Door 1_BTN18"
+ var "DC0519_",LOG,BYTE,63,$10
+ help "Door encoder failure, Door 3_BTN19"
+ var "DC0520_",LOG,BYTE,69,$10
+ help "Door encoder failure, Door 5_BTN20"
+ var "DC0521_",LOG,BYTE,75,$10
+ help "Door encoder failure, Door 7_BTN21"
+ var "DC0522_",LOG,BYTE,78,$10
+ help "Door encoder failure, Door 8_BTN22"
+ var "DC0523_",LOG,BYTE,72,$10
+ help "Door encoder failure, Door 6_BTN23"
+ var "DC0524_",LOG,BYTE,66,$10
+ help "Door encoder failure, Door 4_BTN24"
+ var "DC0525_",LOG,BYTE,60,$10
+ help "Door encoder failure, Door 2_BTN25"
+ var "DC0618_",LOG,BYTE,57,$20
+ help "Block when closing, Door 1_BTN18"
+ var "DC0619_",LOG,BYTE,63,$20
+ help "Block when closing, Door 3_BTN19"
+ var "DC0620_",LOG,BYTE,69,$20
+ help "Block when closing, Door 5_BTN20"
+ var "DC0621_",LOG,BYTE,75,$20
+ help "Block when closing, Door 7_BTN21"
+ var "DC0622_",LOG,BYTE,78,$20
+ help "Block when closing, Door 8_BTN22"
+ var "DC0623_",LOG,BYTE,72,$20
+ help "Block when closing, Door 6_BTN23"
+ var "DC0624_",LOG,BYTE,66,$20
+ help "Block when closing, Door 4_BTN24"
+ var "DC0625_",LOG,BYTE,60,$20
+ help "Block when closing, Door 2_BTN25"
+ var "DC0718_",LOG,BYTE,57,$40
+ help "Block when opening, Door 1_BTN18"
+ var "DC0719_",LOG,BYTE,63,$40
+ help "Block when opening, Door 3_BTN19"
+ var "DC0720_",LOG,BYTE,69,$40
+ help "Block when opening, Door 5_BTN20"
+ var "DC0721_",LOG,BYTE,75,$40
+ help "Block when opening, Door 7_BTN21"
+ var "DC0722_",LOG,BYTE,78,$40
+ help "Block when opening, Door 8_BTN22"
+ var "DC0723_",LOG,BYTE,72,$40
+ help "Block when opening, Door 6_BTN23"
+ var "DC0724_",LOG,BYTE,66,$40
+ help "Block when opening, Door 4_BTN24"
+ var "DC0725_",LOG,BYTE,60,$40
+ help "Block when opening, Door 2_BTN25"
+ var "DC0818_",LOG,BYTE,57,$80
+ help "Internal safety relay failure, Door 1_BTN18"
+ var "DC0819_",LOG,BYTE,63,$80
+ help "Internal safety relay failure, Door 3_BTN19"
+ var "DC0820_",LOG,BYTE,69,$80
+ help "Internal safety relay failure, Door 5_BTN20"
+ var "DC0821_",LOG,BYTE,75,$80
+ help "Internal safety relay failure, Door 7_BTN21"
+ var "DC0822_",LOG,BYTE,78,$80
+ help "Internal safety relay failure, Door 8_BTN22"
+ var "DC0823_",LOG,BYTE,72,$80
+ help "Internal safety relay failure, Door 6_BTN23"
+ var "DC0824_",LOG,BYTE,66,$80
+ help "Internal safety relay failure, Door 4_BTN24"
+ var "DC0825_",LOG,BYTE,60,$80
+ help "Internal safety relay failure, Door 2_BTN25"
+ var "DC1318_",LOG,BYTE,58,$01
+ help "Short circuit A1:, Door 1_BTN18"
+ var "DC1319_",LOG,BYTE,64,$01
+ help "Short circuit A1:, Door 3_BTN19"
+ var "DC1320_",LOG,BYTE,70,$01
+ help "Short circuit A1:, Door 5_BTN20"
+ var "DC1321_",LOG,BYTE,76,$01
+ help "Short circuit A1:, Door 7_BTN21"
+ var "DC1322_",LOG,BYTE,79,$01
+ help "Short circuit A1:, Door 8_BTN22"
+ var "DC1323_",LOG,BYTE,73,$01
+ help "Short circuit A1:, Door 6_BTN23"
+ var "DC1324_",LOG,BYTE,67,$01
+ help "Short circuit A1:, Door 4_BTN24"
+ var "DC1325_",LOG,BYTE,61,$01
+ help "Short circuit A1:, Door 2_BTN25"
+ var "DC1418_",LOG,BYTE,58,$02
+ help "Short circuit A2:, Door 1_BTN18"
+ var "DC1419_",LOG,BYTE,64,$02
+ help "Short circuit A2:, Door 3_BTN19"
+ var "DC1420_",LOG,BYTE,70,$02
+ help "Short circuit A2:, Door 5_BTN20"
+ var "DC1421_",LOG,BYTE,76,$02
+ help "Short circuit A2:, Door 7_BTN21"
+ var "DC1422_",LOG,BYTE,79,$02
+ help "Short circuit A2:, Door 8_BTN22"
+ var "DC1423_",LOG,BYTE,73,$02
+ help "Short circuit A2:, Door 6_BTN23"
+ var "DC1424_",LOG,BYTE,67,$02
+ help "Short circuit A2:, Door 4_BTN24"
+ var "DC1425_",LOG,BYTE,61,$02
+ help "Short circuit A2:, Door 2_BTN25"
+ var "DC1518_",LOG,BYTE,58,$04
+ help "Short circuit A3:, Door 1_BTN18"
+ var "DC1519_",LOG,BYTE,64,$04
+ help "Short circuit A3:, Door 3_BTN19"
+ var "DC1520_",LOG,BYTE,70,$04
+ help "Short circuit A3:, Door 5_BTN20"
+ var "DC1521_",LOG,BYTE,76,$04
+ help "Short circuit A3:, Door 7_BTN21"
+ var "DC1522_",LOG,BYTE,79,$04
+ help "Short circuit A3:, Door 8_BTN22"
+ var "DC1523_",LOG,BYTE,73,$04
+ help "Short circuit A3:, Door 6_BTN23"
+ var "DC1524_",LOG,BYTE,67,$04
+ help "Short circuit A3:, Door 4_BTN25"
+ var "DC1525_",LOG,BYTE,61,$04
+ help "Short circuit A3:, Door 2_BTN25"
+ var "DC1618_",LOG,BYTE,58,$08
+ help "Short circuit A4:, Door 1_BTN18"
+ var "DC1619_",LOG,BYTE,64,$08
+ help "Short circuit A4:, Door 3_BTN19"
+ var "DC1620_",LOG,BYTE,70,$08
+ help "Short circuit A4:, Door 5_BTN20"
+ var "DC1621_",LOG,BYTE,76,$08
+ help "Short circuit A4:, Door 7_BTN21"
+ var "DC1622_",LOG,BYTE,79,$08
+ help "Short circuit A4:, Door 8_BTN22"
+ var "DC1623_",LOG,BYTE,73,$08
+ help "Short circuit A4:, Door 6_BTN23"
+ var "DC1624_",LOG,BYTE,67,$08
+ help "Short circuit A4:, Door 4_BTN24"
+ var "DC1625_",LOG,BYTE,61,$08
+ help "Short circuit A4:, Door 2_BTN25"
+ var "DC1818_",LOG,BYTE,58,$10
+ help "Short circuit A5:, Door 1_BTN18"
+ var "DC1819_",LOG,BYTE,64,$10
+ help "Short circuit A5:, Door 3_BTN19"
+ var "DC1820_",LOG,BYTE,70,$10
+ help "Short circuit A5:, Door 5_BTN20"
+ var "DC1821_",LOG,BYTE,76,$10
+ help "Short circuit A5:, Door 7_BTN21"
+ var "DC1822_",LOG,BYTE,79,$10
+ help "Short circuit A5:, Door 8_BTN22"
+ var "DC1823_",LOG,BYTE,73,$10
+ help "Short circuit A5:, Door 6_BTN23"
+ var "DC1824_",LOG,BYTE,67,$10
+ help "Short circuit A5:, Door 4_BTN24"
+ var "DC1825_",LOG,BYTE,61,$10
+ help "Short circuit A5:, Door 2_BTN25"
+ var "DC1918_",LOG,BYTE,58,$20
+ help "Short circuit A6:, Door 1_BTN18"
+ var "DC1919_",LOG,BYTE,64,$20
+ help "Short circuit A6:, Door 3_BTN19"
+ var "DC1920_",LOG,BYTE,70,$20
+ help "Short circuit A6:, Door 5_BTN20"
+ var "DC1921_",LOG,BYTE,76,$20
+ help "Short circuit A6:, Door 7_BTN21"
+ var "DC1922_",LOG,BYTE,79,$20
+ help "Short circuit A6:, Door 8_BTN22"
+ var "DC1923_",LOG,BYTE,73,$20
+ help "Short circuit A6:, Door 6_BTN23"
+ var "DC1924_",LOG,BYTE,67,$20
+ help "Short circuit A6:, Door 4_BTN24"
+ var "DC1925_",LOG,BYTE,61,$20
+ help "Short circuit A6:, Door 2_BTN25"
+ var "DC2018_",LOG,BYTE,58,$40
+ help "Short circuit A7:, Door 1_BTN18"
+ var "DC2019_",LOG,BYTE,64,$40
+ help "Short circuit A7:, Door 3_BTN19"
+ var "DC2020_",LOG,BYTE,70,$40
+ help "Short circuit A7:, Door 5_BTN20"
+ var "DC2021_",LOG,BYTE,76,$40
+ help "Short circuit A7:, Door 7_BTN21"
+ var "DC2022_",LOG,BYTE,79,$40
+ help "Short circuit A7:, Door 8_BTN22"
+ var "DC2023_",LOG,BYTE,73,$40
+ help "Short circuit A7:, Door 7_BTN23"
+ var "DC2024_",LOG,BYTE,67,$40
+ help "Short circuit A7:, Door 4_BTN24"
+ var "DC2025_",LOG,BYTE,61,$40
+ help "Short circuit A7:, Door 2_BTN25"
+ var "DC2118_",LOG,BYTE,58,$80
+ help "Short circuit A8:, Door 1_BTN18"
+ var "DC2119_",LOG,BYTE,64,$80
+ help "Short circuit A8:, Door 3_BTN19"
+ var "DC2120_",LOG,BYTE,70,$80
+ help "Short circuit A8:, Door 5_BTN20"
+ var "DC2121_",LOG,BYTE,76,$80
+ help "Short circuit A8:, Door 7_BTN21"
+ var "DC2122_",LOG,BYTE,79,$80
+ help "Short circuit A8:, Door 8_BTN22"
+ var "DC2123_",LOG,BYTE,73,$80
+ help "Short circuit A8:, Door 6_BTN23"
+ var "DC2124_",LOG,BYTE,67,$80
+ help "Short circuit A8:, Door 4_BTN24"
+ var "DC2125_",LOG,BYTE,61,$80
+ help "Short circuit A8:, Door 2_BTN25"
+ var "DC2218_",LOG,BYTE,59,$01
+ help "Battery buffer Diagnosis memory faulty, Door 1_BTN18"
+ var "DC2219_",LOG,BYTE,65,$01
+ help "Battery buffer Diagnosis memory faulty, Door 3_BTN19"
+ var "DC2220_",LOG,BYTE,71,$01
+ help "Battery buffer Diagnosis memory faulty, Door 5_BTN20"
+ var "DC2221_",LOG,BYTE,77,$01
+ help "Battery buffer Diagnosis memory faulty, Door 7_BTN21"
+ var "DC2222_",LOG,BYTE,80,$01
+ help "Battery buffer Diagnosis memory faulty, Door 8_BTN22"
+ var "DC2223_",LOG,BYTE,74,$01
+ help "Battery buffer Diagnosis memory faulty, Door 6_BTN23"
+ var "DC2224_",LOG,BYTE,68,$01
+ help "Battery buffer Diagnosis memory faulty, Door 4_BTN24"
+ var "DC2225_",LOG,BYTE,62,$01
+ help "Battery buffer Diagnosis memory faulty, Door 2_BTN25"
+ var "DC3218_",LOG,BYTE,59,$02
+ help "Door opening button faulty, Door 1_BTN18"
+ var "DC3219_",LOG,BYTE,65,$02
+ help "Door opening button faulty, Door 3_BTN19"
+ var "DC3220_",LOG,BYTE,71,$02
+ help "Door opening button faulty, Door 5_BTN20"
+ var "DC3221_",LOG,BYTE,77,$02
+ help "Door opening button faulty, Door 7_BTN21"
+ var "DC3222_",LOG,BYTE,80,$02
+ help "Door opening button faulty, Door 8_BTN22"
+ var "DC3223_",LOG,BYTE,74,$02
+ help "Door opening button faulty, Door 6_BTN23"
+ var "DC3224_",LOG,BYTE,68,$02
+ help "Door opening button faulty, Door 4_BTN24"
+ var "DC3225_",LOG,BYTE,62,$02
+ help "Door opening button faulty, Door 2_BTN25"
+ var "DC4018_",LOG,BYTE,59,$04
+ help "Signal content standstill different,  Door 1_BTN18"
+ var "DC4019_",LOG,BYTE,65,$04
+ help "Signal content standstill different,  Door 3_BTN19"
+ var "DC4020_",LOG,BYTE,71,$04
+ help "Signal content standstill different,  Door 5_BTN20"
+ var "DC4021_",LOG,BYTE,77,$04
+ help "Signal content standstill different,  Door 7_BTN21"
+ var "DC4022_",LOG,BYTE,80,$04
+ help "Signal content standstill different,  Door 8_BTN22"
+ var "DC4023_",LOG,BYTE,74,$04
+ help "Signal content standstill different,  Door 6_BTN23"
+ var "DC4024_",LOG,BYTE,68,$04
+ help "Signal content standstill different,  Door 4_BTN24"
+ var "DC4025_",LOG,BYTE,62,$04
+ help "Signal content standstill different,  Door 2_BTN25"
+ var "DC4118_",LOG,BYTE,59,$08
+ help "Signal content Door release different,  Door 1_BTN18"
+ var "DC4119_",LOG,BYTE,65,$08
+ help "Signal content Door release different,  Door 3_BTN19"
+ var "DC4120_",LOG,BYTE,71,$08
+ help "Signal content Door release different,  Door 5_BTN20"
+ var "DC4121_",LOG,BYTE,77,$08
+ help "Signal content Door release different,  Door 7_BTN21"
+ var "DC4122_",LOG,BYTE,80,$08
+ help "Signal content Door release different,  Door 8_BTN22"
+ var "DC4123_",LOG,BYTE,74,$08
+ help "Signal content Door release different,  Door 6_BTN23"
+ var "DC4124_",LOG,BYTE,68,$08
+ help "Signal content Door release different,  Door 4_BTN24"
+ var "DC4125_",LOG,BYTE,62,$08
+ help "Signal content Door release different,  Door 2_BTN25"
+ var "DC4318_",LOG,BYTE,59,$10
+ help "Door lock faulty,  Door 1_BTN18"
+ var "DC4319_",LOG,BYTE,65,$10
+ help "Door lock faulty,  Door 3_BTN19"
+ var "DC4320_",LOG,BYTE,71,$10
+ help "Door lock faulty,  Door 5_BTN20"
+ var "DC4321_",LOG,BYTE,77,$10
+ help "Door lock faulty,  Door 7_BTN21"
+ var "DC4322_",LOG,BYTE,80,$10
+ help "Door lock faulty,  Door 8_BTN22"
+ var "DC4323_",LOG,BYTE,74,$10
+ help "Door lock faulty,  Door 6_BTN23"
+ var "DC4324_",LOG,BYTE,68,$10
+ help "Door lock faulty,  Door 4_BTN24"
+ var "DC4325_",LOG,BYTE,62,$10
+ help "Door lock faulty,  Door 2_BTN25"
+ var "DC4418_",LOG,BYTE,59,$20
+ help "Closed position exit unauthorised,  Door 1_BTN18"
+ var "DC4419_",LOG,BYTE,65,$20
+ help "Closed position exit unauthorised,  Door 3_BTN19"
+ var "DC4420_",LOG,BYTE,71,$20
+ help "Closed position exit unauthorised,  Door 5_BTN20"
+ var "DC4421_",LOG,BYTE,77,$20
+ help "Closed position exit unauthorised,  Door 7_BTN21"
+ var "DC4422_",LOG,BYTE,80,$20
+ help "Closed position exit unauthorised,  Door 8_BTN22"
+ var "DC4423_",LOG,BYTE,74,$20
+ help "Closed position exit unauthorised,  Door 6_BTN23"
+ var "DC4424_",LOG,BYTE,68,$20
+ help "Closed position exit unauthorised,  Door 4_BTN24"
+ var "DC4425_",LOG,BYTE,62,$20
+ help "Closed position exit unauthorised,  Door 2_BTN25"
+ var "DC4818_",LOG,BYTE,59,$40
+ help "Door coding faulty,  Door 1_BTN18"
+ var "DC4819_",LOG,BYTE,65,$40
+ help "Door coding faulty,  Door 3_BTN19"
+ var "DC4820_",LOG,BYTE,71,$40
+ help "Door coding faulty,  Door 5_BTN20"
+ var "DC4821_",LOG,BYTE,77,$40
+ help "Door coding faulty,  Door 7_BTN21"
+ var "DC4822_",LOG,BYTE,80,$40
+ help "Door coding faulty,  Door 8_BTN22"
+ var "DC4823_",LOG,BYTE,74,$40
+ help "Door coding faulty,  Door 6_BTN23"
+ var "DC4824_",LOG,BYTE,68,$40
+ help "Door coding faulty,  Door 4_BTN24"
+ var "DC4825_",LOG,BYTE,62,$40
+ help "Door coding faulty,  Door 2_BTN25"
+ var "DC6118_",LOG,BYTE,59,$80
+ help "Driver key-operated switch faulty,  Door 1_BTN18"
+ var "DC6119_",LOG,BYTE,65,$80
+ help "Driver key-operated switch faulty,  Door 3_BTN19"
+ var "DC6120_",LOG,BYTE,71,$80
+ help "Driver key-operated switch faulty,  Door 5_BTN20"
+ var "DC6121_",LOG,BYTE,77,$80
+ help "Driver key-operated switch faulty,  Door 7_BTN21"
+ var "DC6122_",LOG,BYTE,80,$80
+ help "Driver key-operated switch faulty,  Door 8_BTN22"
+ var "DC6123_",LOG,BYTE,74,$80
+ help "Driver key-operated switch faulty,  Door 6_BTN23"
+ var "DC6124_",LOG,BYTE,68,$80
+ help "Driver key-operated switch faulty,  Door 4_BTN24"
+ var "DC6125_",LOG,BYTE,62,$80
+ help "Driver key-operated switch faulty,  Door 2_BTN25"
+ var "DC6818_",LOG,BYTE,57,$02
+ help "Electromagnet for door emergency opening faulty,  Door 1_BTN18"
+ var "DC6819_",LOG,BYTE,63,$02
+ help "Electromagnet for door emergency opening faulty,  Door 3_BTN18"
+ var "DC6820_",LOG,BYTE,69,$02
+ help "Electromagnet for door emergency opening faulty,  Door 5_BTN20"
+ var "DC6821_",LOG,BYTE,75,$02
+ help "Electromagnet for door emergency opening faulty,  Door 7_BTN21"
+ var "DC6822_",LOG,BYTE,78,$02
+ help "Electromagnet for door emergency opening faulty,  Door 8_BTN22"
+ var "DC6823_",LOG,BYTE,72,$02
+ help "Electromagnet for door emergency opening faulty,  Door 6_BTN23"
+ var "DC6824_",LOG,BYTE,66,$02
+ help "Electromagnet for door emergency opening faulty,  Door 4_BTN24"
+ var "DC6825_",LOG,BYTE,60,$02
+ help "Electromagnet for door emergency opening faulty,  Door 2_BTN25"
+ var "EFR109_",LOG,BYTE,6,$02
+ help "Single control line Travel direction 1 BTN 9 (ASM102)"
+ var "EFR209_",LOG,BYTE,6,$04
+ help "Single control line Travel direction 2 BTN 9 (ASM102)"
+ var "ENAB_N_",LOG,BYTE,6,$08
+ help "Single control line Emergency shutdown NOT"
+ var "EZBR_N_",LOG,BYTE,6,$01
+ help "Single control line Automatic brake NOT"
+ var "FNBF_",LOG,BYTE,6,$40
+ help "Passenger emergency brake vehicle"
+ var "FS1A_",LOG,BYTE,6,$10
+ help "Driver's cab 1 is active"
+ var "FS2A_",LOG,BYTE,6,$20
+ help "Driver's cab 2 is active"
+ var "FSPF_",LOG,BYTE,6,$80
+ help "Drive block vehicle"
+ var "KAOK14_",LOG,BYTE,44,$20
+ help "Passenger compartment system OK, HKL123-1_BTN14"
+ var "KAOK15_",LOG,BYTE,47,$20
+ help "Passenger compartment system OK, HKL123-2_BTN15"
+ var "KAOK16_",LOG,BYTE,52,$02
+ help "Driver's cab air-conditioning system OK, HKL304-1_BTN16"
+ var "KAOK17_",LOG,BYTE,56,$02
+ help "Driver's cab air-conditioning system OK, HKL304-2_BTN17"
+ var "LASTAC_",LOG,BYTE,7,$10
+ help "Load shedding AC 400V"
+ var "LASTDC_",LOG,BYTE,7,$08
+ help "Load shedding DC 24V"
+ var "LFKA14_",LOG,BYTE,44,$40
+ help "Minor malf. pass. compart. temp. equalisation system, HKL123-1_BTN14"
+ var "LFKA15_",LOG,BYTE,47,$40
+ help "Minor malf. pass. compart. temp. equalisation system, HKL123-2_BTN15"
+ var "LFKA16_",LOG,BYTE,52,$04
+ help "Minor malfunction Driver's cab air-conditioning system, HKL304-1_BTN16"
+ var "LFKA17_",LOG,BYTE,56,$04
+ help "Minor malfunction Driver's cab air-conditioning system, HKL304-2_BTN17"
+ var "SAPWM09_",LOG,BYTE,9,$80
+ help "Malfunction drive from PWM4 BTN 9 (ASM1)"
+ var "SAPWM10_",LOG,BYTE,16,$80
+ help "Malfunction drive from PWM4 BTN 10 (ASM2)"
+ var "SAUS09_",LOG,BYTE,10,$01
+ help "Malfunction Prewarning ASM from BTN 9 (ASM1)"
+ var "SAUS10_",LOG,BYTE,17,$01
+ help "Malfunction Prewarning ASM from BTN 10 (ASM2)"
+ var "SAWT1_28_",LOG,BYTE,87,$04
+ help "Malfunction AW Test 1, BSG_BTN28"
+ var "SAWT2_28_",LOG,BYTE,87,$08
+ help "Malfunction AW Test 2, BSG_BTN28"
+ var "SAWT3_28_",LOG,BYTE,87,$10
+ help "Malfunction AW Test 3, BSG_BTN28"
+ var "SAWT4_28_",LOG,BYTE,87,$20
+ help "Malfunction AW Test 4, BSG_BTN28"
+ var "SAWT5_28_",LOG,BYTE,87,$40
+ help "Malfunction AW Test 5, BSG_BTN28"
+ var "SAWT6_28_",LOG,BYTE,87,$80
+ help "Malfunction AW Test 6, BSG_BTN28"
+ var "SAWT7_28_",LOG,BYTE,88,$01
+ help "Malfunction AW Test 7, BSG_BTN28"
+ var "SAWT8_28_",LOG,BYTE,88,$02
+ help "Malfunction AW Test 8, BSG_BTN28"
+ var "SAWT9_28_",LOG,BYTE,88,$04
+ help "Malfunction AW Test 9, BSG_BTN28"
+ var "SBIS209_",LOG,BYTE,10,$02
+ help "Malfunction Drive-Brake-Command BTN 9 (ASM1)"
+ var "SBIS210_",LOG,BYTE,17,$02
+ help "Malfunction Drive-Brake-Command BTN 10 (ASM2)"
+ var "SCAN28_",LOG,BYTE,82,$02
+ help "Malfunction Communication bus coupler, BSG_BTN28"
+ var "SCB28_",LOG,BYTE,86,$10
+ help "Malfunction CAN Bus, BSG_BTN28"
+ var "SCBK28_",LOG,BYTE,82,$01
+ help "Malfunction Coding bus coupler, BSG_BTN28"
+ var "SCEB28_",LOG,BYTE,82,$40
+ help "Malfunction Coding Extension board, BSG_BTN28"
+ var "SCMB28_",LOG,BYTE,81,$02
+ help "Malfunction Coding Main board, BSG_BTN28"
+ var "SCMSCH16_",LOG,BYTE,51,$04
+ help "Malfunction Motor protection compressor, HKL304-1_BTN16"
+ var "SCMSCH17_",LOG,BYTE,55,$04
+ help "Malfunction Motor protection compressor, HKL304-2_BTN17"
+ var "SCSCH16_",LOG,BYTE,49,$04
+ help "Malfunction Compressor contactor K270, HKL304-1_BTN16"
+ var "SCSCH17_",LOG,BYTE,53,$04
+ help "Malfunction Compressor contactor K270, HKL304-2_BTN17"
+ var "SDA28_",LOG,BYTE,84,$40
+ help "Malfunction Pressure deviation, BSG_BTN28"
+ var "SDG1_28_",LOG,BYTE,83,$80
+ help "Malfunction Speed measurement axle 1, BSG_BTN28"
+ var "SDG28_",LOG,BYTE,84,$02
+ help "Malfunction speed measurement, BSG_BTN28"
+ var "SDG2_28_",LOG,BYTE,84,$01
+ help "Malfunction Speed measurement axle 2, BSG_BTN28"
+ var "SDMAX28_",LOG,BYTE,81,$04
+ help "Malfunction Pressure sensor Max, BSG_BTN28"
+ var "SDMIN28_",LOG,BYTE,81,$08
+ help "Malfunction Pressure sensor MIN, BSG_BTN28"
+ var "SDNM109_",LOG,BYTE,10,$04
+ help "Speed measurement dn Detection Motor 1 BTN 9 (ASM1)"
+ var "SDNM110_",LOG,BYTE,17,$04
+ help "Speed measurement dn Detection Motor 1 BTN 10 (ASM2)"
+ var "SDNM209_",LOG,BYTE,10,$08
+ help "Speed measurement dn Detection Motor 2 BTN 9 (ASM1)"
+ var "SDNM210_",LOG,BYTE,17,$08
+ help "Speed measurement dn Detection Motor 2 BTN 10 (ASM2)"
+ var "SDNR09_",LOG,BYTE,10,$10
+ help "Speed measurement dn Detection Reference wheel BTN 9 (ASM1)"
+ var "SDNR10_",LOG,BYTE,17,$10
+ help "Speed measurement dn Detection Reference wheel BTN 10 (ASM2)"
+ var "SDRHD16_",LOG,BYTE,49,$08
+ help "Malfunction Pressure switch High pressure, HKL304-1_BTN16"
+ var "SDRHD17_",LOG,BYTE,53,$08
+ help "Malfunction Pressure switch High pressure, HKL304-2_BTN17"
+ var "SDRSG16_",LOG,BYTE,49,$10
+ help "Malfunction Pressure switch Low pressure, HKL304-1_BTN16"
+ var "SDRSG17_",LOG,BYTE,53,$10
+ help "Malfunction Pressure switch Low pressure, HKL304-2_BTN17"
+ var "SDS28_",LOG,BYTE,84,$04
+ help "Malfunction Pressure sensor C, BSG_BTN28"
+ var "SDSS28_",LOG,BYTE,84,$08
+ help "Malfunction Pressure sensor Tank, BSG_BTN28"
+ var "SEB28_",LOG,BYTE,82,$08
+ help "Malfunction Internal extension board, BSG_BTN28"
+ var "SEER28_",LOG,BYTE,85,$80
+ help "Malfunction EEPROM write/read, BSG_BTN28"
+ var "SEES28_",LOG,BYTE,86,$01
+ help "Malfunction EEPROM Stop, BSG_BTN28"
+ var "SEFR09_",LOG,BYTE,10,$40
+ help "Malfunction single control line FRA or FRB BTN 9 (ASM1)"
+ var "SEFR10_",LOG,BYTE,17,$40
+ help "Malfunction single control line FRA or FRB BTN 10 (ASM2)"
+ var "SESL09_",LOG,BYTE,10,$20
+ help "Malfunction single control line BTN 9 (ASM1)"
+ var "SESL10_",LOG,BYTE,17,$20
+ help "Malfunction single control line BTN 10 (ASM2)"
+ var "SF1116_",LOG,BYTE,49,$40
+ help "Fuse failure F110, HKL304-1_BTN16"
+ var "SF1117_",LOG,BYTE,53,$40
+ help "Fuse failure F110, HKL304-2_BTN17"
+ var "SF11F1214_",LOG,BYTE,44,$10
+ help "Fuse failure F11 and/or F12, HKL123-1_BTN14"
+ var "SF11F1215_",LOG,BYTE,47,$10
+ help "Fuse failure F11 and/or F12, HKL123-2_BTN15"
+ var "SF1314_",LOG,BYTE,44,$01
+ help "Fuse failure F15 (UH1), HKL123-1_BTN14"
+ var "SF1315_",LOG,BYTE,47,$01
+ help "Fuse failure F15 (UH1), HKL123-2_BTN15"
+ var "SF1414_",LOG,BYTE,44,$02
+ help "Fuse failure F16 (UH2), HKL123-1_BTN14"
+ var "SF1415_",LOG,BYTE,47,$02
+ help "Fuse failure F16 (UH2), HKL123-2_BTN15"
+ var "SF2114_",LOG,BYTE,45,$02
+ help "Malfunction Fan circuit breaker, HKL123-1_BTN14"
+ var "SF2115_",LOG,BYTE,48,$02
+ help "Malfunction Fan circuit breaker, HKL123-2_BTN15"
+ var "SF2116_",LOG,BYTE,51,$10
+ help "Malfunction Fan circuit breaker F290, HKL304-1_BTN16"
+ var "SF2117_",LOG,BYTE,55,$10
+ help "Malfunction Fan circuit breaker F290, HKL304-2_BTN17"
+ var "SF2216_",LOG,BYTE,51,$20
+ help "Malfunction Compressor circuit breaker, HKL304-1_BTN16"
+ var "SF2217_",LOG,BYTE,55,$20
+ help "Malfunction Compressor circuit breaker, HKL304-2_BTN17"
+ var "SFESL09_",LOG,BYTE,10,$80
+ help "Malfunction Single control line FESL_N BTN 9 (ASM1)"
+ var "SFESL10_",LOG,BYTE,17,$80
+ help "Malfunction Single control line FESL_N BTN 10 (ASM2)"
+ var "SFKA14_",LOG,BYTE,44,$80
+ help "Major malf. Pass. compart. temp. equalisation system, HKL123-1_BTN14"
+ var "SFKA15_",LOG,BYTE,47,$80
+ help "Major malf. Pass. compart. temp. equalisation system, HKL123-2_BTN15"
+ var "SFKA16_",LOG,BYTE,51,$01
+ help "Major malfunction Driver's cab air-conditioning system, HKL304-1_BTN16"
+ var "SFKA17_",LOG,BYTE,55,$01
+ help "Major malfunction Driver's cab air-conditioning system, HKL304-2_BTN17"
+ var "SGB28_",LOG,BYTE,86,$02
+ help "Malfunction Hazard brake, BSG_BTN28"
+ var "SGHEIZ114_",LOG,BYTE,43,$01
+ help "Malfunction Heating contactor, HKL123-1_BTN14"
+ var "SGHEIZ115_",LOG,BYTE,46,$01
+ help "Malfunction Heating contactor, HKL123-2_BTN15"
+ var "SGHEIZ116_",LOG,BYTE,49,$01
+ help "Malfunction Heating contactor, HKL304-1_BTN16"
+ var "SGHEIZ117_",LOG,BYTE,53,$01
+ help "Malfunction Heating contactor, HKL304-2_BTN17"
+ var "SGLMSCH116_",LOG,BYTE,51,$02
+ help "Malfunction Fan Motor protection K220, HKL304-1_BTN16"
+ var "SGLMSCH117_",LOG,BYTE,55,$02
+ help "Malfunction Fan Motor protection K220, HKL304-2_BTN17"
+ var "SGLMSCH22116_",LOG,BYTE,50,$01
+ help "Malfunction Fan Motor protection 221, HKL304-1_BTN16"
+ var "SGLMSCH22117_",LOG,BYTE,54,$01
+ help "Malfunction Fan Motor protection 221, HKL304-2_BTN17"
+ var "SGLSCH24016_",LOG,BYTE,50,$04
+ help "Malfunction Condenser fan contactor, HKL304-1_BTN16"
+ var "SGLSCH24017_",LOG,BYTE,54,$04
+ help "Malfunction Condenser fan contactor, HKL304-2_BTN16"
+ var "SGMSCH114_",LOG,BYTE,45,$01
+ help "Malfunction Fan motor protection, HKL123-1_BTN14"
+ var "SGMSCH115_",LOG,BYTE,48,$01
+ help "Malfunction Fan motor protection, HKL123-2_BTN15"
+ var "SGTAUI216_",LOG,BYTE,51,$40
+ help "Malfunction Blowing temperature 2, HKL304-1_BTN16"
+ var "SGTAUI217_",LOG,BYTE,55,$40
+ help "Malfunction Blowing temperature 2, HKL304-2_BTN17"
+ var "SHYD28_",LOG,BYTE,84,$10
+ help "Malfunction Hydraulic, BSG_BTN28"
+ var "SIBK28_",LOG,BYTE,81,$20
+ help "Malfunction Internal bus coupler, BSG_BTN28"
+ var "SIMB28_",LOG,BYTE,88,$08
+ help "Malfunction Internal mainboard, BSG_BTN28"
+ var "SKBK28_",LOG,BYTE,82,$04
+ help "Malfunction Communication bus coupler Mainboard, BSG_BTN28"
+ var "SKEB28_",LOG,BYTE,82,$20
+ help "Malfunction Communication Extension board, BSG_BTN28"
+ var "SKLUR09_",LOG,BYTE,11,$02
+ help "Malfunction Fan contactor status signal BTN 9 (ASM1)"
+ var "SKLUR10_",LOG,BYTE,18,$02
+ help "Malfunction Fan contactor status signal BTN 10 (ASM2)"
+ var "SKMB28_",LOG,BYTE,81,$01
+ help "Malfunction Communication Main board, BSG_BTN28"
+ var "SLMSCH216_",LOG,BYTE,51,$08
+ help "Malfunction Motor protection Condenser fan, HKL304-1_BTN16"
+ var "SLMSCH217_",LOG,BYTE,55,$08
+ help "Malfunction Motor protection Condenser fan, HKL304-2_BTN17"
+ var "SLMSCH22X16_",LOG,BYTE,50,$02
+ help "Malfunction Condenser fan contactor, HKL304-1_BTN16"
+ var "SLMSCH22X17_",LOG,BYTE,54,$02
+ help "Malfunction Condenser fan contactor, HKL304-2_BTN17"
+ var "SLSCH116_",LOG,BYTE,49,$02
+ help "Malfunction fan contactor, HKL304-1_BTN16"
+ var "SLSCH117_",LOG,BYTE,53,$02
+ help "Malfunction fan contactor, HKL304-2_BTN17"
+ var "SLSCH2114_",LOG,BYTE,43,$02
+ help "Malfunction Fan contactor K21, HKL123-1_BTN14"
+ var "SLSCH2115_",LOG,BYTE,46,$02
+ help "Malfunction Fan contactor K21, HKL123-2_BTN15"
+ var "SMEIN28_",LOG,BYTE,81,$10
+ help "Malfunction Motor ON, BSG_BTN28"
+ var "SMLZ1_28_",LOG,BYTE,85,$10
+ help "Malfunction Motor runtime 1x, BSG_BTN28"
+ var "SMLZ3_28_",LOG,BYTE,85,$08
+ help "Malfunction Motor runtime 3x, BSG_BTN28"
+ var "SNTM109_",LOG,BYTE,11,$04
+ help "Speed measurement dn/dt Detection Motor 1 BTN 9 (ASM1)"
+ var "SNTM110_",LOG,BYTE,18,$04
+ help "Speed measurement dn/dt Detection Motor 1 BTN 10 (ASM2)"
+ var "SNTM209_",LOG,BYTE,11,$08
+ help "Speed measurement dn/dt Detection Motor 2 BTN 9 (ASM1)"
+ var "SNTM210_",LOG,BYTE,18,$08
+ help "Speed measurement dn/dt Detection Motor 2 BTN 10 (ASM2)"
+ var "SNTR09_",LOG,BYTE,11,$10
+ help "Speed measurement dn/dt Detection Reference wheel BTN 9 (ASM1)"
+ var "SNTR10_",LOG,BYTE,18,$10
+ help "Speed measurement dn/dt Detection Reference wheel BTN 10 (ASM2)"
+ var "SOFF28_",LOG,BYTE,84,$20
+ help "Malfunction Offset, BSG_BTN28"
+ var "SONU09_",LOG,BYTE,11,$20
+ help "Malfunction Communication ASM USM BTN 9 (ASM1)"
+ var "SONU10_",LOG,BYTE,18,$20
+ help "Malfunction Communication ASM USM BTN 10 (ASM2)"
+ var "SPL28_",LOG,BYTE,86,$08
+ help "Malfunction Plausibility, BSG_BTN28"
+ var "SPLIM28_",LOG,BYTE,85,$02
+ help "Malfunction Pressure <105 bar, BSG_BTN28"
+ var "SPMIN28_",LOG,BYTE,85,$04
+ help "Malfunction Pressure <105 bar, BSG_BTN28"
+ var "SRBA28_",LOG,BYTE,83,$02
+ help "Malfunction Brake Relay applied, BSG_BTN28"
+ var "SRBR28_",LOG,BYTE,83,$01
+ help "Malfunction Brake Relay released, BSG_BTN28"
+ var "SREM109_",LOG,BYTE,12,$02
+ help "Malfunction Direction detection Motor 1 BTN 9 (ASM1)"
+ var "SREM110_",LOG,BYTE,19,$02
+ help "Malfunction Direction detection Motor 1 BTN 10 (ASM2)"
+ var "SREM209_",LOG,BYTE,12,$04
+ help "Malfunction Direction detection Motor 2 BTN 9 (ASM1)"
+ var "SREM210_",LOG,BYTE,19,$04
+ help "Malfunction Direction detection Motor 2 BTN 10 (ASM2)"
+ var "SRER09_",LOG,BYTE,12,$08
+ help "Malfunction Direction detection Reference wheel 2 BTN 9 (ASM1)"
+ var "SRER10_",LOG,BYTE,19,$08
+ help "Malfunction Direction detection Reference wheel 2 BTN 10 (ASM2)"
+ var "SRLF28_",LOG,BYTE,83,$04
+ help "Malfunction relay minor fault, BSG_BTN28"
+ var "SRR1_28_",LOG,BYTE,82,$80
+ help "Malfunction Reserve relay 1, BSG_BTN28"
+ var "SRR2_28_",LOG,BYTE,83,$20
+ help "Malfunction Reserve relay 2, BSG_BTN28"
+ var "SRR3_28_",LOG,BYTE,83,$40
+ help "Malfunction Reserve relay 3, BSG_BTN28"
+ var "SRS28_",LOG,BYTE,83,$10
+ help "Malfunction Relay sanding request, BSG_BTN28"
+ var "SRSF28_",LOG,BYTE,83,$08
+ help "Malfunction relay major fault, BSG_BTN28"
+ var "SRT1_28_",LOG,BYTE,86,$20
+ help "Malfunction Tank Test 1, BSG_BTN28"
+ var "SRT2_28_",LOG,BYTE,86,$40
+ help "Malfunction Tank Test 2, BSG_BTN28"
+ var "SRT3_28_",LOG,BYTE,86,$80
+ help "Malfunction Tank Test 3, BSG_BTN28"
+ var "SRT4_28_",LOG,BYTE,87,$01
+ help "Malfunction Tank Test 4, BSG_BTN28"
+ var "SRT5_28_",LOG,BYTE,87,$02
+ help "Malfunction Tank Test 5, BSG_BTN28"
+ var "SSEB28_",LOG,BYTE,82,$10
+ help "Malfunction Software Extension board, BSG_BTN28"
+ var "SSHSCH_UH14_",LOG,BYTE,43,$08
+ help "Accumulative failure Heating contactor UH, HKL123-1_BTN14"
+ var "SSHSCH_UH15_",LOG,BYTE,46,$08
+ help "Accumulative failure Heating contactor UH, HKL123-2_BTN15"
+ var "SSMB28_",LOG,BYTE,88,$10
+ help "Malfunction Software Main board, BSG_BTN28"
+ var "SST_28",LOG,BYTE,85,$40
+ help "Malfunction Self-test, BSG_BTN28"
+ var "ST24V09_",LOG,BYTE,9,$10
+ help "Operating system 05: Malfunction Voltage supply, BTN 9 (ASM1)"
+ var "ST24V10_",LOG,BYTE,16,$10
+ help "Operating system 05: Malfunction Voltage supply, BTN 10 (ASM2)"
+ var "ST24VMIN09_",LOG,BYTE,11,$01
+ help "Operating system 04: Malfunction Undervoltage BTN 9 (ASM1)"
+ var "ST24VMIN10_",LOG,BYTE,18,$01
+ help "Operating system 04: Malfunction Undervoltage BTN 10 (ASM2)"
+ var "STANI14_",LOG,BYTE,45,$10
+ help "Malfunction Intake temperature, HKL123-1_BTN14"
+ var "STANI15_",LOG,BYTE,48,$10
+ help "Malfunction Intake temperature, HKL123-2_BTN15"
+ var "STANI16_",LOG,BYTE,52,$08
+ help "Malfunction Intake temperature. HKL304-1_BTN16"
+ var "STANI17_",LOG,BYTE,56,$08
+ help "Malfunction Intake temperature. HKL304-2_BTN17"
+ var "STAUI14_",LOG,BYTE,45,$20
+ help "Malfunction Blowing temperature, HKL123-1_BTN14"
+ var "STAUI15_",LOG,BYTE,48,$20
+ help "Malfunction Blowing temperature, HKL123-2_BTN15"
+ var "STAUI16_",LOG,BYTE,52,$10
+ help "Malfunction Blowing temperature, HKL304-1_BTN16"
+ var "STAUI17_",LOG,BYTE,56,$10
+ help "Malfunction Blowing temperature, HKL304-2_BTN17"
+ var "STBC1RE09_",LOG,BYTE,12,$10
+ help "Drive 06: Warning - Control dynamics of Chopper 1 inadequate, 2 BTN 9 A1"
+ var "STBC1RE10_",LOG,BYTE,19,$10
+ help "Drive 06: Warning - Control dynamics of Chopper 1 inadequate, 2 BTN 10"
+ var "STCAN09_",LOG,BYTE,9,$20
+ help "Control 02: "Malfunction External communication failed BTN 9 (ASM1)"
+ var "STCAN10_",LOG,BYTE,16,$20
+ help "Control 02: "Malfunction External communication failed BTN 10 (ASM2)"
+ var "STDIVN09_",LOG,BYTE,9,$40
+ help "Operating system 01: Malfunction Division by zero BTN 9 (ASM1)"
+ var "STDIVN10_",LOG,BYTE,16,$40
+ help "Operating system 01: Malfunction Division by zero BTN 10 (ASM2)"
+ var "STDSP09_",LOG,BYTE,11,$40
+ help "Control 01: Fault - DSP-Reset activated BTN 9 (ASM1)"
+ var "STDSP10_",LOG,BYTE,18,$40
+ help "Control 01: Fault - DSP-Reset activated BTN 10 (ASM2)"
+ var "STELA09_",LOG,BYTE,12,$20
+ help "Line 04: Warning - Line filter unloading failed, BTN 9 (ASM1)"
+ var "STELA10_",LOG,BYTE,19,$20
+ help "Line 04: Warning - Line filter unloading failed, BTN 10 (ASM2)"
+ var "STESPU09_",LOG,BYTE,12,$80
+ help "Warning in event memory USMBTN 9 (ASM1)"
+ var "STESPU10_",LOG,BYTE,19,$80
+ help "Warning in event memory USMBTN 10 (ASM2)"
+ var "STFLOK09_",LOG,BYTE,13,$01
+ help "Drive 01: Malfunction - Flow build-up machine failed, BTN 9 (ASM1)"
+ var "STFLOK10_",LOG,BYTE,20,$01
+ help "Drive 01: Malfunction - Flow build-up machine failed, BTN 10 (ASM2)"
+ var "STFRI114_",LOG,BYTE,45,$04
+ help "Malfunction Room temperature, HKL123-1_BTN14"
+ var "STFRI115_",LOG,BYTE,48,$04
+ help "Malfunction Room temperature, HKL123-2_BTN15"
+ var "STFRI16_",LOG,BYTE,51,$80
+ help "Malfunction Room temperature. HKL304-1_BTN16"
+ var "STFRI17_",LOG,BYTE,55,$80
+ help "Malfunction Room temperature. HKL304-2_BTN17"
+ var "STFRI214_",LOG,BYTE,45,$08
+ help "Malfunction Room temperature 2, HKL123-1_BTN14"
+ var "STFRI215_",LOG,BYTE,48,$08
+ help "Malfunction Room temperature 2, HKL123-2_BTN15"
+ var "STIGBT09_",LOG,BYTE,13,$02
+ help "DPU 01: Malfunction  - IGBT- Power section, BTN 9 (ASM1)"
+ var "STIGBT10_",LOG,BYTE,20,$02
+ help "DPU 01: Malfunction  - IGBT- Power section, BTN 10 (ASM2)"
+ var "STIMBEG09_",LOG,BYTE,13,$04
+ help "Drive 02: Warning - Motor current limit activated, BTN 9 (ASM1)"
+ var "STIMBEG10_",LOG,BYTE,20,$04
+ help "Drive 02: Warning - Motor current limit activated, BTN 10 (ASM2)"
+ var "STIMMAX09_",LOG,BYTE,13,$08
+ help "Drive 03: Malfunction - Motor excess temperature detected, BTN 9 (ASM1)"
+ var "STIMMAX10_",LOG,BYTE,20,$08
+ help "Drive 03: Malfunction - Motor excess temperature detected, BTN 10 (ASM2)"
+ var "STIN09_",LOG,BYTE,13,$10
+ help "Sensor 02: Malf.- Line current conv., measured value implausible, BTN 9"
+ var "STIN10_",LOG,BYTE,20,$10
+ help "Sensor 02: Malf.- Line current conv., measured value implausible, BTN 10"
+ var "STINETZ09_",LOG,BYTE,13,$20
+ help "Line 08: Warning - Line current consumption detected, BTN 9 (ASM1)"
+ var "STINETZ10_",LOG,BYTE,20,$20
+ help "Line 08: Warning - Line current consumption detected, BTN 10 (ASM2)"
+ var "STINMAX09_",LOG,BYTE,13,$40
+ help "Line 07: Warning - Line excess current detected, BTN 9 (ASM1)"
+ var "STINMAX10_",LOG,BYTE,20,$40
+ help "Line 07: Warning - Line excess current detected, BTN 10 (ASM2)"
+ var "STIUWR09_",LOG,BYTE,13,$80
+ help "Sensor 03: Malf. - Motor current converter(Ph.U), value implausible, A1"
+ var "STIUWR10_",LOG,BYTE,20,$80
+ help "Sensor 03: Malf. - Motor current converter(Ph.U), value implausible, A2"
+ var "STIVWR09_",LOG,BYTE,14,$01
+ help "Sensor 04: Malf. - Motor current converter(Ph.V), value implausible,"
+ var "STIVWR10_",LOG,BYTE,21,$01
+ help "Sensor 04: Malf. - Motor current converter(Ph.V), value implausible, A2"
+ var "STLA09_",LOG,BYTE,14,$02
+ help "Line 02: Fault - Charging contactor(Activation/Status signal discrep)"
+ var "STLA10_",LOG,BYTE,21,$02
+ help "Line 02: Malf. - Charging contactor(Activation/Status signal discrep) A2"
+ var "STLAD09_",LOG,BYTE,14,$04
+ help "Line 01: Malfunc. - Charging contactor(Act./Status signal discrepancy) B"
+ var "STLAD10_",LOG,BYTE,21,$04
+ help "Line 01: Malfunc. - Charging contactor(Act./Status signal discrepancy) A"
+ var "STLEIST09_",LOG,BYTE,12,$40
+ help "Drive 05: Malfunction  - Power balancing faulty, BTN 9 (ASM1)"
+ var "STLEIST10_",LOG,BYTE,19,$40
+ help "Drive 05: Malfunction  - Power balancing faulty, BTN 10 (ASM2)"
+ var "STLI09_",LOG,BYTE,14,$08
+ help "Line 01: Malfunc. - Charging contactor(Act./Status signal discrepancy) B"
+ var "STLI10_",LOG,BYTE,21,$08
+ help "Line 01: Malfunc. - Charging contactor(Act./Status signal discrepancy) A"
+ var "STMA09_",LOG,BYTE,14,$10
+ help "Malfunction Motor excess temperature BTN 9 (ASM1)"
+ var "STMA10_",LOG,BYTE,21,$10
+ help "Malfunction Motor excess temperature BTN 10 (ASM2)"
+ var "STTE109_",LOG,BYTE,14,$40
+ help "Sensor 05: Malf. - Temperature sensor TE1 outside measuring range B"
+ var "STTE110_",LOG,BYTE,21,$40
+ help "Sensor 05: Malf. - Temperature sensor TE1 outside measuring range A"
+ var "STTE209_",LOG,BYTE,14,$80
+ help "Sensor 06: Malf. - Temperature sensor TE2 outside measuring range"
+ var "STTE210_",LOG,BYTE,21,$80
+ help "Sensor 06: Malf. - Temperature sensor TE2 outside measuring range A"
+ var "STTEMAX09_",LOG,BYTE,15,$01
+ help "DPU 02: Warning - Excess temperature in IGBT-Power sect., BTN 9 (ASM1)"
+ var "STTEMAX10_",LOG,BYTE,22,$01
+ help "DPU 02: Warning - Excess temperature in IGBT-Power sect., BTN 10 (ASM2)"
+ var "STUAD09_",LOG,BYTE,11,$80
+ help "Control 03: Malfunction - Internal power supply BTN 9 (ASM1)"
+ var "STUAD10_",LOG,BYTE,18,$80
+ help "Control 03: Malfunction - Internal power supply BTN 10 (ASM2)"
+ var "STUFMAX09_",LOG,BYTE,15,$02
+ help "Line 05: Warning - Filter excess voltage detected, BTN 9 (ASM1)"
+ var "STUFMAX10_",LOG,BYTE,22,$02
+ help "Line 05: Warning - Filter excess voltage detected, BTN 10 (ASM2)"
+ var "STUFUN09_",LOG,BYTE,15,$04
+ help "Sensor 01: Malf. - Line or filter voltage converter, Discrepancy BT"
+ var "STUFUN10_",LOG,BYTE,22,$04
+ help "Sensor 01: Malf. - Line or filter voltage converter, Discrepancy A2"
+ var "STUNMAX09_",LOG,BYTE,15,$08
+ help "Line 06: Warning - Line overvoltage detected, BTN 9 (ASM1)"
+ var "STUNMAX10_",LOG,BYTE,22,$08
+ help "Line 06: Warning - Line overvoltage detected, BTN 10 (ASM2)"
+ var "STUS14_",LOG,BYTE,43,$04
+ help "Malfunction Excess temperature switch, HKL123-1_BTN14"
+ var "STUS15_",LOG,BYTE,46,$04
+ help "Malfunction Excess temperature switch, HKL123-2_BTN15"
+ var "STVDI16_",LOG,BYTE,52,$20
+ help "Malfunction Evaporator temperature, HKL304-1_BTN16"
+ var "STVDI17_",LOG,BYTE,56,$20
+ help "Malfunction Evaporator temperature, HKL304-2_BTN17"
+ var "STWDOG09_",LOG,BYTE,12,$01
+ help "Operating system 02: Malfunction - Watchdog BTN 9 (ASM1)"
+ var "STWDOG10_",LOG,BYTE,19,$01
+ help "Operating system 02: Malfunction - Watchdog BTN 10 (ASM2)"
+ var "STZYKMAX09_",LOG,BYTE,14,$20
+ help "Operating system 03: Malfunction - Cycle time overrun BTN 9 (ASM1)"
+ var "STZYKMAX10_",LOG,BYTE,21,$20
+ help "Operating system 03: Malfunction - Cycle time overrun BTN 10 (ASM2)"
+ var "SUH114_",LOG,BYTE,43,$10
+ help "Malfunction Underseat heating 1, HKL123-1_BTN14"
+ var "SUH115_",LOG,BYTE,46,$10
+ help "Malfunction Underseat heating 1, HKL123-2_BTN15"
+ var "SUH214_",LOG,BYTE,43,$20
+ help "Malfunction Underseat heating 2, HKL123-1_BTN14"
+ var "SUH215_",LOG,BYTE,46,$20
+ help "Malfunction Underseat heating 2, HKL123-2_BTN15"
+ var "SUH314_",LOG,BYTE,43,$40
+ help "Malfunction Underseat heating 3, HKL123-1_BTN14"
+ var "SUH315_",LOG,BYTE,46,$40
+ help "Malfunction Underseat heating 3, HKL123-2_BTN15"
+ var "SUH414_",LOG,BYTE,43,$80
+ help "Malfunction Underseat heating 4, HKL123-1_BTN14"
+ var "SUH415_",LOG,BYTE,46,$80
+ help "Malfunction Underseat heating 4, HKL123-2_BTN15"
+ var "SUNM109_",LOG,BYTE,15,$10
+ help "Warning Voltage supply Speed sensor Motor 1 BTN 9 (ASM1)"
+ var "SUNM110_",LOG,BYTE,22,$10
+ help "Warning Voltage supply Speed sensor Motor 1 BTN 10 (ASM2)"
+ var "SUNM209_",LOG,BYTE,15,$20
+ help "Warning Voltage supply Speed sensor Motor 2 BTN 9 (ASM1)"
+ var "SUNM210_",LOG,BYTE,22,$20
+ help "Warning Voltage supply Speed sensor Motor 2 BTN 10 (ASM2)"
+ var "SUNR09_",LOG,BYTE,15,$40
+ help "Warning Voltage supply Speed sensor Reference wheel BTN 9 (ASM1)"
+ var "SUNR10_",LOG,BYTE,22,$40
+ help "Warning Voltage supply Speed sensor Reference wheel BTN 10 (ASM2)"
+ var "SUTS16_",LOG,BYTE,49,$20
+ help "Malfunction Excess temperature switch, HKL304-1_BTN16"
+ var "SUTS17_",LOG,BYTE,53,$20
+ help "Malfunction Excess temperature switch, HKL304-2_BTN17"
+ var "SUTS32116_",LOG,BYTE,49,$80
+ help "Malfunction Excess temperature switch B321, HKL304-1_BTN16"
+ var "SUTS32117_",LOG,BYTE,53,$80
+ help "Malfunction Excess temperature switch B321, HKL304-2_BTN17"
+ var "SVDEIS16_",LOG,BYTE,50,$08
+ help "Malfunction Evaporator, HKL304-1_BTN16"
+ var "SVDEIS17_",LOG,BYTE,54,$08
+ help "Malfunction Evaporator, HKL304-2_BTN17"
+ var "SVMAX28_",LOG,BYTE,84,$80
+ help "Malfunction Activate spring brake V=15km/h, BSG_BTN28"
+ var "SVMIN28_",LOG,BYTE,85,$01
+ help "Malfunction Release spring brake V=3km/h, BSG_BTN28"
+ var "SVZ28_",LOG,BYTE,86,$04
+ help "Malfunction Delay, BSG_BTN28"
+ var "TFR1_",LOG,BYTE,7,$20
+ help "Door release vehicle Side 1 (right)"
+ var "TFR2_",LOG,BYTE,7,$40
+ help "Door release vehicle Side 2 (left)"
+ var "TSHG_",LOG,BYTE,8,$02
+ help "Door loops hardware closed"
+ var "UNF_",LOG,BYTE,7,$04
+ help "Line voltage available vehicle"
+ var "V40F_",LOG,BYTE,7,$01
+ help "Speed limit 40 km/h vehicle"
+ var "V5F_",LOG,BYTE,7,$02
+ help "Speed limit 5 km/h vehicle"
+ var "WBESL09_",LOG,BYTE,15,$80
+ help "Contradiction between BISS and ESL BTN 9 (ASM1)"
+ var "WBESL10_",LOG,BYTE,22,$80
+ help "Contradiction between BISS and ESL BTN 10 (ASM2)"
+ var "FNR_",VNUM,DWORD,23,$FFFFFFFF,"",1.5258789063e-005,-32767.00000,32767.00000,4,0
+ help "Vehicle number"
+ var "HALT_",VNUM,DWORD,35,$FFFFFFFF,"",1.5258789063e-005,-32767.00000,32767.00000,4,0
+ help "Manufacturer number"
+ var "KMS",VNUM,DWORD,39,$FFFFFFFF,"km",1.0000000000e+000,0.00000,10000000.00000,4,0
+ help "Mileage"
+ var "SWNF_",VNUM,DWORD,27,$FFFFFFFF,"%",1.5258789063e-005,-32767.00000,32767.00000,4,0
+ help "Setpoint vehicle numerical"
+ var "VF_",VNUM,DWORD,31,$FFFFFFFF,"km/h",1.5258789063e-005,-32767.00000,32767.00000,4,0
+ help "Speed vehicle"
+
+END_SEG
+
+BDA_SEG
+ bdtdata 1000,12
+ bdtwrite 1000,0
+ bdtdel 1000,0
+
+ ;Projektbetriebsdaten
+ bdatgroup "Route"
+  bdt "Mileage",NUM,QWORD,4,"km",2.3283064365386955e-010,11,1,0
+END_SEG
+
+MAN_SEG
+ mandata 200,14
+ manwrite 200,14
+ mantab "Plug","Signal","SIMM"
+
+ mangroup "Ports used"
+  schalt $0004,"MRA100 (9):X22","TFL02","MRA100, Slot 9, X22",0
+  help "A:Delete door release side 2"
+  schalt $0010,"MRA200 (4):X22","FSZBG01","MRA200, Slot 4, X22",0
+  help "A: Driver's cab in train is occupied, saved"
+  schalt $0020,"MRA200 (4):X23","AESL_N01","MRA200, Slot 4, X23",0
+  help "A: Release drive with single control line NOT"
+  schalt $0040,"MRA200 (5):X22","ASB01","MRA200, Slot 5, X22",0
+  help "A: Track brake activation"
+  schalt $0080,"MRA200 (5):X23","ASTH01","MRA200, Slot 5, X23",0
+  help "A: Activation Lift current collector"
+  schalt $0001,"MRA200 (6):X22","ASTS01","MRA200, Slot 6, X22",1
+  help "A: Activation Lower current collector"
+
+ mangroup "Unused ports"
+  schalt $0008,"MRA100 (9):X21","","MRA100, Platz 9, X21",0
+  help ""
+  schalt $0001,"MRA100 (9):X23","","MRA100, Platz 9, X23",0
+  help ""
+  schalt $0002,"MRA100 (9):X24","","MRA100, Platz 9, X24",0
+  help ""
+  schalt $0002,"MRA200 (6):X23","","MRA200, Platz 6, X23",1
+  help ""
+END_SEG
