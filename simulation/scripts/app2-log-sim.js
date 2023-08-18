@@ -1,12 +1,12 @@
 const App2LogSim = require('../class/app-2-log-sim');
-const config = require('../../config/app-2-logs');
+const config = require('../../config/app-2-logs prev');
 const logs = [];
 
 // The program will have a number of modes:
 //      - 1. Realtime replication
 //      - 2. Speed up options
 //      - 3. Test mode: no pause between events
-const mode = 2;
+const mode = 1;
 
 // load sim
 config.forEach(lc => {

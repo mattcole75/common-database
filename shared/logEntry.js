@@ -5,8 +5,7 @@ const logEntry = (entry) => {
     if(entry.includes('Tram') && !entry.includes('CMP') && !entry.includes('DMP')) {
         tmsObject = {
             system: 'tram',
-            date: entry.slice(0, 10),
-            eventTimestamp: entry.slice(11, 23),
+            eventTimestamp: entry.slice(0, 12),
             area: entry.substr(entry.indexOf('Area') + 5, 3),
             tram: parseInt(entry.substr(entry.indexOf('Tram') + 5, 4)),
             line: parseInt(entry.substr(entry.indexOf('Line') + 5, 2)),

@@ -1,108 +1,108 @@
 module.exports = points = [
-    // {
-    //     id: 'psmZl2irc0P8DxiVRHLs', // get this from the Metrolink Sensor Network Website on registration
-    //     name: 'POM02M',
-    //     area: 'POM',
-    //     path: '../../simulation/data/tms/app-2/replicated-logs/POM.log',
-    //     IO: [
-    //         {
-    //             system: 'lc',
-    //             ioType: 'input',
-    //             signal: 'Point Set Right',
-    //             slot: 2,
-    //             channel: 2,
-    //             key: '0.2',
-    //             on: 'Detected Right',
-    //             off: 'Not Detected Right',
-    //             relay: 'IP-R2',
-    //             relayType: 'DPDT'
-    //         },
-    //         {
-    //             system: 'lc',
-    //             ioType: 'input',
-    //             signal: 'Point Set Left',
-    //             slot: 2,
-    //             channel: 3,
-    //             key: '0.3',
-    //             on: 'Dectected Left',
-    //             off: 'Not Detected Left',
-    //             relay: 'IP-R3',
-    //             relayType: 'DPDT'
-    //         },
-    //         {
-    //             system: 'lc',
-    //             ioType: 'input',
-    //             signal: 'Point Locked',
-    //             slot: 2,
-    //             channel: 4,
-    //             key: '0.4',
-    //             on: 'Locked',
-    //             off: 'Free',
-    //             relay: 'IP-R4*',
-    //             relayType: 'DPDT'
-    //         },
-    //         {
-    //             system: 'lc',
-    //             ioType: 'input',
-    //             signal: 'ULTR-1 Feedback',
-    //             slot: 2,
-    //             channel: 5,
-    //             key: '0.5',
-    //             on: 'Unloack Enabled',
-    //             off: 'Unlock Disabled',
-    //             relay: 'IP-TB5',
-    //             relayType: 'ULTR-1'
-    //         },
-    //         {
-    //             system: 'lc',
-    //             ioType: 'output',
-    //             signal: 'Point Set Right',
-    //             slot: 3,
-    //             channel: 1,
-    //             key: '0.1',
-    //             on: 'Drive On',
-    //             off: 'Drive Off',
-    //             relay: 'OP-R1',
-    //             relayType: 'SPDT'
-    //         },
-    //         {
-    //             system: 'lc',
-    //             ioType: 'output',
-    //             signal: 'Point Set Left',
-    //             slot: 3,
-    //             channel: 2,
-    //             key: '0.2',
-    //             on: 'Drive On',
-    //             off: 'Drive Off',
-    //             relay: 'OP-R2',
-    //             relayType: 'SPDT'
-    //         },
-    //         {
-    //             system: 'lc',
-    //             ioType: 'output',
-    //             signal: 'Unlock Command-1',
-    //             slot: 3,
-    //             channel: 3,
-    //             key: '0.3',
-    //             on: 'Unlock',
-    //             off: 'Not Set',
-    //             relay: 'ULTR-1*',
-    //             relayType: 'ULTR'
-    //         },
-    //         {
-    //             system: 'lc',
-    //             ioType: 'output',
-    //             signal: 'Unlock Command-2',
-    //             slot: 3,
-    //             channel: 4,
-    //             key: '0.4',
-    //             on: 'Unlock',
-    //             off: 'Not Set',
-    //             relay: 'ULRT-1*',
-    //             relayType: 'ULTR'
-    //         }
-    //     ]
-    // },
+    {
+        id: 'psmZl2irc0P8DxiVRHLs', // get this from the Metrolink Sensor Network Website on registration
+        name: 'POM02M',
+        area: 'POM',
+        path: '../../simulation/data/tms/app-2/replicated-logs/POM.log',
+        IO: [
+            {
+                system: 'lc',
+                ioType: 'input',
+                signal: 'Point Set Right',
+                slot: 2,
+                channel: 2,
+                key: '0.2',
+                on: 'Detected Right',
+                off: 'Not Detected Right',
+                relay: 'IP-R2',
+                relayType: 'DPDT'
+            },
+            {
+                system: 'lc',
+                ioType: 'input',
+                signal: 'Point Set Left',
+                slot: 2,
+                channel: 3,
+                key: '0.3',
+                on: 'Dectected Left',
+                off: 'Not Detected Left',
+                relay: 'IP-R3',
+                relayType: 'DPDT'
+            },
+            {
+                system: 'lc',
+                ioType: 'input',
+                signal: 'Point Locked',
+                slot: 2,
+                channel: 4,
+                key: '0.4',
+                on: 'Locked',
+                off: 'Free',
+                relay: 'IP-R4*',
+                relayType: 'DPDT'
+            },
+            {
+                system: 'lc',
+                ioType: 'input',
+                signal: 'ULTR-1 Feedback',
+                slot: 2,
+                channel: 5,
+                key: '0.5',
+                on: 'Unloack Enabled',
+                off: 'Unlock Disabled',
+                relay: 'IP-TB5',
+                relayType: 'ULTR-1'
+            },
+            {
+                system: 'lc',
+                ioType: 'output',
+                signal: 'Point Set Right',
+                slot: 3,
+                channel: 1,
+                key: '0.1',
+                on: 'Drive On',
+                off: 'Drive Off',
+                relay: 'OP-R1',
+                relayType: 'SPDT'
+            },
+            {
+                system: 'lc',
+                ioType: 'output',
+                signal: 'Point Set Left',
+                slot: 3,
+                channel: 2,
+                key: '0.2',
+                on: 'Drive On',
+                off: 'Drive Off',
+                relay: 'OP-R2',
+                relayType: 'SPDT'
+            },
+            {
+                system: 'lc',
+                ioType: 'output',
+                signal: 'Unlock Command-1',
+                slot: 3,
+                channel: 3,
+                key: '0.3',
+                on: 'Unlock',
+                off: 'Not Set',
+                relay: 'ULTR-1*',
+                relayType: 'ULTR'
+            },
+            {
+                system: 'lc',
+                ioType: 'output',
+                signal: 'Unlock Command-2',
+                slot: 3,
+                channel: 4,
+                key: '0.4',
+                on: 'Unlock',
+                off: 'Not Set',
+                relay: 'ULRT-1*',
+                relayType: 'ULTR'
+            }
+        ]
+    },
     {
         id: '1CljshxWYRhz4ffqg31C',
         name: 'IRK02M',
@@ -310,6 +310,733 @@ module.exports = points = [
                 relayType: 'ULTR'
             }
         ]
+    },
+    {
+        id: 'UPwNJhKXEsehMYsz9QGB',
+        name: 'NIS03M',
+        area: 'NIS',
+        path: '../../simulation/data/tms/app-2/replicated-logs/NIS.log',
+        IO: [
+            {
+                system: 'lc',
+                ioType: 'input',
+                signal: 'Point Set Right',
+                slot: 2,
+                channel: 2,
+                key: '0.2',
+                on: 'Detected Right',
+                off: 'Not Detected Right',
+                relay: 'IP-R2',
+                relayType: 'DPDT'
+            },
+            {
+                system: 'lc',
+                ioType: 'input',
+                signal: 'Point Set Left',
+                slot: 2,
+                channel: 3,
+                key: '0.3',
+                on: 'Detected Left',
+                off: 'Not Detected Left',
+                relay: 'IP-R3',
+                relayType: 'DPDT'
+            },
+            {
+                system: 'lc',
+                ioType: 'input',
+                signal: 'Point Locked',
+                slot: 2,
+                channel: 4,
+                key: '0.4',
+                on: 'Locked',
+                off: 'Free',
+                relay: 'IP-R4',
+                relayType: 'DPDT'
+            },
+            {
+                system: 'lc',
+                ioType: 'input',
+                signal: 'ULTR-1 Feedback',
+                slot: 2,
+                channel: 31,
+                key: '0.31',
+                on: 'Unloack Enabled',
+                off: 'Unlock Disabled',
+                relay: 'IP-30',
+                relayType: 'TB'
+            },
+            {
+                system: 'lc',
+                ioType: 'output',
+                signal: 'Point Set Right',
+                slot: 3,
+                channel: 1,
+                key: '0.1',
+                on: 'Drive On',
+                off: 'Drive Off',
+                relay: 'OP-R1',
+                relayType: 'SPDT'
+            },
+            {
+                system: 'lc',
+                ioType: 'output',
+                signal: 'Point Set Left',
+                slot: 3,
+                channel: 2,
+                key: '0.2',
+                on: 'Drive On',
+                off: 'Drive Off',
+                relay: 'OP-R2',
+                relayType: 'SPDT'
+            },
+            {
+                system: 'lc',
+                ioType: 'output',
+                signal: 'Unlock Command-1',
+                slot: 3,
+                channel: 3,
+                key: '0.3',
+                on: 'Unlock',
+                off: 'Not Set',
+                relay: 'ULTR-1',
+                relayType: 'ULTR'
+            },
+            {
+                system: 'lc',
+                ioType: 'output',
+                signal: 'Unlock Command-2',
+                slot: 3,
+                channel: 4,
+                key: '0.4',
+                on: 'Unlock',
+                off: 'Not Set',
+                relay: 'ULRT-1',
+                relayType: 'ULTR'
+            }
+        ]
+    },
+    {
+        id: 'UfymVXJtfvvze6KTbGoS',
+        name: 'CNK02M',
+        area: 'CNK',
+        path: '../../simulation/data/tms/app-2/replicated-logs/CNK.log',
+        IO: [
+                {
+                    system: 'lc',
+                    ioType: 'input',
+                    signal: 'Point Set Right',
+                    slot: 3,
+                    channel: 0,
+                    key: '1.0',
+                    on: 'Detected Right',
+                    off: 'Not Detected Right',
+                    relay: 'IP-R32',
+                    relayType: 'DPDT'
+                },
+                {
+                    system: 'lc',
+                    ioType: 'input',
+                    signal: 'Point Set Left',
+                    slot: 3,
+                    channel: 1,
+                    key: '1.1',
+                    on: 'Detected Left',
+                    off: 'Not Detected Left',
+                    relay: 'IP-R33',
+                    relayType: 'DPDT'
+                },
+                {
+                    system: 'lc',
+                    ioType: 'input',
+                    signal: 'Point Locked',
+                    slot: 3,
+                    channel: 2,
+                    key: '1.2',
+                    on: 'Locked',
+                    off: 'Free',
+                    relay: 'IP-R34',
+                    relayType: 'DPDT'
+                },
+                {
+                    system: 'lc',
+                    ioType: 'input',
+                    signal: 'ULTR-4 Feedback',
+                    slot: 3,
+                    channel: 26,
+                    key: '1.26',
+                    on: 'Unloack Enabled',
+                    off: 'Unlock Disabled',
+                    relay: 'TB58',
+                    relayType: 'TB'
+                },
+                {
+                    system: 'lc',
+                    ioType: 'output',
+                    signal: 'Point Set Right',
+                    slot: 5,
+                    channel: 0,
+                    key: '1.0',
+                    on: 'Drive On',
+                    off: 'Drive Off',
+                    relay: 'OP-R32',
+                    relayType: 'SPDT'
+                },
+                {
+                    system: 'lc',
+                    ioType: 'output',
+                    signal: 'Point Set Left',
+                    slot: 5,
+                    channel: 1,
+                    key: '1.1',
+                    on: 'Drive On',
+                    off: 'Drive Off',
+                    relay: 'OP-R33',
+                    relayType: 'SPDT'
+                },
+                {
+                    system: 'lc',
+                    ioType: 'output',
+                    signal: 'Unlock Command-1',
+                    slot: 5,
+                    channel: 2,
+                    key: '1.2',
+                    on: 'Unlock',
+                    off: 'Not Set',
+                    relay: 'ULTR-4',
+                    relayType: 'ULTR'
+                },
+                {
+                    system: 'lc',
+                    ioType: 'output',
+                    signal: 'Unlock Command-2',
+                    slot: 5,
+                    channel: 3,
+                    key: '1.3',
+                    on: 'Unlock',
+                    off: 'Not Set',
+                    relay: 'ULRT-4',
+                    relayType: 'ULTR'
+                }
+        ]
+    },
+    {
+        id: 'iEXpGxgsZxGJktVUAzQ0',
+        name: 'CNK04M',
+        area: 'CNK',
+        path: '../../simulation/data/tms/app-2/replicated-logs/CNK.log',
+        IO: [
+            {
+                system: 'lc',
+                ioType: 'input',
+                signal: 'Point Set Right',
+                slot: 2,
+                channel: 2,
+                key: '0.2',
+                on: 'Detected Right',
+                off: 'Not Detected Right',
+                relay: 'IP-R2',
+                relayType: 'DPDT'
+            },
+            {
+                system: 'lc',
+                ioType: 'input',
+                signal: 'Point Set Left',
+                slot: 2,
+                channel: 3,
+                key: '0.3',
+                on: 'Detected Left',
+                off: 'Not Detected Left',
+                relay: 'IP-R3',
+                relayType: 'DPDT'
+            },
+            {
+                system: 'lc',
+                ioType: 'input',
+                signal: 'Point Locked',
+                slot: 2,
+                channel: 4,
+                key: '0.4',
+                on: 'Locked',
+                off: 'Free',
+                relay: 'IP-R4',
+                relayType: 'DPDT'
+            },
+            {
+                system: 'lc',
+                ioType: 'input',
+                signal: 'ULTR-1 Feedback',
+                slot: 2,
+                channel: 29,
+                key: '0.29',
+                on: 'Unloack Enabled',
+                off: 'Unlock Disabled',
+                relay: 'TB-29',
+                relayType: 'TB'
+            },
+            {
+                system: 'lc',
+                ioType: 'output',
+                signal: 'Point Set Right',
+                slot: 4,
+                channel: 1,
+                key: '0.1',
+                on: 'Drive On',
+                off: 'Drive Off',
+                relay: 'OP-R1',
+                relayType: 'SPDT'
+            },
+            {
+                system: 'lc',
+                ioType: 'output',
+                signal: 'Point Set Left',
+                slot: 4,
+                channel: 2,
+                key: '0.2',
+                on: 'Drive On',
+                off: 'Drive Off',
+                relay: 'OP-R2',
+                relayType: 'SPDT'
+            },
+            {
+                system: 'lc',
+                ioType: 'output',
+                signal: 'Unlock Command-1',
+                slot: 4,
+                channel: 3,
+                key: '0.3',
+                on: 'Unlock',
+                off: 'Not Set',
+                relay: 'ULTR-1',
+                relayType: 'ULTR'
+            },
+            {
+                system: 'lc',
+                ioType: 'output',
+                signal: 'Unlock Command-2',
+                slot: 4,
+                channel: 4,
+                key: '0.4',
+                on: 'Unlock',
+                off: 'Not Set',
+                relay: 'ULRT-1',
+                relayType: 'ULTR'
+            }
+        ]
+    },
+    {
+        id: 'MrhvulKwpLpYSDcNIAR4',
+        name: 'CNK07M',
+        area: 'CNK',
+        path: '../../simulation/data/tms/app-2/replicated-logs/CNK.log',
+        IO: [
+                {
+                    system: 'lc',
+                    ioType: 'input',
+                    signal: 'Point Set Right',
+                    slot: 3,
+                    channel: 11,
+                    key: '1.11',
+                    on: 'Detected Right',
+                    off: 'Not Detected Right',
+                    relay: 'IP-R43',
+                    relayType: 'DPDT'
+                },
+                {
+                    system: 'lc',
+                    ioType: 'input',
+                    signal: 'Point Set Left',
+                    slot: 3,
+                    channel: 12,
+                    key: '1.12',
+                    on: 'Detected Left',
+                    off: 'Not Detected Left',
+                    relay: 'IP-R44',
+                    relayType: 'DPDT'
+                },
+                {
+                    system: 'lc',
+                    ioType: 'input',
+                    signal: 'Point Locked',
+                    slot: 3,
+                    channel: 13,
+                    key: '1.13',
+                    on: 'Locked',
+                    off: 'Free',
+                    relay: 'IP-R45',
+                    relayType: 'DPDT'
+                },
+                {
+                    system: 'lc',
+                    ioType: 'input',
+                    signal: 'ULTR-5 Feedback',
+                    slot: 3,
+                    channel: 27,
+                    key: '1.27',
+                    on: 'Unloack Enabled',
+                    off: 'Unlock Disabled',
+                    relay: 'TB59',
+                    relayType: 'TB'
+                },
+                {
+                    system: 'lc',
+                    ioType: 'output',
+                    signal: 'Point Set Right',
+                    slot: 6,
+                    channel: 0,
+                    key: '2.0',
+                    on: 'Drive On',
+                    off: 'Drive Off',
+                    relay: 'OP-R64',
+                    relayType: 'SPDT'
+                },
+                {
+                    system: 'lc',
+                    ioType: 'output',
+                    signal: 'Point Set Left',
+                    slot: 6,
+                    channel: 1,
+                    key: '2.1',
+                    on: 'Drive On',
+                    off: 'Drive Off',
+                    relay: 'OP-R65',
+                    relayType: 'SPDT'
+                },
+                {
+                    system: 'lc',
+                    ioType: 'output',
+                    signal: 'Unlock Command-1',
+                    slot: 6,
+                    channel: 2,
+                    key: '2.2',
+                    on: 'Unlock',
+                    off: 'Not Set',
+                    relay: 'ULTR-5',
+                    relayType: 'ULTR'
+                },
+                {
+                    system: 'lc',
+                    ioType: 'output',
+                    signal: 'Unlock Command-2',
+                    slot: 6,
+                    channel: 3,
+                    key: '2.3',
+                    on: 'Unlock',
+                    off: 'Not Set',
+                    relay: 'ULRT-5',
+                    relayType: 'ULTR'
+                }
+        ]
+    },
+    {
+        id: 'NwCw9oZvLb7z9jXWOdUA',
+        name: 'CNK10M',
+        area: 'CNK',
+        path: '../../simulation/data/tms/app-2/replicated-logs/CNK.log',
+        IO: [
+                {
+                    system: 'lc',
+                    ioType: 'input',
+                    signal: 'Point Set Right',
+                    slot: 3,
+                    channel: 14,
+                    key: '1.14',
+                    on: 'Detected Right',
+                    off: 'Not Detected Right',
+                    relay: 'IP-R46',
+                    relayType: 'DPDT'
+                },
+                {
+                    system: 'lc',
+                    ioType: 'input',
+                    signal: 'Point Set Left',
+                    slot: 3,
+                    channel: 15,
+                    key: '1.15',
+                    on: 'Detected Left',
+                    off: 'Not Detected Left',
+                    relay: 'IP-R47',
+                    relayType: 'DPDT'
+                },
+                {
+                    system: 'lc',
+                    ioType: 'input',
+                    signal: 'Point Locked',
+                    slot: 3,
+                    channel: 16,
+                    key: '1.16',
+                    on: 'Locked',
+                    off: 'Free',
+                    relay: 'IP-R48',
+                    relayType: 'DPDT'
+                },
+                {
+                    system: 'lc',
+                    ioType: 'input',
+                    signal: 'ULTR-6 Feedback',
+                    slot: 3,
+                    channel: 28,
+                    key: '1.28',
+                    on: 'Unloack Enabled',
+                    off: 'Unlock Disabled',
+                    relay: 'TB60',
+                    relayType: 'TB'
+                },
+                {
+                    system: 'lc',
+                    ioType: 'output',
+                    signal: 'Point Set Right',
+                    slot: 6,
+                    channel: 4,
+                    key: '2.4',
+                    on: 'Drive On',
+                    off: 'Drive Off',
+                    relay: 'OP-R68',
+                    relayType: 'SPDT'
+                },
+                {
+                    system: 'lc',
+                    ioType: 'output',
+                    signal: 'Point Set Left',
+                    slot: 6,
+                    channel: 5,
+                    key: '2.5',
+                    on: 'Drive On',
+                    off: 'Drive Off',
+                    relay: 'OP-R69',
+                    relayType: 'SPDT'
+                },
+                {
+                    system: 'lc',
+                    ioType: 'output',
+                    signal: 'Unlock Command-1',
+                    slot: 6,
+                    channel: 6,
+                    key: '2.6',
+                    on: 'Unlock',
+                    off: 'Not Set',
+                    relay: 'ULTR-6',
+                    relayType: 'ULTR'
+                },
+                {
+                    system: 'lc',
+                    ioType: 'output',
+                    signal: 'Unlock Command-2',
+                    slot: 6,
+                    channel: 7,
+                    key: '2.7',
+                    on: 'Unlock',
+                    off: 'Not Set',
+                    relay: 'ULRT-6',
+                    relayType: 'ULTR'
+                }
+        ]
+    },
+    {
+        id: 'qDdxL4MSocaswyxbax7H',
+        name: 'CNK17M',
+        area: 'CNK',
+        path: '../../simulation/data/tms/app-2/replicated-logs/CNK.log',
+        IO: [
+            {
+                system: 'lc',
+                ioType: 'input',
+                signal: 'Point Set Right',
+                slot: 2,
+                channel: 5,
+                key: '0.5',
+                on: 'Detected Right',
+                off: 'Not Detected Right',
+                relay: 'IP-R5',
+                relayType: 'DPDT'
+            },
+            {
+                system: 'lc',
+                ioType: 'input',
+                signal: 'Point Set Left',
+                slot: 2,
+                channel: 6,
+                key: '0.6',
+                on: 'Detected Left',
+                off: 'Not Detected Left',
+                relay: 'IP-R6',
+                relayType: 'DPDT'
+            },
+            {
+                system: 'lc',
+                ioType: 'input',
+                signal: 'Point Locked',
+                slot: 2,
+                channel: 7,
+                key: '0.7',
+                on: 'Locked',
+                off: 'Free',
+                relay: 'IP-R7',
+                relayType: 'DPDT'
+            },
+            {
+                system: 'lc',
+                ioType: 'input',
+                signal: 'ULTR-2 Feedback',
+                slot: 2,
+                channel: 30,
+                key: '0.30',
+                on: 'Unloack Enabled',
+                off: 'Unlock Disabled',
+                relay: 'TB-30',
+                relayType: 'TB'
+            },
+            {
+                system: 'lc',
+                ioType: 'output',
+                signal: 'Point Set Right',
+                slot: 4,
+                channel: 5,
+                key: '0.5',
+                on: 'Drive On',
+                off: 'Drive Off',
+                relay: 'OP-R5',
+                relayType: 'SPDT'
+            },
+            {
+                system: 'lc',
+                ioType: 'output',
+                signal: 'Point Set Left',
+                slot: 4,
+                channel: 6,
+                key: '0.6',
+                on: 'Drive On',
+                off: 'Drive Off',
+                relay: 'OP-R6',
+                relayType: 'SPDT'
+            },
+            {
+                system: 'lc',
+                ioType: 'output',
+                signal: 'Unlock Command-1',
+                slot: 4,
+                channel: 7,
+                key: '0.7',
+                on: 'Unlock',
+                off: 'Not Set',
+                relay: 'ULTR-2',
+                relayType: 'ULTR'
+            },
+            {
+                system: 'lc',
+                ioType: 'output',
+                signal: 'Unlock Command-2',
+                slot: 4,
+                channel: 8,
+                key: '0.8',
+                on: 'Unlock',
+                off: 'Not Set',
+                relay: 'ULRT-2',
+                relayType: 'ULTR'
+            }
+        ]
+    },
+    {
+        id: 'QzfAFt8Xr9ujZddXceUp',
+        name: 'CNK21M',
+        area: 'CNK',
+        path: '../../simulation/data/tms/app-2/replicated-logs/CNK.log',
+        IO: [
+                {
+                    system: 'lc',
+                    ioType: 'input',
+                    signal: 'Point Set Right',
+                    slot: 2,
+                    channel: 8,
+                    key: '0.8',
+                    on: 'Detected Right',
+                    off: 'Not Detected Right',
+                    relay: 'IP-R8',
+                    relayType: 'DPDT'
+                },
+                {
+                    system: 'lc',
+                    ioType: 'input',
+                    signal: 'Point Set Left',
+                    slot: 2,
+                    channel: 9,
+                    key: '0.9',
+                    on: 'Detected Left',
+                    off: 'Not Detected Left',
+                    relay: 'IP-R9',
+                    relayType: 'DPDT'
+                },
+                {
+                    system: 'lc',
+                    ioType: 'input',
+                    signal: 'Point Locked',
+                    slot: 2,
+                    channel: 10,
+                    key: '0.10',
+                    on: 'Locked',
+                    off: 'Free',
+                    relay: 'IP-R10',
+                    relayType: 'DPDT'
+                },
+                {
+                    system: 'lc',
+                    ioType: 'input',
+                    signal: 'ULTR-3 Feedback',
+                    slot: 2,
+                    channel: 31,
+                    key: '0.31',
+                    on: 'Unloack Enabled',
+                    off: 'Unlock Disabled',
+                    relay: 'TB-31',
+                    relayType: 'TB'
+                },
+                {
+                    system: 'lc',
+                    ioType: 'output',
+                    signal: 'Point Set Right',
+                    slot: 4,
+                    channel: 9,
+                    key: '0.9',
+                    on: 'Drive On',
+                    off: 'Drive Off',
+                    relay: 'OP-R9',
+                    relayType: 'SPDT'
+                },
+                {
+                    system: 'lc',
+                    ioType: 'output',
+                    signal: 'Point Set Left',
+                    slot: 4,
+                    channel: 10,
+                    key: '0.10',
+                    on: 'Drive On',
+                    off: 'Drive Off',
+                    relay: 'OP-R10',
+                    relayType: 'SPDT'
+                },
+                {
+                    system: 'lc',
+                    ioType: 'output',
+                    signal: 'Unlock Command-1',
+                    slot: 4,
+                    channel: 11,
+                    key: '0.11',
+                    on: 'Unlock',
+                    off: 'Not Set',
+                    relay: 'ULTR-3',
+                    relayType: 'ULTR'
+                },
+                {
+                    system: 'lc',
+                    ioType: 'output',
+                    signal: 'Unlock Command-2',
+                    slot: 4,
+                    channel: 12,
+                    key: '0.12',
+                    on: 'Unlock',
+                    off: 'Not Set',
+                    relay: 'ULRT-3',
+                    relayType: 'ULTR'
+                }
+        ]
     }
-
 ]

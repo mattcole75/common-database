@@ -16,7 +16,7 @@ class PointMonIO {
         this.IO = IO;
         this.tail = new Tail(this.path);
         this.msg = null;
-    }
+    }s
 
     start = () => {
 
@@ -37,7 +37,7 @@ class PointMonIO {
         let swingTime = null;
 
         //specifiy date for testing this is to be deleted
-        let logDate = '2022-11-14';
+        // let logDate = '2023-06-12';
         
         //output what is being monitored
         console.log('Monitoring for', ioMonitorFor);
@@ -94,17 +94,17 @@ class PointMonIO {
                     cls => cls.ioType === (this.msg.output === true ? 'output' : this.msg.input === true ? 'input' : null)
                         && cls.key === this.msg.key
                 );                
-                // if reference signal exists
-                if(index !== -1){
+                // if reference signal is being monitored
+                if(index !== -1) {
                     // update local event datetime
                     ioMonitorFor[index].setState(this.msg.state);
-                    ioMonitorFor[index].setEventTimestamp(moment(new Date(logDate + ' ' + this.msg.eventTimestamp).toISOString(), 'YYYY-MM-DD HH:mm:ss:SSS'));
-                    // ioMonitorFor[index].setEventTimestamp(moment((logDate + ' ' + this.msg.eventTimestamp)).format('YYYY-MM-DD HH:mm:ss:SSS'));
-                    // ioMonitorFor[index].setEventTimestamp(moment((logDate + ' ' + this.msg.eventTimestamp), 'YYYY-MM-DD HH:mm:ss:SSS').format('YYYY-MM-DD HH:mm:ss:SSS'));
+                    // ioMonitorFor[index].setEventTimestamp(moment().toISOString());
+
+                    //use this for processing previous logs
+                    // ioMonitorFor[index].setEventTimestamp(moment(new Date(logDate + ' ' + this.msg.eventTimestamp).toISOString(), 'YYYY-MM-DD HH:mm:ss:SSS'));
+                    ioMonitorFor[index].setEventTimestamp(moment(new Date(moment().format('YYYY-MM-DD') + ' ' + this.msg.eventTimestamp).toISOString(), 'YYYY-MM-DD HH:mm:ss:SSS'));
                     
-
-
-                    // debugging console output
+                    //debugging console output
                     console.log(this.name,
                         ioMonitorFor[index].state === 'on'
                             ? ioMonitorFor[index].onState
@@ -112,58 +112,78 @@ class PointMonIO {
                                 ? ioMonitorFor[index].offState
                                 : 'ukn'
                     )
+
+                    // post IO state change to timeseries db
+                    postPointState(ioMonitorFor[index].signalState());
                     
                     // check for drive and swing times
                     if(ioMonitorFor[index].signal === 'Point Set Right' || ioMonitorFor[index].signal === 'Point Set Left') {
 
+                        // set swing direction
                         direction = ioMonitorFor[index].signal;
 
-                        if(ioMonitorFor[index].ioType === 'output' && ioMonitorFor[index].state === 'on') {
-                            driveStart = ioMonitorFor[index].eventTimestamp;
-                            // driveStart = moment(ioMonitorFor[index].eventTimestamp, "HH:mm:ss:SSS");
-                        }
+                        // point machine drive on
+                        // if(ioMonitorFor[index].ioType === 'output' && ioMonitorFor[index].state === 'on') {
+                        //     driveStart = ioMonitorFor[index].eventTimestamp;
+                        // }
 
-                        if(ioMonitorFor[index].ioType === 'output' && ioMonitorFor[index].state === 'off') {
-                            driveEnd = ioMonitorFor[index].eventTimestamp;
-                            // driveEnd = moment(ioMonitorFor[index].eventTimestamp, "HH:mm:ss:SSS");
+                        // point machine drive off
+                        // if(ioMonitorFor[index].ioType === 'output' && ioMonitorFor[index].state === 'off') {
+                        //     driveEnd = ioMonitorFor[index].eventTimestamp;
 
-                            if(driveStart !== null) {
-                                driveTime = moment(driveEnd).diff(moment(driveStart), 'milliseconds');
-                                console.log('Drive Time', driveTime);
+                        //     if(driveStart !== null) {
+                        //         driveTime = moment(driveEnd).diff(moment(driveStart), 'milliseconds');
+                        //         // console.log('Drive Time', driveTime);
                                 
-                                if(swingTime !== null && driveTime !== null) {
-                                    postPointTimings({
-                                        id: this.id,
-                                        direction: direction,
-                                        swingTime: swingTime,
-                                        driveTime: driveTime,
-                                        eventTimestamp: swingStart
-                                    });
-                                }
-                            }
-                        }
+                        //         // Point Machine has finished its cycle log to database
+                        //         if(swingTime !== null && driveTime !== null) {
+                        //             // postPointTimings({
+                        //             //     id: this.id,
+                        //             //     direction: direction,
+                        //             //     swingTime: swingTime,
+                        //             //     driveTime: driveTime,
+                        //             //     eventTimestamp: swingStart
+                        //             // });
 
+                        //             // direction = null;
+                        //             // driveStart = null;
+                        //             // driveEnd = null;
+                        //             // swingStart = null;
+                        //             // swingEnd = null;
+                        //             // driveTime = null;
+                        //             // swingTime = null;
+                        //         }
+                        //     }
+                        // }
+
+                        // point swing time start
                         if(ioMonitorFor[index].ioType === 'input' && ioMonitorFor[index].state === 'off') {
                             swingStart = ioMonitorFor[index].eventTimestamp;
-                            // swingStart = moment(ioMonitorFor[index].eventTimestamp, "HH:mm:ss:SSS");
                         }
 
+                        // point swing time end
                         if(ioMonitorFor[index].ioType === 'input' && ioMonitorFor[index].state === 'on') {
                             swingEnd = ioMonitorFor[index].eventTimestamp;
-                            // swingEnd = moment(ioMonitorFor[index].eventTimestamp, "HH:mm:ss:SSS");
 
                             if(swingStart !== null) {
                                 swingTime = moment(swingEnd).diff(moment(swingStart), 'milliseconds');
                                 console.log('Swing Time', swingTime);
+                                postPointTimings([{
+                                    id: this.id,
+                                    direction: direction,
+                                    swingTime: swingTime,
+                                    eventTimestamp: swingStart
+                                }]);
                             }
                         }
                     }
                     
-                    // post IO state change to timeseries db
-                    postPointState(ioMonitorFor[index].signalState());
+                    
 
                     // console.log('Event', ioMonitorFor[index].signalState());
                 }
+                // post IO state change to timeseries db
+                // postPointState(ioMonitorFor[index].signalState());
             }       
         })
     };
