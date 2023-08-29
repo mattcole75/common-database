@@ -3,8 +3,15 @@ const axios = require('../../../../shared/axios/auth');
 const log = require('../../logs/logger')();
 const config = require('../../config/config');
 const version = config.get('version');
+const validate = require('../../data/validation/validate');
+const { postPointMachineSwingTimeSchema } = require('../../data/validation/schema/schema');
 
 const postPointMachineSwingTime = (req, next) => {
+    // validate the input
+    const errors = validate(req.body, postPointMachineSwingTimeSchema);
+    if(errors.length > 0) {
+        return next({ status: 400, msg: 'bad request' }, null);
+    }
     // pull the token and access rules from the request
     const { idtoken } = req.headers;
     // declare local header variable
