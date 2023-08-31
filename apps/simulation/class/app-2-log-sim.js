@@ -21,7 +21,7 @@ class App2LogSim {
         this.currentLogEntryTime = moment(this.time, "HH:mm:ss:SSS");
         this.bst = false;
         this.skip = false;
-        this.skip = true;
+        // this.skip = true;
     }
 
     // The program will have a number of modes:

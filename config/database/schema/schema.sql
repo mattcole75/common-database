@@ -621,13 +621,22 @@ create table metrolink_live (
 -- *******************************
 -- application Stored Procedures
 delimiter //
-create procedure sp_insert_point_machine_swing_time (in point_ref varchar(6), direction varchar(16), swing_time smallInt, tms_timestamp timestamp(3), out insertId int)
+create procedure sp_insert_point_machine_swing_time (in p_point_ref varchar(6), p_direction varchar(16), p_swing_time smallInt, p_tms_timestamp timestamp(3), out insertId int)
     begin
         insert into rm_point_machine_swing_time (point_ref, direction, swing_time, tms_timestamp)
-        values (point_ref, direction, swing_time, tms_timestamp);
+        values (p_point_ref, p_direction, p_swing_time, p_tms_timestamp);
 
         set insertId := last_insert_id();
         select insertId;
+    end//
+
+create procedure sp_select_point_machine_swing_times (in p_point_ref varchar(6), p_start_date timestamp, p_end_date timestamp)
+    begin
+        select id, point_ref, direction, swing_time, tms_timestamp
+        from rm_point_machine_swing_time 
+        where point_ref = p_point_ref
+        and tms_timestamp between p_start_date and p_end_date
+        order by tms_timestamp asc;
     end//
 
 delimiter ;

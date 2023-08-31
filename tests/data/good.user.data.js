@@ -6,7 +6,7 @@ const users = [
             displayName: 'Rand Althor',
             email: 'rand.althor@system.com',
             password: '1234abcd!',
-            roles: ['user'],
+            roles: ['user', 'rcm'],
             localId: '',
             idToken: ''
         },

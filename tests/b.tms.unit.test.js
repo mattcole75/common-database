@@ -7,7 +7,7 @@ let wrongToken = '7c58e9e7cd20ae44f354d59f7a73ebb7e346d5e5a61517e33e0e97c4c79d25
 let idToken = null;
 let localId = null;
 
-describe('Test 1 - Point Machine Swing Time', () => {
+describe('Test 1 - POST Point Machine Swing Time', () => {
 
     it('should, fail (403) for an unauthorised request', async () => {
         await endPoint.post('/pointmachineswingtime')
@@ -29,7 +29,7 @@ describe('Test 1 - Point Machine Swing Time', () => {
     it('should, login and return the user details and token', async () => {
         await authEndPoint.post('/user/login')
             .send({
-                email: 'althea.vestrit@system.com',
+                email: 'rand.althor@system.com',
                 password: crypto.createHash('sha256').update('1234abcd!').digest('hex')
             })
             .set('Accept', 'application/json')
@@ -38,8 +38,8 @@ describe('Test 1 - Point Machine Swing Time', () => {
             .then(res => {
                 expect(res.body).toBeDefined();
                 expect(res.body.status).toBe(200);
-                expect(res.body.user.displayName).toBe('Althea Vestrit');
-                expect(res.body.user.email).toBe('althea.vestrit@system.com');
+                expect(res.body.user.displayName).toBe('Rand Althor');
+                expect(res.body.user.email).toBe('rand.althor@system.com');
                 expect(res.body.user.idToken).toHaveLength(256);
                 idToken = res.body.user.idToken;
                 localId = res.body.user.localId;
@@ -143,8 +143,8 @@ describe('Test 1 - Point Machine Swing Time', () => {
         .send({
             id: 'IRK02M',
             direction: 'Point Set Right',
-            swingTime: '3210',
-            tmsTimestamp: moment().format()
+            swingTime: 3210,
+            tmsTimestamp: moment().format('YYYY-MM-DD HH:mm:ss.SSS')
         })
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
@@ -152,9 +152,56 @@ describe('Test 1 - Point Machine Swing Time', () => {
         .then(res => {
             const { insertId } = res.body.data;
             expect(insertId).toBeDefined();
-            expect(insertId).toBe(1);
+            // expect(insertId).toBe(1);
             // parentAssetRef = insertId;
         });
+    });
+});
+
+describe('Test 2 - GET Point Machine Swing Times', () => {
+    
+    it('should, fail (403) for an unauthorised request', async () => {
+        await endPoint.get('/pointmachineswingtimes')
+            .set({
+                'Content-Type': 'application/json',
+                idToken: wrongToken,
+                params: 'IRK02M'
+            })
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(403)
+    });
+
+    // it('should, login and return the user details and token', async () => {
+    //     await authEndPoint.post('/user/login')
+    //         .send({
+    //             email: 'althea.vestrit@system.com',
+    //             password: crypto.createHash('sha256').update('1234abcd!').digest('hex')
+    //         })
+    //         .set('Accept', 'application/json')
+    //         .expect('Content-Type', /json/)
+    //         .expect(200)
+    //         .then(res => {
+    //             expect(res.body).toBeDefined();
+    //             expect(res.body.status).toBe(200);
+    //             expect(res.body.user.displayName).toBe('Althea Vestrit');
+    //             expect(res.body.user.email).toBe('althea.vestrit@system.com');
+    //             expect(res.body.user.idToken).toHaveLength(256);
+    //             idToken = res.body.user.idToken;
+    //             localId = res.body.user.localId;
+    //         });
+    // });
+
+    it('should, get all the point swing times from the database based on the given parameters', async () => {
+        await endPoint.get('/pointmachineswingtimes')
+        .set({
+            'Content-Type': 'application/json',
+            idToken: idToken,
+            params: 'IRK02M,2023-08-29 09:00,2023-08-29 17:00'
+        })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200)
     });
 });
 

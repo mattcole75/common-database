@@ -1,10 +1,10 @@
 // const Loop = require('./subclass/loop');
 const Tail = require('tail').Tail;
 const logEntry = require('../scripts/logEntry');
-const axios = require('../../../shared/axios');
-const config = require('../../../config/config');
-const idToken = config.get('idToken');
-const moment = require('moment');
+// const axios = require('../../../shared/axios/spark');
+// const config = require('../../../config/config');
+// const idToken = config.get('idToken');
+// const moment = require('moment');
 
 class LoopMonIO {
 

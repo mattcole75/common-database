@@ -14,4 +14,14 @@ module.exports = (app) => {
                 res.status(result.status).send(result);
         });
     });
+
+    app.get('/' + service + '/api/' + version + '/pointmachineswingtimes', (req, res) => {
+        res.set('Content-Type', 'application/json');
+        constoller.getPointMachineSwingTimes(req, (err, result) => {
+            if(err)
+                res.status(err.status).send(err);
+            else
+                res.status(result.status).send(result);
+        });
+    });
 }
