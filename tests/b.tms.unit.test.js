@@ -7,7 +7,7 @@ let wrongToken = '7c58e9e7cd20ae44f354d59f7a73ebb7e346d5e5a61517e33e0e97c4c79d25
 let idToken = null;
 let localId = null;
 
-describe('Test 1 - POST Point Machine Swing Time', () => {
+describe('Test 1 - POST Points Machine Swing Time', () => {
 
     it('should, fail (403) for an unauthorised request', async () => {
         await endPoint.post('/pointmachineswingtime')
@@ -158,7 +158,7 @@ describe('Test 1 - POST Point Machine Swing Time', () => {
     });
 });
 
-describe('Test 2 - GET Point Machine Swing Times', () => {
+describe('Test 2 - GET Points Machine Swing Times', () => {
     
     it('should, fail (403) for an unauthorised request', async () => {
         await endPoint.get('/pointmachineswingtimes')
@@ -203,5 +203,9 @@ describe('Test 2 - GET Point Machine Swing Times', () => {
         .expect('Content-Type', /json/)
         .expect(200)
     });
+});
+
+describe('Test 3 - Points Machine CRUD', () => {
+
 });
 

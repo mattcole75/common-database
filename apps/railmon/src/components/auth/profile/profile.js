@@ -17,7 +17,7 @@ import '../auth.css';
 
 const Profile = () => {
 
-    // connect to redux a extract values
+    // connect to redux state values
     const dispatch = useDispatch();
     const { loading, error, idToken, localId, displayName, email, roles } = useSelector(state => state.auth);
     // declare the redux functions

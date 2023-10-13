@@ -6,7 +6,7 @@ const logs = [];
 //      - 1. Realtime replication
 //      - 2. Speed up options
 //      - 3. Test mode: no pause between events
-const mode = 2;
+const mode = 1;
 
 // load sim
 config.forEach(lc => {

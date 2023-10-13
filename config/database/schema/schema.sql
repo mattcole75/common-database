@@ -112,7 +112,7 @@ create table tms_tram (
     primary key (id)
 );
 
-create table tms_point (
+create table tms_points_machine (
     id varchar(6) not null unique,
     type varchar(50) not null,
     direction varchar(50) not null,
@@ -585,17 +585,59 @@ create table txc_vehicle_journey (
 -- *****************************
 -- application database tables *
 -- *****************************
-create table rm_point_machine_swing_time (
-    id int not null auto_increment,
-    point_ref varchar(6) not null,
-    direction varchar(16), -- Point Set Right or Point Set Left
+create table railmon_points_machine_swing_time (
+    id smallInt not null auto_increment,
+    points_machine_ref varchar(6) not null,
+    direction varchar(16), -- Points Set Right or Points Set Left
     swing_time smallInt not null,
     tms_timestamp timestamp(3) not null,
     created timestamp(3) not null default now(3), -- when was this record created
     updated timestamp(3) not null default now(3) on update now(3), -- when was the last time this record was updated
     inuse boolean not null default true, -- can this record be used / viewed
     primary key (id),
-    constraint fk_rm_point_machine_swing_time_point_ref foreign key (point_ref) references tms_point (id) on update cascade on delete cascade
+    constraint fk_railmon_points_machine_swing_time_point_ref foreign key (points_machine_ref) references tms_points_machine (id)
+		on update cascade on delete cascade
+);
+
+-- ***********************************
+-- point machine configuration table *
+-- ***********************************
+create table config_points_controller (
+    id varchar(8) not null,
+    type varchar(24) not null, -- manufacturer
+    modification_description varchar(256) null,
+    comms_type varchar(16) not null,
+    plc_serial_number varchar(32) not null,
+    plc_firmware_version varchar(16) not null,
+    comments varchar(256) null,
+    primary key (id)
+);
+
+create table config_points_machine (
+    id varchar(6) not null,
+    point_controller_ref varchar(16) null,
+    direction varchar(32) not null,
+    switch_type varchar(32) not null,
+    rail_type varchar(32) not null,
+    track_form varchar(32) not null,
+    maintenance_guage smallInt null, -- MTG 1432
+    free_wheel_clearnace tinyInt null, -- FWC
+    free_wheel_passage tinyInt null, -- FWP
+    open_switch tinyInt null, -- OS
+    machine_type varchar(64) not null,
+    points_configuration varchar(64) not null,
+    points_position_indicator boolean not null,
+    `left` boolean not null,
+    `right` boolean not null,
+    bar boolean not null,
+    points_handle varchar(128) not null,
+    hand_operated_by_driver boolean not null,
+    trailable_5mph boolean not null,
+    operation_restrictions varchar(256) null,
+    operation_procedure varchar(256) null,
+    notes varchar(512) null,
+    primary key (id)
+    -- constraint fk_config_points_machine_point_machine foreign key (id) references tms_points_machine (id) on update cascade on delete cascade
 );
 
 create table metrolink_live (
@@ -621,20 +663,20 @@ create table metrolink_live (
 -- *******************************
 -- application Stored Procedures
 delimiter //
-create procedure sp_insert_point_machine_swing_time (in p_point_ref varchar(6), p_direction varchar(16), p_swing_time smallInt, p_tms_timestamp timestamp(3), out insertId int)
+create procedure sp_insert_points_machine_swing_time (in p_points_machine_ref varchar(6), p_direction varchar(16), p_swing_time smallInt, p_tms_timestamp timestamp(3), out insertId int)
     begin
-        insert into rm_point_machine_swing_time (point_ref, direction, swing_time, tms_timestamp)
-        values (p_point_ref, p_direction, p_swing_time, p_tms_timestamp);
+        insert into railmon_points_machine_swing_time (points_machine_ref, direction, swing_time, tms_timestamp)
+        values (p_points_machine_ref, p_direction, p_swing_time, p_tms_timestamp);
 
         set insertId := last_insert_id();
         select insertId;
     end//
 
-create procedure sp_select_point_machine_swing_times (in p_point_ref varchar(6), p_start_date timestamp, p_end_date timestamp)
+create procedure sp_select_points_machine_swing_times (in p_points_machine_ref varchar(6), p_start_date timestamp, p_end_date timestamp)
     begin
-        select id, point_ref, direction, swing_time, tms_timestamp
-        from rm_point_machine_swing_time 
-        where point_ref = p_point_ref
+        select id, points_machine_ref, direction, swing_time, tms_timestamp
+        from railmon_points_machine_swing_time
+        where points_machine_ref = p_points_machine_ref
         and tms_timestamp between p_start_date and p_end_date
         order by tms_timestamp asc;
     end//

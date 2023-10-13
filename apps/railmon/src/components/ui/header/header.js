@@ -5,7 +5,7 @@ import './header.css';
 
 const Header = (props) => {
 
-    const { showSidebar, toggleShowSidebar, isAuthenticated} = props; 
+    const { showSidebar, toggleShowSidebar, isAuthenticated, roles } = props; 
 
     return (
         <div className='container'>
@@ -31,7 +31,7 @@ const Header = (props) => {
                         </button>
                         
                         <div className='header-navigation_display'>
-                            <Navigation isAuthenticated={ isAuthenticated } />
+                            <Navigation isAuthenticated={ isAuthenticated } roles={ roles } />
                         </div>
 
                 </div>

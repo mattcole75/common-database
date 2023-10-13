@@ -1,0 +1,380 @@
+[
+    {
+        "id": "DCF-PCC1",
+        "type": "Voestalpine",
+        "modification_description": "Thermistor Mod & Unlock Mod",
+        "comms_type": "SERIAL",
+        "plc_serial_number": 301832,
+        "plc_firmware_version": 4.4,
+        "comments": null
+    },
+    {
+        "id": "DCF-PCC2",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "SERIAL",
+        "plc_serial_number": 301834,
+        "plc_firmware_version": 4.4,
+        "comments": null
+    },
+    {
+        "id": "CNK-PCC1",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "ETHERNET",
+        "plc_serial_number": 100126,
+        "plc_firmware_version": 4.2,
+        "comments": null
+    },
+    {
+        "id": "CNK-PCC2",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "SERIAL",
+        "plc_serial_number": 301125,
+        "plc_firmware_version": 4.2,
+        "comments": null
+    },
+    {
+        "id": "CNK-PCC3",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "SERIAL",
+        "plc_serial_number": 301127,
+        "plc_firmware_version": 4.2,
+        "comments": null
+    },
+    {
+        "id": "TFB-PCC1",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "SERIAL",
+        "plc_serial_number": 301138,
+        "plc_firmware_version": 4.2,
+        "comments": null
+    },
+    {
+        "id": "TFB-PCC2",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "SERIAL",
+        "plc_serial_number": 301057,
+        "plc_firmware_version": 4,
+        "comments": null
+    },
+    {
+        "id": "OLD-PCC1",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "SERIAL",
+        "plc_serial_number": 301985,
+        "plc_firmware_version": 4.4,
+        "comments": null
+    },
+    {
+        "id": "TMP-PCC1",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "SERIAL",
+        "plc_serial_number": 301322,
+        "plc_firmware_version": 4.3,
+        "comments": null
+    },
+    {
+        "id": "FIR-PCC1",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "SERIAL",
+        "plc_serial_number": 301209,
+        "plc_firmware_version": 4.3,
+        "comments": null
+    },
+    {
+        "id": "SWR-PCC1",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "SERIAL",
+        "plc_serial_number": 301966,
+        "plc_firmware_version": 4.4,
+        "comments": null
+    },
+    {
+        "id": "EDD-PCC1",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "SERIAL",
+        "plc_serial_number": 301990,
+        "plc_firmware_version": 4.4,
+        "comments": null
+    },
+    {
+        "id": "BDW-PCC1",
+        "type": "H&K",
+        "modification_description": null,
+        "comms_type": null,
+        "plc_serial_number": null,
+        "plc_firmware_version": null,
+        "comments": null
+    },
+    {
+        "id": "HBC-PCC1",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "SERIAL",
+        "plc_serial_number": 301129,
+        "plc_firmware_version": 4.2,
+        "comments": null
+    },
+    {
+        "id": "MEC-PCC1",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "SERIAL",
+        "plc_serial_number": 301191,
+        "plc_firmware_version": 4.3,
+        "comments": null
+    },
+    {
+        "id": "WFD-PCC1",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "SERIAL",
+        "plc_serial_number": 302504,
+        "plc_firmware_version": 4.5,
+        "comments": null
+    },
+    {
+        "id": "BRY-PCC1",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "ETHERNET",
+        "plc_serial_number": 100131,
+        "plc_firmware_version": 4.3,
+        "comments": null
+    },
+    {
+        "id": "BY0.94",
+        "type": "Clamplock Bury Loco",
+        "modification_description": null,
+        "comms_type": null,
+        "plc_serial_number": null,
+        "plc_firmware_version": null,
+        "comments": null
+    },
+    {
+        "id": "BY10.66",
+        "type": "HW CRP",
+        "modification_description": null,
+        "comms_type": null,
+        "plc_serial_number": null,
+        "plc_firmware_version": null,
+        "comments": null
+    },
+    {
+        "id": "QNS-PCC1",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "ETHERNET",
+        "plc_serial_number": 100129,
+        "plc_firmware_version": 4.3,
+        "comments": null
+    },
+    {
+        "id": "QNS-PCC2",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "ETHERNET",
+        "plc_serial_number": 100274,
+        "plc_firmware_version": 4.4,
+        "comments": null
+    },
+    {
+        "id": "IRK-PCC1",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "SERIAL",
+        "plc_serial_number": 301193,
+        "plc_firmware_version": 4.3,
+        "comments": null
+    },
+    {
+        "id": "VIM-PCC1",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "ETHERNET",
+        "plc_serial_number": 100370,
+        "plc_firmware_version": 4.5,
+        "comments": null
+    },
+    {
+        "id": "VIM-PCC2",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "ETHERNET",
+        "plc_serial_number": 100369,
+        "plc_firmware_version": 4.5,
+        "comments": null
+    },
+    {
+        "id": "VIC-PCC3",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": null,
+        "plc_serial_number": null,
+        "plc_firmware_version": null,
+        "comments": null
+    },
+    {
+        "id": "VIC-PCC4",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": null,
+        "plc_serial_number": null,
+        "plc_firmware_version": null,
+        "comments": null
+    },
+    {
+        "id": "RTC-PCC1",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "SERIAL",
+        "plc_serial_number": 301901,
+        "plc_firmware_version": 4.4,
+        "comments": null
+    },
+    {
+        "id": "ROC-PCC1",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "SERIAL",
+        "plc_serial_number": 301384,
+        "plc_firmware_version": 4.3,
+        "comments": null
+    },
+    {
+        "id": "SHC-PCC1",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "SERIAL",
+        "plc_serial_number": 301319,
+        "plc_firmware_version": 4.3,
+        "comments": null
+    },
+    {
+        "id": "NHM-PCC1",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "SERIAL",
+        "plc_serial_number": 301357,
+        "plc_firmware_version": 4.3,
+        "comments": null
+    },
+    {
+        "id": "NHM-PCC2",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "SERIAL",
+        "plc_serial_number": 301742,
+        "plc_firmware_version": 4.4,
+        "comments": null
+    },
+    {
+        "id": "MON-PCC1",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "SERIAL",
+        "plc_serial_number": 301741,
+        "plc_firmware_version": 4.4,
+        "comments": null
+    },
+    {
+        "id": "NEB-PCC1",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "ETHERNET",
+        "plc_serial_number": 100133,
+        "plc_firmware_version": 4.3,
+        "comments": null
+    },
+    {
+        "id": "ASH-PCC1",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "SERIAL",
+        "plc_serial_number": "300200 301893",
+        "plc_firmware_version": 4.4,
+        "comments": null
+    },
+    {
+        "id": "VEL-PCC1",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "SERIAL",
+        "plc_serial_number": 301391,
+        "plc_firmware_version": 4.3,
+        "comments": null
+    },
+    {
+        "id": "NIS-PCC1",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "SERIAL",
+        "plc_serial_number": 301244,
+        "plc_firmware_version": 4.3,
+        "comments": null
+    },
+    {
+        "id": "PIC-PCC1",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "ETHERNET",
+        "plc_serial_number": 100123,
+        "plc_firmware_version": 4.2,
+        "comments": null
+    },
+    {
+        "id": "MKT-PCC1",
+        "type": "H&K",
+        "modification_description": null,
+        "comms_type": null,
+        "plc_serial_number": null,
+        "plc_firmware_version": null,
+        "comments": null
+    },
+    {
+        "id": "MKT-PCC3",
+        "type": "H&K",
+        "modification_description": null,
+        "comms_type": null,
+        "plc_serial_number": null,
+        "plc_firmware_version": null,
+        "comments": null
+    },
+    {
+        "id": "MKT-PCC5",
+        "type": "H&K",
+        "modification_description": null,
+        "comms_type": null,
+        "plc_serial_number": null,
+        "plc_firmware_version": null,
+        "comments": null
+    },
+    {
+        "id": "SPS-PCC1",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "ETHERNET",
+        "plc_serial_number": 100385,
+        "plc_firmware_version": 4.5,
+        "comments": null
+    },
+    {
+        "id": "AIR-PCC1",
+        "type": "Voestalpine",
+        "modification_description": null,
+        "comms_type": "SERIAL",
+        "plc_serial_number": 301965,
+        "plc_firmware_version": 4.4,
+        "comments": null
+    }
+]

@@ -12,13 +12,13 @@ const mysql = require('mysql');
 
 const connection = mysql.createConnection(config.get('db'));
 
-const sql = 'insert into tms_point (id, type, direction, normal_position, normal_position_timeout, route_blocking_disabled, teml_41, local_controller_id) values (?)';
+const sql = 'insert into tms_points_machine (id, type, direction, normal_position, normal_position_timeout, route_blocking_disabled, teml_41, local_controller_id) values (?)';
 
 connection.connect();
 
 const xml = 'http://127.0.0.1:8080/tms/NetworkTopologyModel.xml';
 
-console.log('Loading: TMS Points...');
+console.log('Loading: TMS Points Machines...');
 
 fetch(xml)
 .then(response => {
@@ -46,7 +46,7 @@ fetch(xml)
                     if (err)
                         console.log('err', err);
                     else
-                        console.log('ok - point machine:', values.join(', '), '✔');
+                        console.log('ok - points machine:', values.join(', '), '✔');
                 });
             });
         }

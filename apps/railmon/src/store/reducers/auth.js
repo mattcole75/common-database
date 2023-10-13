@@ -7,6 +7,7 @@ const initialState = {
     localId: null,
     displayName: null,
     email: null,
+    users: [],
     roles: [],
     identifier: null,
     redirectPath: '/'
@@ -49,6 +50,23 @@ const updateEmail = (state, action) => {
     };
 }
 
+const getUsersSuccess = (state, action) => {
+    return { ...state,
+        users: action.users,
+        identifier: action.identifier
+    };
+}
+
+const updateUserSuccess = (state, action) => {
+    let updatedUsers = [ ...state.users];
+    const index = updatedUsers.findIndex(ele => ele.localId === action.user.localId);
+    updatedUsers[index] = { ...updatedUsers[index], roles: action.user.roles, inuse: action.user.inuse };
+
+    return { ...state,
+        users: updatedUsers
+    };
+}
+
 const finish = (state) => {
     return { ...state,
         loading: false,
@@ -77,6 +95,8 @@ const reducer = (state = initialState, action) => {
         case actionType.AUTH_RESET: return reset();
         case actionType.AUTH_UPDATE_DISPLAY_NAME: return updateDisplayName(state, action);
         case actionType.AUTH_UPDATE_EMAIL: return updateEmail(state, action);
+        case actionType.ADMIN_GET_USERS_SUCCESS: return getUsersSuccess(state, action);
+        case actionType.ADMIN_UPDATE_USER_SUCCESS: return updateUserSuccess(state, action);
         default: return state;
     }
 }

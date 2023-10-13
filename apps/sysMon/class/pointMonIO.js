@@ -99,9 +99,9 @@ class PointMonIO {
                     // update the state of the reference signal
                     ioMonitorFor[index].setState(this.msg.state);
                     // update the signal event time and add today's
-                    // ioMonitorFor[index].setEventTimestamp(moment(new Date(moment().format('YYYY-MM-DD') + ' ' + this.msg.eventTimestamp)).format('YYYY-MM-DD HH:mm:ss.SSS'));
+                    ioMonitorFor[index].setEventTimestamp(moment(new Date(moment().format('YYYY-MM-DD') + ' ' + this.msg.eventTimestamp)).format('YYYY-MM-DD HH:mm:ss.SSS'));
                     // the following is used when processing specific files retrospectivly 
-                    ioMonitorFor[index].setEventTimestamp(moment(new Date(logDate + ' ' + this.msg.eventTimestamp)).format('YYYY-MM-DD HH:mm:ss.SSS'));
+                    // ioMonitorFor[index].setEventTimestamp(moment(new Date(logDate + ' ' + this.msg.eventTimestamp)).format('YYYY-MM-DD HH:mm:ss.SSS'));
                     
                     //console output for monitoring
                     console.log(this.id,
@@ -113,7 +113,7 @@ class PointMonIO {
                     )
 
                     // post IO state change to timeseries db
-                    // postPointState(ioMonitorFor[index].signalState()); disable for now
+                    postPointState(ioMonitorFor[index].signalState()); // disable for now
                     
                     // check for drive and swing times
                     if(ioMonitorFor[index].signal === 'Point Set Right' || ioMonitorFor[index].signal === 'Point Set Left') {

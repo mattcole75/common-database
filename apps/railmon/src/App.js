@@ -1,12 +1,23 @@
-import React, { Suspense } from 'react';
-import { useSelector } from 'react-redux';
+import React, { Suspense, useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './layout/layout';
+import { authCheckState } from './store/actions/index';
 
 const App = () => {
 
+    const dispatch = useDispatch();
+
     const isAuthenticated = useSelector(state => state.auth.idToken !== null);
     const roles = useSelector(state => state.auth.roles);
+    const isAdministrator = roles.includes('administrator');
+
+    const onTryAutoLogin = useCallback(() => dispatch(authCheckState()),[dispatch]);
+
+    useEffect(() => {
+        onTryAutoLogin();
+    }, [onTryAutoLogin]);
+
 
     const Index = React.lazy(() => {
         return import('./components/index/index');
@@ -23,6 +34,12 @@ const App = () => {
     const Profile = React.lazy(() => {
         return import('./components/auth/profile/profile');
     });
+    const Monitoring = React.lazy(() => {
+        return import('./components/landing/monitoringLanding');
+    });
+    const Users = React.lazy(() => {
+        return import('./components/auth/userAdmin/users');
+    });
 
     const routes = (
         <Routes>
@@ -32,6 +49,9 @@ const App = () => {
             <Route path='/auth/signup' element={ <Signup /> } />
 
             { isAuthenticated && <Route path='/auth/profile' element={ <Profile /> } /> }
+            { isAuthenticated && <Route path='/monitoring' element={ <Monitoring /> } /> }
+
+            { isAuthenticated && isAdministrator && <Route path='/admin/users' element={ <Users /> } /> }
 
             <Route path='*' element={ <Index /> } />
         </Routes>

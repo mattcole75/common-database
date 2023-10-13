@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start_static": "node ./apps/static/static.js",
-    "start_tms": "cd ./apps/tms && node ./service.js",
-    "start_railmon": "cd ./apps/railmon/scripts && node ./login.js && node ./pointMonIO.js",
     "start_auth": " cd ./apps/auth && node ./service.js",
+    "start_tms": "cd ./apps/tms && node ./service.js",
+    "start_app2_sim": "rm -f ./apps/simulation/data/tms/app-2/replicated-logs/*.log && cd ./apps/simulation/scripts && node app2-log-sim.js",
+    "login": "cd ./apps/sysmon/scripts && node ./login.js",
+    "start_pointmon": "cd ./apps/sysmon/scripts && node ./pointMonIO.js",
+    "start_loopmon": "cd ./apps/sysmon/scripts && node ./loopMonIO.js",
     "load_tms_config": " cd ./config/scripts/tms/topology && node ./version.js && node ./networkSections.js && node ./geographicalAreas.js && node ./trams.js && node ./deploymentAreas.js && node ./trackAreas.js && node ./trackSections.js && node ./trackSectionDetectorPair.js && node ./conflictMonitors.js && node ./localControllers.js && node ./points.js && node ./signals.js && node ./chains.js && node ./detectors.js && node ./chainLinks.js && node ./spasZones.js && node ./massDetectors.js && node ./axleCounters.js && node ./stops.js && node ./platforms.js  && node ./lines.js && node ./routeSections.js && node ./routeSectionLinks.js  && node ./routeLinks.js && node ./routeLinkDetectors.js && node ./routeLinkAtStopDetectors.js && node ./routeLinkDepartDetectors.js && node ./routeLinkApproachDetectors.js && node ./routeLinkArriveDetectors.js && node ./physicalLoops.js",
     "load_tms_timetable": "cd ./config/scripts/tms/timetable && node ./operators.js && node ./garages.js && node ./stops.js && node ./routeSections.js && node ./routes.js && node ./journeyPatternSections.js && node ./services.js && node ./serviceJourneyPatterns.js && node ./vehicleJournies.js",
-    "app2LogSim": "rm -f ./apps/simulation/data/tms/app-2/replicated-logs/*.log && cd ./apps/simulation/scripts && node app2-log-sim.js",
     "auth_service_test": "echo 'db.user.deleteMany({})' | mongosh auth && jest ./tests/a.auth.unit.test.js --runInBand",
     "tms_service_test": " jest ./tests/b.tms.unit.test.js --runInBand"
   },

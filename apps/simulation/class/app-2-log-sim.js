@@ -20,8 +20,8 @@ class App2LogSim {
         this.fileToReplicatepreviousLogEntryTime = moment(this.time, "HH:mm:ss:SSS");
         this.currentLogEntryTime = moment(this.time, "HH:mm:ss:SSS");
         this.bst = false;
-        this.skip = false;
-        // this.skip = true;
+        // this.skip = false;
+        this.skip = true;
     }
 
     // The program will have a number of modes:

@@ -70,6 +70,22 @@ const passwordUpdate = (identifier) => {
     };
 }
 
+const getUsersSuccess = (users, identifier) => {
+    return {
+        type: action.ADMIN_GET_USERS_SUCCESS,
+        users: users,
+        identifier: identifier
+    };
+}
+
+const updateUserSuccess = (user, identifier) => {
+    return {
+        type: action.ADMIN_UPDATE_USER_SUCCESS,
+        user: user,
+        identifier: identifier
+    };
+}
+
 // private functions
 const deleteLocalStorage = () => {
 
@@ -359,6 +375,58 @@ export const updateAccount = (authData, idToken, localId, identifier) => {
             .catch(error => {
                 dispatch(fail(whatIsTheErrorMessage(error))); 
             });
+    };
+}
+
+export const adminGetUsers = (idToken, localId, query, identifier) => {
+    return dispatch => {
+
+        dispatch(start());
+
+        const config = {
+            headers: {
+                'content-type': 'application/json',
+                idToken: idToken,
+                localId: localId,
+                query: query
+            }
+        };
+        
+        axios.get('/admin/users', config)
+            .then(res => {
+                dispatch(getUsersSuccess(res.data.users, identifier));
+            })
+            .then(() => {
+                dispatch(finish());
+            })
+            .catch(err => {
+                dispatch(fail(whatIsTheErrorMessage(err)));
+            })
+    };
+}
+
+export const adminUpdateUser = (idToken, localId, data, identifier) => {
+    return dispatch => {
+        dispatch(start());
+
+        const config = {
+            headers: {
+                'content-type': 'application/json',
+                idToken: idToken,
+                localId: localId
+            }
+        };
+
+        axios.patch('/admin/user', data, config)
+        .then(() => {
+            dispatch(updateUserSuccess(data, identifier));
+        })
+        .then(() => {
+            dispatch(finish());
+        })
+        .catch(err => {
+            dispatch(fail(whatIsTheErrorMessage(err))); 
+        });
     };
 }
 

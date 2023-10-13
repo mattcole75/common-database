@@ -1,16 +1,9 @@
 'use strict';
-const dotenv = require('dotenv').config();
 const database = require('./config/database');
 const config = require('./config/config');
 const service = config.get('service');
 const express = require('./config/express');
-
-const port = 1338;
-
-if(dotenv.error) {
-    console.log(dotenv.error);
-    process.exit(1);
-}
+const port = config.get('port');
 
 const app = express();
 

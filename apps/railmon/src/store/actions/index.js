@@ -5,5 +5,7 @@ export {
     updateDisplayName,
     updateEmail,
     updatePassword,
-    authCheckState
+    authCheckState,
+    adminGetUsers,
+    adminUpdateUser
 } from './auth';
