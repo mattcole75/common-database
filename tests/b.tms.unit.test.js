@@ -10,7 +10,7 @@ let localId = null;
 describe('Test 1 - POST Points Machine Swing Time', () => {
 
     it('should, fail (403) for an unauthorised request', async () => {
-        await endPoint.post('/pointmachineswingtime')
+        await endPoint.post('/pointsmachineswingtime')
             .set({
                 'Content-Type': 'application/json',
                 idToken: wrongToken
@@ -47,7 +47,7 @@ describe('Test 1 - POST Points Machine Swing Time', () => {
     });
 
     it('should, fail to insert with an longer than 7 characters', async () => {
-        await endPoint.post('/pointmachineswingtime')
+        await endPoint.post('/pointsmachineswingtime')
         .set({
             'Content-Type': 'application/json',
             idToken: idToken
@@ -69,7 +69,7 @@ describe('Test 1 - POST Points Machine Swing Time', () => {
     });
 
     it('should, fail to insert with an incorrect defined direction', async () => { // should be Set Point Right or Set Point Left
-        await endPoint.post('/pointmachineswingtime')
+        await endPoint.post('/pointsmachineswingtime')
         .set({
             'Content-Type': 'application/json',
             idToken: idToken
@@ -91,7 +91,7 @@ describe('Test 1 - POST Points Machine Swing Time', () => {
     });
 
     it('should, fail to insert with an invalid integer for the swing time', async () => {
-        await endPoint.post('/pointmachineswingtime')
+        await endPoint.post('/pointsmachineswingtime')
         .set({
             'Content-Type': 'application/json',
             idToken: idToken
@@ -113,7 +113,7 @@ describe('Test 1 - POST Points Machine Swing Time', () => {
     });
 
     it('should, fail to insert with an invalid tms timestamp', async () => {
-        await endPoint.post('/pointmachineswingtime')
+        await endPoint.post('/pointsmachineswingtime')
         .set({
             'Content-Type': 'application/json',
             idToken: idToken
@@ -135,7 +135,7 @@ describe('Test 1 - POST Points Machine Swing Time', () => {
     });
 
     it('should, insert a point swing time into the database', async () => {
-        await endPoint.post('/pointmachineswingtime')
+        await endPoint.post('/pointsmachineswingtime')
         .set({
             'Content-Type': 'application/json',
             idToken: idToken
@@ -161,11 +161,11 @@ describe('Test 1 - POST Points Machine Swing Time', () => {
 describe('Test 2 - GET Points Machine Swing Times', () => {
     
     it('should, fail (403) for an unauthorised request', async () => {
-        await endPoint.get('/pointmachineswingtimes')
+        await endPoint.get('/pointsmachineswingtimes')
             .set({
                 'Content-Type': 'application/json',
                 idToken: wrongToken,
-                params: 'IRK02M'
+                params: 'IRK02M,2023-08-29 09:00,2023-08-29 17:00'
             })
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
@@ -193,11 +193,11 @@ describe('Test 2 - GET Points Machine Swing Times', () => {
     // });
 
     it('should, get all the point swing times from the database based on the given parameters', async () => {
-        await endPoint.get('/pointmachineswingtimes')
+        await endPoint.get('/pointsmachineswingtimes')
         .set({
             'Content-Type': 'application/json',
             idToken: idToken,
-            params: 'IRK02M,2023-08-29 09:00,2023-08-29 17:00'
+            params: 'IRK02M,2023-08-29 09:00,2023-10-30 23:59'
         })
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
@@ -205,7 +205,48 @@ describe('Test 2 - GET Points Machine Swing Times', () => {
     });
 });
 
-describe('Test 3 - Points Machine CRUD', () => {
+describe('Test 3 - Get Points Machines', () => {
+    it('should, fail (403) for an unauthorised request', async () => {
+        await endPoint.get('/pointsmachines')
+            .set({
+                'Content-Type': 'application/json',
+                idToken: wrongToken,
+                params: ''
+            })
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(403)
+    });
+
+    it('should, get all the points machines', async () => {
+        await endPoint.get('/pointsmachines')
+        .set({
+            'Content-Type': 'application/json',
+            idToken: idToken,
+            params: ''
+        })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .then(res => {
+            expect(res.body.data).toHaveLength(160);
+        })
+    });
+
+    it('should, get all thea filtered list of points machines', async () => {
+        await endPoint.get('/pointsmachines')
+        .set({
+            'Content-Type': 'application/json',
+            idToken: idToken,
+            params: 'ASH*'
+        })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .then(res => {
+            expect(res.body.data).toHaveLength(4);
+        })
+    });
 
 });
 

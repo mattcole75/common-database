@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { adminGetUsers } from '../../../../store/actions/index'
+import { getMonitoredPointsMachines, pointsMachineStateReset } from '../../../../store/actions/index';
 
 const Filter = React.memo(() => {
 
@@ -12,8 +12,9 @@ const Filter = React.memo(() => {
 
     const inputRef = useRef();
 
-    const onLoadUsers = useCallback((idToken, localId, query, identifier) => {
-        dispatch(adminGetUsers(idToken, localId, query, identifier));
+    const onLoadPointsMachines = useCallback((idToken, localId, query, identifier) => {
+        dispatch(pointsMachineStateReset());
+        dispatch(getMonitoredPointsMachines(idToken, localId, query,identifier));
     }, [dispatch]);
 
     useEffect(() => {
@@ -23,17 +24,19 @@ const Filter = React.memo(() => {
                 enteredFilter.length === 0
                 ? ''
                 : enteredFilter;
-            onLoadUsers(idToken, localId, query, 'GET_USERS')
+                onLoadPointsMachines(idToken, localId, query, 'GET_POINTS_MACHINES')
           }
         }, 500);
         return () => {
             clearTimeout(timer);
         };
-    }, [enteredFilter, inputRef, onLoadUsers, idToken, localId]);
+    }, [enteredFilter, inputRef, onLoadPointsMachines, idToken, localId]);
 
     const refresh = () => {
+
         const query = enteredFilter.length === 0 ? '' : enteredFilter;
-        onLoadUsers(idToken, localId, query, 'GET_USERS');
+
+        onLoadPointsMachines(idToken, localId, query, 'GET_POINTS_MACHINES');
     }
 
     return (
@@ -41,19 +44,20 @@ const Filter = React.memo(() => {
 
             <div className='d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none'>
                 <h3 className="heading-primary">
-                    <span className='heading-primary_main'>System Users</span>
+                    <span className='heading-primary_main'>Points Machines</span>
                 </h3>
             </div>
             
             <form className='col-12 col-lg-auto mb-3 mb-lg-0'>
                 <input
-                    type="search"
+                    id='search'
+                    type='search'
                     className='form-control'
-                    ref={inputRef}
-                    placeholder='Search email...'
+                    ref={ inputRef }
+                    placeholder='Search...'
                     aria-label='Search'
-                    value={enteredFilter}
-                    onChange={event => setEnteredFilter(event.target.value)}
+                    value={ enteredFilter }
+                    onChange={ event => setEnteredFilter(event.target.value) }
                 />
             </form>
 

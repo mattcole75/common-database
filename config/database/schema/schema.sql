@@ -115,7 +115,7 @@ create table tms_tram (
 create table tms_points_machine (
     id varchar(6) not null unique,
     type varchar(50) not null,
-    direction varchar(50) not null,
+    turnout varchar(50) not null,
     normal_position varchar(50) not null,
     normal_position_timeout smallInt not null,
     route_blocking_disabled boolean not null,
@@ -125,6 +125,7 @@ create table tms_points_machine (
     updated timestamp not null default now() on update now(), -- when was the last time this record was updated
     inuse boolean not null default true, -- can this record be used / viewed
     primary key (id),
+    fulltext key text (id, turnout),
     constraint fk_point_local_controller_id foreign key (local_controller_id) references tms_local_controller (id)
 		    on update cascade on delete cascade
 );
@@ -439,7 +440,6 @@ create table tms_physical_loop (
 -- transXchange database tables *
 -- ******************************
 
--- tXc Stops
 create table txc_stop (
     stop_point_ref varchar(11) not null unique,
     common_name varchar(50) not null,
@@ -450,7 +450,6 @@ create table txc_stop (
     primary key (stop_point_ref)
 );
 
--- tXc Operators
 create table txc_operator (
     id varchar(2) not null unique,
     code varchar(3) not null unique,
@@ -461,7 +460,6 @@ create table txc_operator (
     primary key (id)
 );
 
--- tXc Operator Garages
 create table txc_garage (
     code varchar(3) not null unique,
     operator_id varchar(2) not null,
@@ -473,7 +471,6 @@ create table txc_garage (
     constraint fk_txc_garage_operator_id foreign key (operator_id) references txc_operator (id) on update cascade on delete cascade
 );
 
--- tXc Route Sections
 create table txc_route_section (
     id varchar(7) not null,
     route_link_id varchar(10) not null unique,
@@ -486,7 +483,6 @@ create table txc_route_section (
     inuse boolean not null default true -- can this record be used / viewed
 );
 
--- tXc Routes
 create table txc_route (
     id varchar(10) not null unique,
     private_code varchar(3) not null,
@@ -503,7 +499,6 @@ create table txc_route (
     constraint fk_txc_route_route_number foreign key (route_code) references tms_route_section (route_code) on update cascade on delete cascade
 );
 
--- tXc Journey PatternSequence
 create table txc_journey_pattern_section (
     id varchar(5) not null,
     timing_link_id varchar(10) not null,
@@ -524,7 +519,6 @@ create table txc_journey_pattern_section (
     constraint fk_txc_journey_pattern_section_route_link_ref foreign key (route_link_ref) references txc_route_section (route_link_id) on update cascade on delete cascade
 );
 
--- tXc Services
 create table txc_service (
     code smallInt not null unique,
     line_id varchar(3) not null,
@@ -541,7 +535,6 @@ create table txc_service (
     constraint fk_txc_service_operator_ref foreign key (operator_ref) references txc_operator (id) on update cascade on delete cascade
 );
 
--- txc service  journey pattern
 create table txc_service_journey_pattern (
     service_code smallInt not null,
     journey_pattern_id varchar(6) not null unique,
@@ -556,7 +549,6 @@ create table txc_service_journey_pattern (
     constraint fk_txc_service_journey_pattern_journey_pattern_section_ref foreign key (journey_pattern_section_ref) references txc_journey_pattern_section (id) on update cascade on delete cascade
 );
 
--- txc vehicle Journey
 create table txc_vehicle_journey (
     sequence smallInt not null,
     block varchar(10) not null,
@@ -587,17 +579,130 @@ create table txc_vehicle_journey (
 -- *****************************
 create table railmon_points_machine_swing_time (
     id smallInt not null auto_increment,
-    points_machine_ref varchar(6) not null,
-    direction varchar(16), -- Points Set Right or Points Set Left
-    swing_time smallInt not null,
-    tms_timestamp timestamp(3) not null,
+    points_machine_ref varchar(6) not null, -- reference to the tms points machine table
+    direction varchar(32), -- Points Set Right or Points Set Left
+    swing_time smallInt not null, -- the time in milliseconds it takes to loose detection and then gain detection
+    tms_timestamp timestamp(3) not null, -- the source timestamp
     created timestamp(3) not null default now(3), -- when was this record created
     updated timestamp(3) not null default now(3) on update now(3), -- when was the last time this record was updated
     inuse boolean not null default true, -- can this record be used / viewed
     primary key (id),
-    constraint fk_railmon_points_machine_swing_time_point_ref foreign key (points_machine_ref) references tms_points_machine (id)
+    constraint fk_railmon_points_machine_swing_time_points_machine_ref foreign key (points_machine_ref) references tms_points_machine (id)
 		on update cascade on delete cascade
 );
+
+create table railmon_points_machine_performance (
+    id varchar(6) not null, -- reference to the tms points machine table
+    swing_time_safety_limit smallInt null, -- the machine's safety limit
+    
+    left_swing_time_avg float null, -- left swing time average (mean value over last year)
+	left_swing_time_standard_deviation float null, -- left swing time standard deviation (stdev over last year)
+	left_swing_time_current_avg float null, -- left swing time average (last hour)
+    
+    left_swing_time_measurement_mode varchar(2) generated always as -- IS = In Specification OS = Out of Specification
+		(
+			case
+				when (left_swing_time_avg >= (swing_time_safety_limit - (left_swing_time_standard_deviation * 4))) then
+					'OS'
+				when (left_swing_time_avg < (swing_time_safety_limit - (left_swing_time_standard_deviation * 4))) then
+					'IS'
+			end
+		),
+	left_swing_time_performance_status varchar(32) generated always as -- the performance status = Safety limit exeeded, Immediate Action, Action, Monitor, OK
+		(
+			case
+				when (left_swing_time_avg >= (swing_time_safety_limit - (left_swing_time_standard_deviation * 4))) then
+					case 
+						when (left_swing_time_current_avg >= swing_time_safety_limit) then
+							'Safety Limit Exceeded'
+						when (left_swing_time_current_avg >= (swing_time_safety_limit - left_swing_time_standard_deviation) and left_swing_time_current_avg < swing_time_safety_limit) then
+							'Immediate Action'
+						when (left_swing_time_current_avg >= (swing_time_safety_limit - (left_swing_time_standard_deviation * 2)) && left_swing_time_current_avg < (swing_time_safety_limit - left_swing_time_standard_deviation)) then
+							'Action'
+						when (left_swing_time_current_avg >= (swing_time_safety_limit - (left_swing_time_standard_deviation * 3)) && left_swing_time_current_avg < (swing_time_safety_limit - (left_swing_time_standard_deviation * 2))) then
+							'Monitor'
+						when (left_swing_time_current_avg >= (swing_time_safety_limit - (left_swing_time_standard_deviation * 4)) && left_swing_time_current_avg < (swing_time_safety_limit - (left_swing_time_standard_deviation * 3))) then
+							'OK'
+						when (left_swing_time_current_avg < (swing_time_safety_limit - (left_swing_time_standard_deviation * 4))) then
+							'OK'
+					end
+				when (left_swing_time_avg < (swing_time_safety_limit - (left_swing_time_standard_deviation * 4))) then
+					case 
+						when (left_swing_time_current_avg >= left_swing_time_avg + (left_swing_time_standard_deviation * 4)) then
+							'Immediate Action'
+						when (left_swing_time_current_avg >= (left_swing_time_avg + (left_swing_time_standard_deviation * 3)) && left_swing_time_current_avg < (left_swing_time_avg + (left_swing_time_standard_deviation * 4))) then
+							'Action'
+						when (left_swing_time_current_avg >= (left_swing_time_avg + (left_swing_time_standard_deviation * 2)) && left_swing_time_current_avg < (left_swing_time_avg + (left_swing_time_standard_deviation * 3))) then
+							'Monitor'
+						when (left_swing_time_current_avg >= (left_swing_time_avg + left_swing_time_standard_deviation) && left_swing_time_current_avg < (left_swing_time_avg + (left_swing_time_standard_deviation * 2))) then
+							'OK'
+						when (left_swing_time_current_avg >= left_swing_time_avg && left_swing_time_current_avg < (left_swing_time_avg + left_swing_time_standard_deviation)) then
+							'OK'
+						when (left_swing_time_current_avg < left_swing_time_avg) then
+							'OK'
+					end
+			end
+        ),
+        
+	right_swing_time_avg float null, -- right swing time average (mean value over last year)
+	right_swing_time_standard_deviation float null, -- right swing time standard deviation (stdev over last year)
+	right_swing_time_current_avg float null, -- right swing time average (last hour)
+    
+    right_swing_time_measurement_mode varchar(2) generated always as -- IS = In Specification OS = Out of Specification
+		(
+			case
+				when (right_swing_time_avg >= (swing_time_safety_limit - (right_swing_time_standard_deviation * 4))) then
+					'OS'
+				when (right_swing_time_avg < (swing_time_safety_limit - (right_swing_time_standard_deviation * 4))) then
+					'IS'
+			end
+		),
+	
+    right_swing_time_performance_status varchar(32) generated always as -- the performance status = Safety limit exeeded, Immediate Action, Action, Monitor, OK
+		(
+			case
+				when (right_swing_time_avg >= (swing_time_safety_limit - (right_swing_time_standard_deviation * 4))) then
+					case 
+						when (right_swing_time_current_avg >= swing_time_safety_limit) then
+							'Safety Limit Exceeded'
+						when (right_swing_time_current_avg >= (swing_time_safety_limit - right_swing_time_standard_deviation) and right_swing_time_current_avg < swing_time_safety_limit) then
+							'Immediate Action'
+						when (right_swing_time_current_avg >= (swing_time_safety_limit - (right_swing_time_standard_deviation * 2)) && right_swing_time_current_avg < (swing_time_safety_limit - right_swing_time_standard_deviation)) then
+							'Action'
+						when (right_swing_time_current_avg >= (swing_time_safety_limit - (right_swing_time_standard_deviation * 3)) && right_swing_time_current_avg < (swing_time_safety_limit - (right_swing_time_standard_deviation * 2))) then
+							'Monitor'
+						when (right_swing_time_current_avg >= (swing_time_safety_limit - (right_swing_time_standard_deviation * 4)) && right_swing_time_current_avg < (swing_time_safety_limit - (right_swing_time_standard_deviation * 3))) then
+							'OK'
+						when (right_swing_time_current_avg < (swing_time_safety_limit - (right_swing_time_standard_deviation * 4))) then
+							'OK'
+					end
+				when (right_swing_time_avg < (swing_time_safety_limit - (right_swing_time_standard_deviation * 4))) then
+					case 
+						when (right_swing_time_current_avg >= left_swing_time_avg + (right_swing_time_standard_deviation * 4)) then
+							'Immediate Action'
+						when (right_swing_time_current_avg >= (right_swing_time_avg + (right_swing_time_standard_deviation * 3)) && right_swing_time_current_avg < (right_swing_time_avg + (right_swing_time_standard_deviation * 4))) then
+							'Action'
+						when (right_swing_time_current_avg >= (right_swing_time_avg + (right_swing_time_standard_deviation * 2)) && right_swing_time_current_avg < (right_swing_time_avg + (right_swing_time_standard_deviation * 3))) then
+							'Monitor'
+						when (right_swing_time_current_avg >= (right_swing_time_avg + right_swing_time_standard_deviation) && right_swing_time_current_avg < (right_swing_time_avg + (right_swing_time_standard_deviation * 2))) then
+							'OK'
+						when (right_swing_time_current_avg >= right_swing_time_avg && right_swing_time_current_avg < (right_swing_time_avg + right_swing_time_standard_deviation)) then
+							'OK'
+						when (right_swing_time_current_avg < right_swing_time_avg) then
+							'OK'
+					end
+			end
+        ),
+    
+    created timestamp(3) not null default now(3), -- when was this record created
+    updated timestamp(3) not null default now(3) on update now(3), -- when was the last time this record was updated
+    inuse boolean not null default true, -- can this record be used / viewed
+    
+    primary key (id),
+    constraint fk_railmon_points_machine_performance_id foreign key (id) references tms_points_machine (id)
+		on update cascade on delete cascade
+);
+
 
 -- ***********************************
 -- point machine configuration table *
@@ -614,30 +719,33 @@ create table config_points_controller (
 );
 
 create table config_points_machine (
-    id varchar(6) not null,
-    point_controller_ref varchar(16) null,
-    direction varchar(32) not null,
+    id varchar(6) not null, -- the point machine identity
+    points_controller_ref varchar(16) null, -- the reference to the point controller
+    direction varchar(32) not null, -- 
     switch_type varchar(32) not null,
     rail_type varchar(32) not null,
     track_form varchar(32) not null,
     maintenance_guage smallInt null, -- MTG 1432
-    free_wheel_clearnace tinyInt null, -- FWC
+    free_wheel_clearance tinyInt null, -- FWC
     free_wheel_passage tinyInt null, -- FWP
     open_switch tinyInt null, -- OS
     machine_type varchar(64) not null,
     points_configuration varchar(64) not null,
-    points_position_indicator boolean not null,
-    `left` boolean not null,
-    `right` boolean not null,
-    bar boolean not null,
-    points_handle varchar(128) not null,
-    hand_operated_by_driver boolean not null,
-    trailable_5mph boolean not null,
+    points_position_indicator_present varchar(32) not null,
+    points_position_indicator_shows_left varchar(32) not null,
+    points_position_indicator_shows_right varchar(32) not null,
+    points_barable varchar(32) not null,
+    points_handle_present varchar(128) not null,
+    hand_operated_by_driver varchar(32) not null,
+    trailable_5mph varchar(32) not null,
     operation_restrictions varchar(256) null,
     operation_procedure varchar(256) null,
+    swing_time_safety_limit smallInt null, -- safety limit in milliseconds
+    motor_drive_timeout smallInt null, -- drive timeout in milliseconds
     notes varchar(512) null,
-    primary key (id)
-    -- constraint fk_config_points_machine_point_machine foreign key (id) references tms_points_machine (id) on update cascade on delete cascade
+    primary key (id),
+    constraint fk_config_points_machine_point_machine foreign key (id) references tms_points_machine (id)
+		on update cascade on delete cascade
 );
 
 create table metrolink_live (
@@ -658,12 +766,11 @@ create table metrolink_live (
         --     on update cascade on delete cascade
 );
 
+delimiter //
 -- *******************************
 -- application stored procedures *
 -- *******************************
--- application Stored Procedures
-delimiter //
-create procedure sp_insert_points_machine_swing_time (in p_points_machine_ref varchar(6), p_direction varchar(16), p_swing_time smallInt, p_tms_timestamp timestamp(3), out insertId int)
+create procedure sp_insert_points_machine_swing_time (in p_points_machine_ref varchar(6), p_direction varchar(32), p_swing_time smallInt, p_tms_timestamp timestamp(3), out insertId int)
     begin
         insert into railmon_points_machine_swing_time (points_machine_ref, direction, swing_time, tms_timestamp)
         values (p_points_machine_ref, p_direction, p_swing_time, p_tms_timestamp);
@@ -679,6 +786,172 @@ create procedure sp_select_points_machine_swing_times (in p_points_machine_ref v
         where points_machine_ref = p_points_machine_ref
         and tms_timestamp between p_start_date and p_end_date
         order by tms_timestamp asc;
-    end//
+    end;//
 
+create procedure sp_select_monitored_points_machines (in searchText varchar(64))
+	begin
+		if(searchText <> '') then
+			select
+				a.id,
+				a.turnout,
+                b.swing_time_safety_limit,
+				b.left_swing_time_avg,
+				b.left_swing_time_standard_deviation,
+				b.left_swing_time_current_avg,
+                b.left_swing_time_measurement_mode,
+                b.left_swing_time_performance_status,
+				b.right_swing_time_avg,
+				b.right_swing_time_standard_deviation,
+				b.right_swing_time_current_avg,
+                b.right_swing_time_measurement_mode,
+                b.right_swing_time_performance_status
+			from tms_points_machine a
+			inner join railmon_points_machine_performance b on a.id = b.id
+			where a.inuse = 1
+			and match(a.id, a.turnout) against(searchText in boolean mode)
+			order by
+				FIELD(left_swing_time_performance_status,'Safety Limit Exceeded', 'Immediate Action', 'Action', 'Monitor', 'OK'),
+                FIELD(right_swing_time_performance_status,'Safety Limit Exceeded', 'Immediate Action', 'Action', 'Monitor', 'OK'),
+                a.id;
+		else
+			select
+				a.id,
+				a.turnout,
+                b.swing_time_safety_limit,
+				b.left_swing_time_avg,
+				b.left_swing_time_standard_deviation,
+				b.left_swing_time_current_avg,
+                b.left_swing_time_measurement_mode,
+                b.left_swing_time_performance_status,
+				b.right_swing_time_avg,
+				b.right_swing_time_standard_deviation,
+				b.right_swing_time_current_avg,
+                b.right_swing_time_measurement_mode,
+                b.right_swing_time_performance_status
+			from tms_points_machine a
+			inner join railmon_points_machine_performance b on a.id = b.id
+			where a.inuse = 1
+			order by
+				FIELD(left_swing_time_performance_status,'Safety Limit Exceeded', 'Immediate Action', 'Action', 'Monitor', 'OK'),
+                FIELD(right_swing_time_performance_status,'Safety Limit Exceeded', 'Immediate Action', 'Action', 'Monitor', 'OK'),
+                a.id;
+		end if;
+	end;//
+
+create procedure sp_select_points_machine (in p_id varchar(6))
+	begin
+		select a.id, a.type, a.turnout, a.normal_position, a.created, a.updated, a.inuse,
+			b.points_controller_ref, b.direction, b.switch_type, b.rail_type, b.track_form,
+			b.maintenance_guage, b.free_wheel_clearance, b.free_wheel_passage, b.open_switch,
+			b.machine_type, b.points_configuration, b.points_position_indicator_present,
+            b.points_position_indicator_shows_left, b.points_position_indicator_shows_right,
+			b.points_barable, b.points_handle_present, b.hand_operated_by_driver, b.trailable_5mph, b.operation_restrictions,
+			b.operation_procedure, b.swing_time_safety_limit, b.motor_drive_timeout, b.notes,
+            c.left_swing_time_avg, c.left_swing_time_standard_deviation, c.left_swing_time_current_avg,
+			c.left_swing_time_measurement_mode, c.left_swing_time_performance_status, c.right_swing_time_avg,
+			c.right_swing_time_standard_deviation, c.right_swing_time_current_avg, c.right_swing_time_measurement_mode, c.right_swing_time_performance_status
+		from tms_points_machine a
+		inner join config_points_machine b on a.id = b.id
+        left outer join railmon_points_machine_performance c on a.id = c.id
+		where a.id = p_id;
+    end; //
+    
+create procedure sp_calculate_avg_points_swing_time (in p_points_machine_ref varchar(6), p_direction varchar(32))
+	begin
+		declare l_total_avg float default 0;
+		
+		set l_total_avg = (	select avg(swing_time)
+							from railmon_points_machine_swing_time
+							where tms_timestamp > (now() - interval 1 year)
+							and points_machine_ref = p_points_machine_ref
+							and direction = p_direction);
+							
+		if(p_direction = 'Points Set Left') then
+			insert into railmon_points_machine_performance
+				(id, left_swing_time_avg)
+			values
+				(p_points_machine_ref, l_total_avg)
+			on duplicate key update
+				left_swing_time_avg = l_total_avg;
+		else
+			insert into railmon_points_machine_performance
+				(id, right_swing_time_avg)
+			values
+				(p_points_machine_ref, l_total_avg)
+			on duplicate key update
+				right_swing_time_avg = l_total_avg;
+		end if;
+	end;//
+
+create procedure sp_calculate_std_deviation_points_swing_time (in p_points_machine_ref varchar(6), p_direction varchar(32))
+	begin
+		declare l_total_stddev float default 0;
+		set l_total_stddev = (	select stddev(swing_time)
+								from railmon_points_machine_swing_time
+								where tms_timestamp > (now() - interval 1 year)
+								and points_machine_ref = p_points_machine_ref
+								and direction = p_direction);
+								
+		if(p_direction = 'Points Set Left') then
+			insert into railmon_points_machine_performance
+				(id, left_swing_time_standard_deviation)
+			values
+				(p_points_machine_ref, l_total_stddev)
+			on duplicate key update
+				left_swing_time_standard_deviation = l_total_stddev;
+		else
+			insert into railmon_points_machine_performance
+				(id, right_swing_time_standard_deviation)
+			values
+				(p_points_machine_ref, l_total_stddev)
+			on duplicate key update
+				right_swing_time_standard_deviation = l_total_stddev;
+		end if;
+	end;//
+
+create procedure sp_calculate_current_avg_points_machine_swing_time (in p_points_machine_ref varchar(6), p_direction varchar(32))
+	begin
+			declare l_last_n_avg float default 0;
+            declare l_swing_time_safety_limit smallInt default 0;
+            
+            set l_last_n_avg = (	select avg(swing_time)
+									from (select swing_time
+											from railmon_points_machine_swing_time
+											where  points_machine_ref = p_points_machine_ref
+											and direction = p_direction
+											order by tms_timestamp desc 
+											limit 10)q);
+			set l_swing_time_safety_limit = (select swing_time_safety_limit from config_points_machine where id = p_points_machine_ref);
+			
+                                    
+			if(p_direction = 'Points Set Left') then
+				insert into railmon_points_machine_performance
+					(id, left_swing_time_current_avg, swing_time_safety_limit)
+				values
+					(p_points_machine_ref, l_last_n_avg, l_swing_time_safety_limit)
+				on duplicate key update
+					left_swing_time_current_avg = l_last_n_avg,
+                    swing_time_safety_limit = l_swing_time_safety_limit;
+			else
+				insert into railmon_points_machine_performance
+					(id, right_swing_time_current_avg, swing_time_safety_limit)
+				values
+					(p_points_machine_ref, l_last_n_avg, l_swing_time_safety_limit)
+				on duplicate key update
+					right_swing_time_current_avg = l_last_n_avg,
+                    swing_time_safety_limit = l_swing_time_safety_limit;
+            end if;
+        end;//
+        
+-- *******************
+-- database triggers *
+-- *******************
+create trigger trg_update_railmon_points_machine_performance after insert on railmon_points_machine_swing_time
+	for each row
+		begin
+			call sp_calculate_avg_points_swing_time(new.points_machine_ref, new.direction);
+            call sp_calculate_std_deviation_points_swing_time(new.points_machine_ref, new.direction);
+            call sp_calculate_current_avg_points_machine_swing_time(new.points_machine_ref, new.direction);
+        end;//
 delimiter ;
+

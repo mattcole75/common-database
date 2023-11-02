@@ -5,9 +5,9 @@ const constoller = require('../controller/tms');
 
 module.exports = (app) => {
 
-    app.post('/' + service + '/api/' + version + '/pointmachineswingtime', (req, res) => {
+    app.post('/' + service + '/api/' + version + '/pointsmachineswingtime', (req, res) => {
         res.set('Content-Type', 'application/json');
-        constoller.postPointMachineSwingTime(req, (err, result) => {
+        constoller.postPointsMachineSwingTime(req, (err, result) => {
             if(err)
                 res.status(err.status).send(err);
             else
@@ -15,9 +15,29 @@ module.exports = (app) => {
         });
     });
 
-    app.get('/' + service + '/api/' + version + '/pointmachineswingtimes', (req, res) => {
+    app.get('/' + service + '/api/' + version + '/pointsmachineswingtimes', (req, res) => {
         res.set('Content-Type', 'application/json');
-        constoller.getPointMachineSwingTimes(req, (err, result) => {
+        constoller.getPointsMachineSwingTimes(req, (err, result) => {
+            if(err)
+                res.status(err.status).send(err);
+            else
+                res.status(result.status).send(result);
+        });
+    });
+
+    app.get('/' + service + '/api/' + version + '/monitoredpointsmachines', (req, res) => {
+        res.set('Content-Type', 'application/json');
+        constoller.getMonitoredPointsMachines(req, (err, result) => {
+            if(err)
+                res.status(err.status).send(err);
+            else
+                res.status(result.status).send(result);
+        });
+    });
+
+    app.get('/' + service + '/api/' + version + '/pointsmachine', (req, res) => {
+        res.set('Content-Type', 'application/json');
+        constoller.getPointsMachine(req, (err, result) => {
             if(err)
                 res.status(err.status).send(err);
             else

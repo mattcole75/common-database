@@ -58,7 +58,7 @@ const UserAdmin = () => {
             { spinner }
             { error &&
                 <div className='alert alert-danger text-wrap text-break' role='alert'>
-                    {error}
+                    { error }
                 </div>
             }
             { modal }

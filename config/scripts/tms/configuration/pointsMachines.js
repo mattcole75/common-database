@@ -10,7 +10,7 @@ const mysql = require('mysql');
 
 const connection = mysql.createConnection(config.get('db'));
 
-const sql = 'insert into config_points_machine (id, point_controller_ref, direction, switch_type, rail_type, track_form, maintenance_guage, free_wheel_clearnace, free_wheel_passage, open_switch, machine_type, points_configuration, points_position_indicator, `left`, `right`, bar, points_handle, hand_operated_by_driver, trailable_5mph, operation_restrictions, operation_procedure, notes) values (?)';
+const sql = 'insert into config_points_machine (id, points_controller_ref, direction, switch_type, rail_type, track_form, maintenance_guage, free_wheel_clearance, free_wheel_passage, open_switch, machine_type, points_configuration, points_position_indicator_present, points_position_indicator_shows_left, points_position_indicator_shows_right, points_barable, points_handle_present, hand_operated_by_driver, trailable_5mph, operation_restrictions, operation_procedure, swing_time_safety_limit, motor_drive_timeout, notes) values (?)';
 
 connection.connect();
 
@@ -31,15 +31,17 @@ pointsMachines.forEach(element => {
         element.os,
         element.machine_type,
         element.points_configuration ? element.points_configuration : 'Unknown',
-        element.ppi,
-        element.left,
-        element.right,
-        element.bar,
+        element.ppi ? 'Yes' : 'No',
+        element.left ? 'Yes' : 'No',
+        element.right ? 'Yes' : 'No',
+        element.bar ? 'Yes' : 'No',
         element.points_handle ? element.points_handle : 'Unknown',
-        element.hand_operated_by_driver,
-        element.trailable_5mph,
+        element.hand_operated_by_driver ? 'Yes' : 'No',
+        element.trailable_5mph ? 'Yes' : 'No',
         element.operational_restrictions,
         element.operation_procedure,
+        element.swing_time_safety_limit,
+        element.motor_drive_timeout,
         element.comments
     ];
 

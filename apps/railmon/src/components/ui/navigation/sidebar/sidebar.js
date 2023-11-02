@@ -25,7 +25,10 @@ const Sidebar = (props) => {
                                 ?   <NavigationListItem link='/monitoring' icon='bi-alt' click={ toggleShowSidebar }> Monitoring</NavigationListItem>
                                 :   null
                             }
-                            <li><hr /></li>
+                            { isAuthenticated
+                                ?   <li><hr /></li>
+                                :   null
+                            }
                             { isAuthenticated
                                 ?	<NavigationListItem link='/auth/profile' icon='bi-person' click={ toggleShowSidebar }> Profile</NavigationListItem>
                                 :	null
@@ -34,7 +37,7 @@ const Sidebar = (props) => {
                                 ?   <NavigationListItem link='/admin/users' icon='bi-people' click={ toggleShowSidebar }> User Admin</NavigationListItem>
                                 :   null
                             }
-                            <li><hr /></li>     
+                            <li><hr /></li>
                             { isAuthenticated
                                 ?   <NavigationListItem link='/auth/logout' icon='bi-person-x' click={ toggleShowSidebar }> Logout</NavigationListItem>
                                 :   <NavigationListItem link='/auth/login' icon='bi-person-check' click={ toggleShowSidebar }> Login</NavigationListItem>

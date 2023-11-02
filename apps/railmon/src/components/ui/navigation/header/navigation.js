@@ -31,7 +31,12 @@ const Navigation = (props) => {
                         ?   <NavigationListItem link='/admin/users' icon='bi-people'> User Admin</NavigationListItem>
                         :   null
                     }
-                    <li><hr /></li>
+                    { isAuthenticated
+                        ?   <li><hr /></li>
+                        :   null
+                    }
+                    
+
                     { isAuthenticated
                         ?   <NavigationListItem link='/auth/logout' icon='bi-person-x'> Logout</NavigationListItem>
                         :   <NavigationListItem link='/auth/login' icon='bi-person-check'> Login</NavigationListItem>

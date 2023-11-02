@@ -21,6 +21,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -45,6 +47,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -69,6 +73,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -93,6 +99,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 2500,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -117,6 +125,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -141,6 +151,8 @@
       "trailable_5mph": false,
       "operational_restrictions": "No Facing moves - Operational or Engineering vehicles",
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": "Changed to Bistable due to wear on switch blades and machine"
     },
     {
@@ -165,6 +177,8 @@
       "trailable_5mph": false,
       "operational_restrictions": "OOS for facing moves - No operational PPI",
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": "(Unapproved Howells Small LED type PPI to be changed) Awaiting new PPI to be installed by Thales as part of the EARP Process. SS Alarms to be configured as part of this change."
     },
     {
@@ -189,6 +203,8 @@
       "trailable_5mph": false,
       "operational_restrictions": "OOS for facing moves until  EARP modifications complete.",
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": "(temporary PPI installed)Awaiting new PPI to be installed by Thales as part of the EARP Process. SS Alarms to be configured as part of this change."
     },
     {
@@ -213,6 +229,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -237,6 +255,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -261,6 +281,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -285,6 +307,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": "Trailable from the Outbound Line"
     },
     {
@@ -309,6 +333,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -333,6 +359,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -357,6 +385,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3000,
+      "motor_drive_timeout": 7000,
       "comments": null
     },
     {
@@ -381,6 +411,8 @@
       "trailable_5mph": false,
       "operational_restrictions": "No Facing Moves",
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3000,
+      "motor_drive_timeout": 7000,
       "comments": null
     },
     {
@@ -405,6 +437,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -429,6 +463,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -453,6 +489,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -477,6 +515,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -501,6 +541,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -525,6 +567,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -549,6 +593,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -573,6 +619,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -597,6 +645,8 @@
       "trailable_5mph": true,
       "operational_restrictions": "Clipped & Scotched",
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": "Note normally clipped and scotched"
     },
     {
@@ -621,6 +671,8 @@
       "trailable_5mph": true,
       "operational_restrictions": "Clipped & Scotched",
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": "Note normally clipped and scotched"
     },
     {
@@ -645,6 +697,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3000,
+      "motor_drive_timeout": 7000,
       "comments": null
     },
     {
@@ -669,6 +723,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3000,
+      "motor_drive_timeout": 7000,
       "comments": null
     },
     {
@@ -693,6 +749,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3000,
+      "motor_drive_timeout": 7000,
       "comments": null
     },
     {
@@ -717,6 +775,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -741,6 +801,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -765,6 +827,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -789,6 +853,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -813,6 +879,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -837,6 +905,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -861,6 +931,8 @@
       "trailable_5mph": true,
       "operational_restrictions": "No Facing Moves",
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -885,6 +957,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -909,6 +983,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -933,6 +1009,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -957,6 +1035,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -981,6 +1061,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -1005,6 +1087,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -1029,6 +1113,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": 2300,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -1053,6 +1139,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 2300,
+      "motor_drive_timeout": 10000,
       "comments": "Special case, passengers on board"
     },
     {
@@ -1077,6 +1165,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 2300,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -1101,6 +1191,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 2500,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -1125,6 +1217,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -1149,6 +1243,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -1173,6 +1269,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -1197,6 +1295,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 2500,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -1221,6 +1321,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 2500,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -1245,6 +1347,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 2500,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -1269,6 +1373,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 1700,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -1293,6 +1399,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": 2500,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -1317,6 +1425,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -1341,6 +1451,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3000,
+      "motor_drive_timeout": 7000,
       "comments": null
     },
     {
@@ -1365,6 +1477,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3000,
+      "motor_drive_timeout": 7000,
       "comments": null
     },
     {
@@ -1389,6 +1503,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3000,
+      "motor_drive_timeout": 7000,
       "comments": null
     },
     {
@@ -1413,6 +1529,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3000,
+      "motor_drive_timeout": 7000,
       "comments": null
     },
     {
@@ -1437,6 +1555,8 @@
       "trailable_5mph": false,
       "operational_restrictions": "Clipped and Scotched - Set for main line-Engineering Moves only",
       "operation_procedure": null,
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": "HGS03PR - Repeat PPI"
     },
     {
@@ -1461,6 +1581,8 @@
       "trailable_5mph": false,
       "operational_restrictions": "Clipped and scotched - Set for trap -Engineering Moves only",
       "operation_procedure": null,
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -1485,6 +1607,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -1509,6 +1633,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -1533,6 +1659,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -1557,6 +1685,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -1581,6 +1711,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -1605,6 +1737,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 2300,
+      "motor_drive_timeout": 7000,
       "comments": null
     },
     {
@@ -1629,6 +1763,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 2300,
+      "motor_drive_timeout": 7000,
       "comments": null
     },
     {
@@ -1653,6 +1789,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 2300,
+      "motor_drive_timeout": 7000,
       "comments": null
     },
     {
@@ -1677,6 +1815,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 2300,
+      "motor_drive_timeout": 7000,
       "comments": null
     },
     {
@@ -1701,6 +1841,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 2300,
+      "motor_drive_timeout": 7000,
       "comments": null
     },
     {
@@ -1725,6 +1867,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 2300,
+      "motor_drive_timeout": 7000,
       "comments": null
     },
     {
@@ -1749,6 +1893,8 @@
       "trailable_5mph": true,
       "operational_restrictions": "No facing moves",
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 7000,
       "comments": null
     },
     {
@@ -1773,6 +1919,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -1797,6 +1945,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -1821,6 +1971,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -1845,6 +1997,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -1869,6 +2023,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -1893,6 +2049,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 2500,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -1917,6 +2075,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -1941,6 +2101,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -1965,6 +2127,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 2500,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -1989,6 +2153,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 2500,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -2013,6 +2179,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": 2500,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -2037,6 +2205,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -2061,6 +2231,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -2085,6 +2257,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -2109,6 +2283,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": 1700,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -2133,6 +2309,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -2157,6 +2335,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 1700,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -2181,6 +2361,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -2205,6 +2387,8 @@
       "trailable_5mph": true,
       "operational_restrictions": "Clipped and scotched -Set for Main Line",
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": "Clipped & Scotched with Kaba Key - Set for main line"
     },
     {
@@ -2229,6 +2413,8 @@
       "trailable_5mph": true,
       "operational_restrictions": "Clipped and scotched -Set for Main Line",
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": "Clipped & Scotched with Kaba Key - Set for main line"
     },
     {
@@ -2253,6 +2439,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -2277,6 +2465,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -2301,6 +2491,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -2325,6 +2517,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -2349,6 +2543,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -2373,6 +2569,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -2397,6 +2595,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -2421,6 +2621,8 @@
       "trailable_5mph": true,
       "operational_restrictions": "Clipped and scotched -Set for Main Line",
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": "Clipped & Scotched with Special Key - Set for main line (Key in QRD Crew supervisors Office)"
     },
     {
@@ -2445,6 +2647,8 @@
       "trailable_5mph": true,
       "operational_restrictions": "Clipped and scotched -Set for Main Line",
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": "Clipped & Scotched with Special Key - Set for main line (Key in QRD Crew supervisors Office)"
     },
     {
@@ -2469,6 +2673,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3000,
+      "motor_drive_timeout": 7000,
       "comments": null
     },
     {
@@ -2493,6 +2699,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3000,
+      "motor_drive_timeout": 7000,
       "comments": null
     },
     {
@@ -2517,6 +2725,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -2541,6 +2751,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -2565,6 +2777,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -2589,6 +2803,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -2613,6 +2829,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": "Repeat PPI provided in tunnel"
     },
     {
@@ -2637,6 +2855,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -2661,6 +2881,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": "QRD Depot From 1 road to ORL"
     },
     {
@@ -2685,6 +2907,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -2709,6 +2933,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -2733,6 +2959,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -2757,6 +2985,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": 1700,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -2781,6 +3011,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -2805,6 +3037,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -2829,6 +3063,8 @@
       "trailable_5mph": false,
       "operational_restrictions": "No Trailing Moves",
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": "Normally Facing moves - Trailing move restriction due to Road Traffic"
     },
     {
@@ -2853,6 +3089,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -2877,6 +3115,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -2901,6 +3141,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -2925,6 +3167,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 1700,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -2949,6 +3193,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": 1700,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -2973,6 +3219,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 1700,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -2997,6 +3245,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -3021,6 +3271,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -3045,6 +3297,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3000,
+      "motor_drive_timeout": 7000,
       "comments": null
     },
     {
@@ -3069,6 +3323,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Safety Brief 0324",
+      "swing_time_safety_limit": 3000,
+      "motor_drive_timeout": 7000,
       "comments": "TMS EARP Restriction - Points approach Locking issue - Route is Blocked PIC08S to Inbound Platform Clear loop  PIC13/PIC14 (no longer a valid TMS Route)"
     },
     {
@@ -3093,6 +3349,8 @@
       "trailable_5mph": false,
       "operational_restrictions": "Clipped and scotched -Set for Main Line",
       "operation_procedure": "Safety Brief 0324",
+      "swing_time_safety_limit": 3000,
+      "motor_drive_timeout": 7000,
       "comments": "Route is Bloocked PIC11S to Outbound Platform Clear Loop PIC28S&T Points Detection Fault 23-2-18 (PPI watchman)"
     },
     {
@@ -3117,6 +3375,8 @@
       "trailable_5mph": false,
       "operational_restrictions": "No Facing Moves -Clipped and scotched -Set for Main Line",
       "operation_procedure": null,
+      "swing_time_safety_limit": 3000,
+      "motor_drive_timeout": 7000,
       "comments": null
     },
     {
@@ -3141,6 +3401,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3000,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -3165,6 +3427,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": 3000,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -3189,6 +3453,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": 3000,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -3213,6 +3479,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": 3000,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -3237,6 +3505,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": 3000,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -3261,6 +3531,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": 3000,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -3285,6 +3557,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": 3000,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -3309,6 +3583,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": 3000,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -3333,6 +3609,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": 1700,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -3357,6 +3635,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": "Set selectable Sprung - Alarm requires configuration - At present alarms when the switch does not return Route Left."
     },
     {
@@ -3381,6 +3661,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": "Check Bistable when testing SPS"
     },
     {
@@ -3405,6 +3687,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": "Check Bistable when testing SPS"
     },
     {
@@ -3429,6 +3713,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -3453,6 +3739,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -3477,6 +3765,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -3501,6 +3791,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -3525,6 +3817,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -3549,6 +3843,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -3573,6 +3869,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -3597,6 +3895,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": "Turnback Moves Manual",
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -3621,6 +3921,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -3645,6 +3947,8 @@
       "trailable_5mph": true,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": 3200,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -3669,6 +3973,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -3693,6 +3999,8 @@
       "trailable_5mph": false,
       "operational_restrictions": "No Facing Moves",
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -3717,6 +4025,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -3741,6 +4051,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -3765,6 +4077,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -3789,6 +4103,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -3813,6 +4129,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -3837,6 +4155,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": 1600,
+      "motor_drive_timeout": 10000,
       "comments": null
     },
     {
@@ -3861,6 +4181,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     },
     {
@@ -3885,6 +4207,8 @@
       "trailable_5mph": false,
       "operational_restrictions": null,
       "operation_procedure": null,
+      "swing_time_safety_limit": null,
+      "motor_drive_timeout": null,
       "comments": null
     }
 ]

@@ -12,7 +12,7 @@ const mysql = require('mysql');
 
 const connection = mysql.createConnection(config.get('db'));
 
-const sql = 'insert into tms_points_machine (id, type, direction, normal_position, normal_position_timeout, route_blocking_disabled, teml_41, local_controller_id) values (?)';
+const sql = 'insert into tms_points_machine (id, type, turnout, normal_position, normal_position_timeout, route_blocking_disabled, teml_41, local_controller_id) values (?)';
 
 connection.connect();
 

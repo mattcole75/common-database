@@ -35,10 +35,16 @@ const App = () => {
         return import('./components/auth/profile/profile');
     });
     const Monitoring = React.lazy(() => {
-        return import('./components/landing/monitoringLanding');
+        return import('./components/ui/navigation/landing/monitoringLanding');
     });
     const Users = React.lazy(() => {
         return import('./components/auth/userAdmin/users');
+    });
+    const PointsMachines = React.lazy(() => {
+        return import('./components/monitoring/pointsMachine/pointsMachines');
+    });
+    const PointsMachine = React.lazy(() => {
+        return import('./components/monitoring/pointsMachine/form/pointsMachine');
     });
 
     const routes = (
@@ -50,6 +56,8 @@ const App = () => {
 
             { isAuthenticated && <Route path='/auth/profile' element={ <Profile /> } /> }
             { isAuthenticated && <Route path='/monitoring' element={ <Monitoring /> } /> }
+            { isAuthenticated && <Route path='/monitoring/pointsmachines' element={ <PointsMachines /> } /> }
+            { isAuthenticated && <Route path='/monitoring/pointsmachine/:id' element={ <PointsMachine /> } /> }
 
             { isAuthenticated && isAdministrator && <Route path='/admin/users' element={ <Users /> } /> }
 

@@ -9,3 +9,10 @@ export {
     adminGetUsers,
     adminUpdateUser
 } from './auth';
+
+export {
+    getMonitoredPointsMachines,
+    getPointsMachine,
+    getPointsMachinePerformanceData,
+    pointsMachineStateReset
+} from './pointsMachine';

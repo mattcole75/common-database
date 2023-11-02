@@ -40,7 +40,7 @@ class PointMonIO {
         let swingTime = null;
 
         //specifiy date for testing this is to be deleted
-        const logDate = '2023-08-31';
+        const logDate = '2023-10-18';
         
         //output what is being monitored
         console.log('Monitoring for', ioMonitorFor);
@@ -64,7 +64,7 @@ class PointMonIO {
             }
 
             const postPointTimings = (data) => {
-                tms.post('/pointmachineswingtime', data, {
+                tms.post('/pointsmachineswingtime', data, {
                     headers: {
                         "Content-Type": "application/json",
                         idToken: idToken
@@ -99,9 +99,9 @@ class PointMonIO {
                     // update the state of the reference signal
                     ioMonitorFor[index].setState(this.msg.state);
                     // update the signal event time and add today's
-                    ioMonitorFor[index].setEventTimestamp(moment(new Date(moment().format('YYYY-MM-DD') + ' ' + this.msg.eventTimestamp)).format('YYYY-MM-DD HH:mm:ss.SSS'));
+                    // ioMonitorFor[index].setEventTimestamp(moment(new Date(moment().format('YYYY-MM-DD') + ' ' + this.msg.eventTimestamp)).format('YYYY-MM-DD HH:mm:ss.SSS'));
                     // the following is used when processing specific files retrospectivly 
-                    // ioMonitorFor[index].setEventTimestamp(moment(new Date(logDate + ' ' + this.msg.eventTimestamp)).format('YYYY-MM-DD HH:mm:ss.SSS'));
+                    ioMonitorFor[index].setEventTimestamp(moment(new Date(logDate + ' ' + this.msg.eventTimestamp)).format('YYYY-MM-DD HH:mm:ss.SSS'));
                     
                     //console output for monitoring
                     console.log(this.id,
@@ -116,7 +116,7 @@ class PointMonIO {
                     postPointState(ioMonitorFor[index].signalState()); // disable for now
                     
                     // check for drive and swing times
-                    if(ioMonitorFor[index].signal === 'Point Set Right' || ioMonitorFor[index].signal === 'Point Set Left') {
+                    if(ioMonitorFor[index].signal === 'Points Set Right' || ioMonitorFor[index].signal === 'Points Set Left') {
 
                         // set swing direction
                         direction = ioMonitorFor[index].signal;

@@ -9,7 +9,7 @@ module.exports = points = [
             {
                 system: 'lc',
                 ioType: 'input',
-                signal: 'Point Set Right',
+                signal: 'Points Set Right',
                 slot: 2,
                 channel: 2,
                 key: '0.2',
@@ -21,7 +21,7 @@ module.exports = points = [
             {
                 system: 'lc',
                 ioType: 'input',
-                signal: 'Point Set Left',
+                signal: 'Points Set Left',
                 slot: 2,
                 channel: 3,
                 key: '0.3',
@@ -57,7 +57,7 @@ module.exports = points = [
             {
                 system: 'lc',
                 ioType: 'output',
-                signal: 'Point Set Right',
+                signal: 'Points Set Right',
                 slot: 3,
                 channel: 1,
                 key: '0.1',
@@ -69,7 +69,7 @@ module.exports = points = [
             {
                 system: 'lc',
                 ioType: 'output',
-                signal: 'Point Set Left',
+                signal: 'Points Set Left',
                 slot: 3,
                 channel: 2,
                 key: '0.2',
@@ -112,7 +112,7 @@ module.exports = points = [
             {
                 system: 'lc',
                 ioType: 'input',
-                signal: 'Point Set Right',
+                signal: 'Points Set Right',
                 slot: 2,
                 channel: 2,
                 key: '0.2',
@@ -124,7 +124,7 @@ module.exports = points = [
             {
                 system: 'lc',
                 ioType: 'input',
-                signal: 'Point Set Left',
+                signal: 'Points Set Left',
                 slot: 2,
                 channel: 3,
                 key: '0.3',
@@ -160,7 +160,7 @@ module.exports = points = [
             {
                 system: 'lc',
                 ioType: 'output',
-                signal: 'Point Set Right',
+                signal: 'Points Set Right',
                 slot: 3,
                 channel: 1,
                 key: '0.1',
@@ -172,7 +172,7 @@ module.exports = points = [
             {
                 system: 'lc',
                 ioType: 'output',
-                signal: 'Point Set Left',
+                signal: 'Points Set Left',
                 slot: 3,
                 channel: 2,
                 key: '0.2',
@@ -215,7 +215,7 @@ module.exports = points = [
             {
                 system: 'lc',
                 ioType: 'input',
-                signal: 'Point Set Right',
+                signal: 'Points Set Right',
                 slot: 2,
                 channel: 5,
                 key: '0.5',
@@ -227,7 +227,7 @@ module.exports = points = [
             {
                 system: 'lc',
                 ioType: 'input',
-                signal: 'Point Set Left',
+                signal: 'Points Set Left',
                 slot: 2,
                 channel: 6,
                 key: '0.6',
@@ -263,7 +263,7 @@ module.exports = points = [
             {
                 system: 'lc',
                 ioType: 'output',
-                signal: 'Point Set Right',
+                signal: 'Points Set Right',
                 slot: 3,
                 channel: 5,
                 key: '0.5',
@@ -275,7 +275,7 @@ module.exports = points = [
             {
                 system: 'lc',
                 ioType: 'output',
-                signal: 'Point Set Left',
+                signal: 'Points Set Left',
                 slot: 3,
                 channel: 6,
                 key: '0.6',
@@ -318,7 +318,7 @@ module.exports = points = [
             {
                 system: 'lc',
                 ioType: 'input',
-                signal: 'Point Set Right',
+                signal: 'Points Set Right',
                 slot: 2,
                 channel: 2,
                 key: '0.2',
@@ -330,7 +330,7 @@ module.exports = points = [
             {
                 system: 'lc',
                 ioType: 'input',
-                signal: 'Point Set Left',
+                signal: 'Points Set Left',
                 slot: 2,
                 channel: 3,
                 key: '0.3',
@@ -366,7 +366,7 @@ module.exports = points = [
             {
                 system: 'lc',
                 ioType: 'output',
-                signal: 'Point Set Right',
+                signal: 'Points Set Right',
                 slot: 3,
                 channel: 1,
                 key: '0.1',
@@ -378,7 +378,7 @@ module.exports = points = [
             {
                 system: 'lc',
                 ioType: 'output',
-                signal: 'Point Set Left',
+                signal: 'Points Set Left',
                 slot: 3,
                 channel: 2,
                 key: '0.2',
@@ -421,7 +421,7 @@ module.exports = points = [
                 {
                     system: 'lc',
                     ioType: 'input',
-                    signal: 'Point Set Right',
+                    signal: 'Points Set Right',
                     slot: 3,
                     channel: 0,
                     key: '1.0',
@@ -433,7 +433,7 @@ module.exports = points = [
                 {
                     system: 'lc',
                     ioType: 'input',
-                    signal: 'Point Set Left',
+                    signal: 'Points Set Left',
                     slot: 3,
                     channel: 1,
                     key: '1.1',
@@ -469,7 +469,7 @@ module.exports = points = [
                 {
                     system: 'lc',
                     ioType: 'output',
-                    signal: 'Point Set Right',
+                    signal: 'Points Set Right',
                     slot: 5,
                     channel: 0,
                     key: '1.0',
@@ -481,7 +481,7 @@ module.exports = points = [
                 {
                     system: 'lc',
                     ioType: 'output',
-                    signal: 'Point Set Left',
+                    signal: 'Points Set Left',
                     slot: 5,
                     channel: 1,
                     key: '1.1',
@@ -524,7 +524,7 @@ module.exports = points = [
             {
                 system: 'lc',
                 ioType: 'input',
-                signal: 'Point Set Right',
+                signal: 'Points Set Right',
                 slot: 2,
                 channel: 2,
                 key: '0.2',
@@ -536,7 +536,7 @@ module.exports = points = [
             {
                 system: 'lc',
                 ioType: 'input',
-                signal: 'Point Set Left',
+                signal: 'Points Set Left',
                 slot: 2,
                 channel: 3,
                 key: '0.3',
@@ -572,7 +572,7 @@ module.exports = points = [
             {
                 system: 'lc',
                 ioType: 'output',
-                signal: 'Point Set Right',
+                signal: 'Points Set Right',
                 slot: 4,
                 channel: 1,
                 key: '0.1',
@@ -584,7 +584,7 @@ module.exports = points = [
             {
                 system: 'lc',
                 ioType: 'output',
-                signal: 'Point Set Left',
+                signal: 'Points Set Left',
                 slot: 4,
                 channel: 2,
                 key: '0.2',
@@ -627,7 +627,7 @@ module.exports = points = [
                 {
                     system: 'lc',
                     ioType: 'input',
-                    signal: 'Point Set Right',
+                    signal: 'Points Set Right',
                     slot: 3,
                     channel: 11,
                     key: '1.11',
@@ -639,7 +639,7 @@ module.exports = points = [
                 {
                     system: 'lc',
                     ioType: 'input',
-                    signal: 'Point Set Left',
+                    signal: 'Points Set Left',
                     slot: 3,
                     channel: 12,
                     key: '1.12',
@@ -675,7 +675,7 @@ module.exports = points = [
                 {
                     system: 'lc',
                     ioType: 'output',
-                    signal: 'Point Set Right',
+                    signal: 'Points Set Right',
                     slot: 6,
                     channel: 0,
                     key: '2.0',
@@ -687,7 +687,7 @@ module.exports = points = [
                 {
                     system: 'lc',
                     ioType: 'output',
-                    signal: 'Point Set Left',
+                    signal: 'Points Set Left',
                     slot: 6,
                     channel: 1,
                     key: '2.1',
@@ -730,7 +730,7 @@ module.exports = points = [
                 {
                     system: 'lc',
                     ioType: 'input',
-                    signal: 'Point Set Right',
+                    signal: 'Points Set Right',
                     slot: 3,
                     channel: 14,
                     key: '1.14',
@@ -742,7 +742,7 @@ module.exports = points = [
                 {
                     system: 'lc',
                     ioType: 'input',
-                    signal: 'Point Set Left',
+                    signal: 'Points Set Left',
                     slot: 3,
                     channel: 15,
                     key: '1.15',
@@ -778,7 +778,7 @@ module.exports = points = [
                 {
                     system: 'lc',
                     ioType: 'output',
-                    signal: 'Point Set Right',
+                    signal: 'Points Set Right',
                     slot: 6,
                     channel: 4,
                     key: '2.4',
@@ -790,7 +790,7 @@ module.exports = points = [
                 {
                     system: 'lc',
                     ioType: 'output',
-                    signal: 'Point Set Left',
+                    signal: 'Points Set Left',
                     slot: 6,
                     channel: 5,
                     key: '2.5',
@@ -833,7 +833,7 @@ module.exports = points = [
             {
                 system: 'lc',
                 ioType: 'input',
-                signal: 'Point Set Right',
+                signal: 'Points Set Right',
                 slot: 2,
                 channel: 5,
                 key: '0.5',
@@ -845,7 +845,7 @@ module.exports = points = [
             {
                 system: 'lc',
                 ioType: 'input',
-                signal: 'Point Set Left',
+                signal: 'Points Set Left',
                 slot: 2,
                 channel: 6,
                 key: '0.6',
@@ -881,7 +881,7 @@ module.exports = points = [
             {
                 system: 'lc',
                 ioType: 'output',
-                signal: 'Point Set Right',
+                signal: 'Points Set Right',
                 slot: 4,
                 channel: 5,
                 key: '0.5',
@@ -893,7 +893,7 @@ module.exports = points = [
             {
                 system: 'lc',
                 ioType: 'output',
-                signal: 'Point Set Left',
+                signal: 'Points Set Left',
                 slot: 4,
                 channel: 6,
                 key: '0.6',
@@ -936,7 +936,7 @@ module.exports = points = [
                 {
                     system: 'lc',
                     ioType: 'input',
-                    signal: 'Point Set Right',
+                    signal: 'Points Set Right',
                     slot: 2,
                     channel: 8,
                     key: '0.8',
@@ -948,7 +948,7 @@ module.exports = points = [
                 {
                     system: 'lc',
                     ioType: 'input',
-                    signal: 'Point Set Left',
+                    signal: 'Points Set Left',
                     slot: 2,
                     channel: 9,
                     key: '0.9',
@@ -984,7 +984,7 @@ module.exports = points = [
                 {
                     system: 'lc',
                     ioType: 'output',
-                    signal: 'Point Set Right',
+                    signal: 'Points Set Right',
                     slot: 4,
                     channel: 9,
                     key: '0.9',
@@ -996,7 +996,7 @@ module.exports = points = [
                 {
                     system: 'lc',
                     ioType: 'output',
-                    signal: 'Point Set Left',
+                    signal: 'Points Set Left',
                     slot: 4,
                     channel: 10,
                     key: '0.10',

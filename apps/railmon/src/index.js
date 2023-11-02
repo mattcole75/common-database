@@ -6,11 +6,13 @@ import { configureStore } from '@reduxjs/toolkit'
 
 import App from './App';
 import auth from './store/reducers/auth';
+import pointsMachine from './store/reducers/pointsMachine';
 // import reportWebVitals from './reportWebVitals';
 
 const store = configureStore({
     reducer: {
-        auth: auth
+        auth: auth,
+        pointsMachine: pointsMachine
     }
 });
 
