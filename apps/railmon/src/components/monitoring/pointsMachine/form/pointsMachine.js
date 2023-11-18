@@ -154,7 +154,7 @@ const PointsMachineForm = () => {
     }
 
     const renderLeftLineChart = (
-        <ResponsiveContainer width={"100%"} height={400}>
+        <ResponsiveContainer width={"100%"} height={300}>
             <LineChart data={leftSeries} margin={{top: 0, right: 0, left: 20, bottom: 20}}>
                 {/* <CartesianGrid strokeDasharray="3 3" /> */}
                 <XAxis 
@@ -231,7 +231,7 @@ const PointsMachineForm = () => {
     );
 
     const renderRightLineChart = (
-        <ResponsiveContainer width={"100%"} height={400}>
+        <ResponsiveContainer width={"100%"} height={300}>
             <LineChart data={rightSeries} margin={{top: 0, right: 0, left: 20, bottom: 20}}>
                 {/* <CartesianGrid strokeDasharray="3 3" /> */}
                 <XAxis 

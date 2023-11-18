@@ -46,9 +46,22 @@ const getPointsMachine = (req, next) => {
         });
 };
 
+const postSensorMonitoringPoint = (req, next) => {
+    
+    const { name, purpose, stopRef } = req;
+    const sproc = `call sp_insert_sensor_monitoring_point('${name}', '${purpose}', ${parseInt(stopRef)}, @insertId);`;
+    database.getPool().query(sproc, (err, res) => {
+        if(err)
+            next({ status: 500, msg: err }, null);
+        else
+            next(null, { status: 201, data: res });
+    });
+};
+
 module.exports = {
     postPointsMachineSwingTime: postPointsMachineSwingTime,
     getPointsMachineSwingTimes: getPointsMachineSwingTimes,
     getMonitoredPointsMachines: getMonitoredPointsMachines,
-    getPointsMachine: getPointsMachine
+    getPointsMachine: getPointsMachine,
+    postSensorMonitoringPoint: postSensorMonitoringPoint
 }

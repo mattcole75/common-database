@@ -703,9 +703,49 @@ create table railmon_points_machine_performance (
 		on update cascade on delete cascade
 );
 
+create table railmon_sensor_monitoring_point (
+	id int not null auto_increment,
+    name varchar(64) not null, -- the name of the monitoring point
+    purpose varchar(256) not null, -- a description of the thing being monitored
+    stop_ref smallInt not null, -- the location the sensor can be found
+    
+    created timestamp(3) not null default now(3), -- when was this record created
+    updated timestamp(3) not null default now(3) on update now(3), -- when was the last time this record was updated
+    inuse boolean not null default true, -- can this record be used / viewed
+    
+    primary key (id),
+    constraint fk_railmon_sensor_monitoring_point_stop_ref foreign key (stop_ref) references tms_stop (id)
+		on update cascade on delete cascade
+);
+
+create table railmon_sensor (
+	id int not null auto_increment,
+    railmon_sensor_monitoring_point_ref int not null,
+	prev_id_ref varchar(64) null, -- the id reference from the earlier database
+    name varchar(64) not null, -- the name of the sensor
+    `type` varchar(64) not null, -- what type of sensor is it
+    `system` varchar(64) not null, -- the system being monitored
+    department varchar(64) not null, -- the technical department carrying out the monitoring
+    location json null, -- the location json value for the map interface
+    location_description varchar(256) null, -- a brief description of the location
+    calibration_date date null, -- date the sensor was calibrated
+    calibration_valid_weeks smallInt null, -- how many weeks in the calibration valid for
+    installed_date date null, -- the date the sensor was installed
+    commissioned_date date null, -- the date the sensor was commissioned
+    uninstalled_date date null, -- the date the sensor was uninstalled
+    `status` varchar(64) not null, -- the status of the sensor
+    
+    created timestamp(3) not null default now(3), -- when was this record created
+    updated timestamp(3) not null default now(3) on update now(3), -- when was the last time this record was updated
+    inuse boolean not null default true, -- can this record be used / viewed
+    
+    primary key (id),
+    constraint fk_railmon_sensor_monitoring_point_ref foreign key (railmon_sensor_monitoring_point_ref) references railmon_sensor_monitoring_point (id)
+		on update cascade on delete cascade
+);
 
 -- ***********************************
--- point machine configuration table *
+-- configuration tables *
 -- ***********************************
 create table config_points_controller (
     id varchar(8) not null,
@@ -942,7 +982,15 @@ create procedure sp_calculate_current_avg_points_machine_swing_time (in p_points
                     swing_time_safety_limit = l_swing_time_safety_limit;
             end if;
         end;//
-        
+create procedure sp_insert_sensor_monitoring_point (in p_name varchar(64), p_purpose varchar(256), p_stop_ref smallInt, out insertId int)
+    begin
+        insert into railmon_sensor_monitoring_point (name, purpose, stop_ref)
+        values (p_name, p_purpose, p_stop_ref);
+
+        set insertId := last_insert_id();
+        select insertId;
+    end//
+    
 -- *******************
 -- database triggers *
 -- *******************

@@ -13,6 +13,12 @@ const getPointMachineSwingTimesSchema = {
     endDate: value => moment(value).isValid()
 }
 
+const postSensorMonitoringPointSchema = {
+    name: value => value.length > 3 && value.length <= 64,
+    purpose: value => value.length > 5 && value.length <= 256,
+    stopRef: value => parseInt(value) === Number(value)
+}
+
 module.exports = {
     postPointMachineSwingTimeSchema: postPointMachineSwingTimeSchema,
     getPointMachineSwingTimesSchema: getPointMachineSwingTimesSchema

@@ -44,4 +44,14 @@ module.exports = (app) => {
                 res.status(result.status).send(result);
         });
     });
+
+    app.post('/' + service + '/api/' + version + '/postsensormonitoringpoint', (req, res) => {
+        res.set('Content-Type', 'application/json');
+        constoller.postSensorMonitoringPoint(req, (err, result) => {
+            if(err)
+                res.status(err.status).send(err);
+            else
+                res.status(result.status).send(result);
+        });
+    });
 }
