@@ -16,3 +16,16 @@ export {
     getPointsMachinePerformanceData,
     pointsMachineStateReset
 } from './pointsMachine';
+
+export {
+    sensorCreateMonitoringPoint,
+    sensorGetMonitoringPoints,
+    sensorGetMonitoringPoint,
+    sensorUpdateMonitoringPoint,
+    sensorCreateSensor,
+    sensorGetSensors,
+    sensorGetSensor,
+    sensorUpdateSensor,
+    sensorGetSensorData,
+    sensorReset
+} from './sensor';

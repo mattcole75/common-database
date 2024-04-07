@@ -82,8 +82,8 @@ const Login = () => {
                     <label htmlFor='password'>Password</label>
                 </div>
                 
-                { errors.email && <p className='form-auth_error mt-1'>{errors.email.message}</p> }
-                { errors.password && <p className='form-auth_error'>{errors.password.message}</p> }
+                { errors.email && <p className='form-error mt-1'>{errors.email.message}</p> }
+                { errors.password && <p className='form-error'>{errors.password.message}</p> }
 
                 
                 <button className='w-100 btn btn-primary mt-3 rounded' type='submit'>Log In</button>

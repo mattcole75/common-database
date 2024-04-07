@@ -26,7 +26,7 @@ const EmailEdit = (props) => {
                         })}
                         />
                         <label htmlFor='email'>Email</label>
-                        { errors.email && <p className='form-auth-error mt-1'>{errors.email.message}</p> }
+                        { errors.email && <p className='form-error mt-1'>{errors.email.message}</p> }
                     </div>
                     <button className='btn btn-outline-danger w-49 me-1' type='button' onClick={ toggle }>Cancel</button>
                     <button className='btn btn-outline-success w-49' type='submit'>Save</button>

@@ -30,7 +30,7 @@ const DisplayNameEdit = (props) => {
                         }) }
                         />
                         <label htmlFor='displayName'>Display Name</label>
-                        { errors.displayName && <p className='form-auth-error mt-1'>{errors.displayName.message}</p> }
+                        { errors.displayName && <p className='form-error mt-1'>{errors.displayName.message}</p> }
                     </div>
                     <button className='btn btn-outline-danger w-49 me-1' type='button' onClick={ toggle }>Cancel</button>
                     <button className='btn btn-outline-success w-49' type='submit'>Save</button>

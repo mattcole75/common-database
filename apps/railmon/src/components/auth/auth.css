@@ -44,12 +44,12 @@
     font-size: 5rem;
     color: white;
 }
-.form-auth_error {
+.form-error {
     margin: 0;
     color: #bf1650;
 }
   
-.form-auth_error::before {
+.form-error::before {
     display: inline;
     content: "⚠ ";
 }

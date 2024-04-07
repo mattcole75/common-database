@@ -1,0 +1,15 @@
+[
+    { "code": "CIF", "system": "Customer interface" },
+    { "code": "COM", "system": "Communications" },
+    { "code": "FUR", "system": "Furniture" },
+    { "code": "ITO", "system": "Office IT" },
+    { "code": "INF", "system": "Track Infrastructure" },
+    { "code": "LVP", "system": "Low Voltage" },
+    { "code": "OLE", "system": "Over-head Line Equipment" },
+    { "code": "PLA", "system": "Plant, tools and equipment" },
+    { "code": "R&D", "system": "Reseach & Development" },
+    { "code": "SIG", "system": "Signalling" },
+    { "code": "STR", "system": "Structures" },
+    { "code": "TRP", "system": "Traction Power & distribution" },
+    { "code": "UTI", "system": "Utilities" }
+]

@@ -21,31 +21,41 @@ const App = () => {
 
     const Index = React.lazy(() => {
         return import('./components/index/index');
-    });
+    })
     const Login = React.lazy(() => {
         return import('./components/auth/login/login');
-    });
+    })
     const Logout = React.lazy(() => {
         return import('./components/auth/logout/logout');
-    });
+    })
     const Signup = React.lazy(() => {
 		return import('./components/auth/signup/signup');
-	});
+	})
     const Profile = React.lazy(() => {
         return import('./components/auth/profile/profile');
-    });
+    })
     const Monitoring = React.lazy(() => {
         return import('./components/ui/navigation/landing/monitoringLanding');
-    });
+    })
     const Users = React.lazy(() => {
         return import('./components/auth/userAdmin/users');
-    });
+    })
     const PointsMachines = React.lazy(() => {
         return import('./components/monitoring/pointsMachine/pointsMachines');
-    });
+    })
     const PointsMachine = React.lazy(() => {
         return import('./components/monitoring/pointsMachine/form/pointsMachine');
-    });
+    })
+    const SensorMonitoringPoints = React.lazy(() => {
+        return import('./components/monitoring/monitoringPoint/monitoringPoints');
+    })
+    const ViewSensorMonitoringPoint = React.lazy(() => {
+        return import('./components/monitoring/monitoringPoint/form/viewMonitoringPoint');
+    })
+    
+    const ViewSensor = React.lazy(() => {
+        return import('./components/monitoring/sensors/form/viewSensor');
+    })
 
     const routes = (
         <Routes>
@@ -58,6 +68,11 @@ const App = () => {
             { isAuthenticated && <Route path='/monitoring' element={ <Monitoring /> } /> }
             { isAuthenticated && <Route path='/monitoring/pointsmachines' element={ <PointsMachines /> } /> }
             { isAuthenticated && <Route path='/monitoring/pointsmachine/:id' element={ <PointsMachine /> } /> }
+
+            { isAuthenticated && <Route path='/monitoring/sensormonitoringpoints' element={ <SensorMonitoringPoints /> } /> }
+            { isAuthenticated && <Route path='/monitoring/sensormonitoringpoint/view/:id' element={ <ViewSensorMonitoringPoint /> } /> }
+
+            { isAuthenticated && <Route path='/monitoring/sensor/view/:id' element={ <ViewSensor /> } /> }
 
             { isAuthenticated && isAdministrator && <Route path='/admin/users' element={ <Users /> } /> }
 

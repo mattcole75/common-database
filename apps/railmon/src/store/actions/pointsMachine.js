@@ -1,5 +1,5 @@
 import * as action from './actionTypes';
-import axios from '../../axios/tms';
+import axios from '../../axios/common-database';
 import { whatIsTheErrorMessage } from '../../shared/errorMessages';
 
 // reducer interface functions

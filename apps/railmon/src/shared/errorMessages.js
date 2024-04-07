@@ -17,6 +17,10 @@ export const whatIsTheErrorMessage = (err) => {
                 errorMessage = '404: Server request error - resource not found. If this problem continues, please contact your system administrator.';
                 break;
 
+            case 409:
+                errorMessage = '409: This record already exists. Check the information and try again. If this problem continues, please contact your system administrator.';
+                break;
+
             case 'EMAIL_NOT_FOUND':
                 errorMessage = 'Email address not found. Check your email address or try creating an account.';
                 break;
@@ -52,8 +56,8 @@ export const whatIsTheErrorMessage = (err) => {
                 console.log(err);
                 errorMessage = 'Unknown error. Please contact your administrator.'
         }
-
     } else {
+        console.log(err);
         errorMessage = 'Unknown error. Please contact your administrator.';
     }
 

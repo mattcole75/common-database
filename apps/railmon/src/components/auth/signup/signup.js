@@ -142,10 +142,10 @@ const Signup = () => {
                     />
                     <label htmlFor='passwordConfirm'>Confirm Password</label>
                 </div>
-                { errors.displayName && <p className='form-auth_error mt-1'>{errors.displayName.message}</p> }
-                { errors.email && <p className='form-auth_error mt-1'>{errors.email.message}</p> }
-                { errors.password && <p className='form-auth_error '>{errors.password.message}</p> }
-                { errors.passwordRepeat && <p className='form-auth_error mt-1'>{errors.passwordRepeat.message}</p> }
+                { errors.displayName && <p className='form-error mt-1'>{errors.displayName.message}</p> }
+                { errors.email && <p className='form-error mt-1'>{errors.email.message}</p> }
+                { errors.password && <p className='form-error '>{errors.password.message}</p> }
+                { errors.passwordRepeat && <p className='form-error mt-1'>{errors.passwordRepeat.message}</p> }
 
                 <button className='w-100 btn btn-lg btn-primary' type='submit'>Sign-Up</button>
             </form>

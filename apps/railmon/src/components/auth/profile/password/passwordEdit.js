@@ -54,8 +54,8 @@ const PasswordEdit = (props) => {
                             }) }
                         />
                         <label htmlFor='passwordRepeat'>Password Confirmation</label>
-                        { errors.passwordRepeat && <p className='form-auth_error mt-1'>{errors.passwordRepeat.message}</p> }
-                        { errors.password && <p className='form-auth-error '>{errors.password.message}</p> }
+                        { errors.passwordRepeat && <p className='form-error mt-1'>{errors.passwordRepeat.message}</p> }
+                        { errors.password && <p className='form-error '>{errors.password.message}</p> }
                     </div>
                     <button className='btn btn-outline-danger w-49 me-1' type='button' onClick={ toggle }>Cancel</button>
                     <button className='btn btn-outline-success w-49' type='submit'>Save</button>

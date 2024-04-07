@@ -17,11 +17,11 @@ const MonitoringLanding = () => {
                     </div>
                 </NavLink>
 
-                <NavLink to='/' className='nav-link col d-flex align-items-start m-3'>
-                    <i className='bi-lightbulb landing-icon text-body-secondary flex-shrink-0 me-3'></i>
+                <NavLink to='/monitoring/sensormonitoringpoints' className='nav-link col d-flex align-items-start m-3'>
+                    <i className='bi-broadcast landing-icon text-body-secondary flex-shrink-0 me-3'></i>
                     <div>
-                        <h3 className='fw-bold mb-0 fs-4 text-body-emphasis'>Temperature</h3>
-                        <p>View monitored assets temperatures performance.</p>
+                        <h3 className='fw-bold mb-0 fs-4 text-body-emphasis'>Sensors</h3>
+                        <p>View sensor data from the Metrolink Sensor Network.</p>
                     </div>
                 </NavLink>
             </div>

@@ -23,7 +23,8 @@ module.exports = function() {
         res.status(200).json({'msg': 'Service is up!'});
     });
 
-    require('../app/routes/tms')(app);
+    require('../app/routes/points')(app);
+    require('../app/routes/sensors')(app);
 
     return app;
 };

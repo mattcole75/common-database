@@ -2,8 +2,8 @@ import React from 'react';
 import BackDrop from '../backdrop/backdrop';
 
 const modal = (props) => (
-    <React.Fragment>
-        <BackDrop show={props.show} clicked={props.modalClosed} />
+    <>
+        <BackDrop show={props.show} clicked={props.modalClose} />
         <div className='modal' tabIndex='-1' role='dialog'
             style={{
                 transform: props.show ? 'translateY(0)' : 'translateY(-100vh)',
@@ -18,7 +18,7 @@ const modal = (props) => (
                 </div>
             </div>
         </div>
-    </React.Fragment>
+    </>
 )
 
 export default modal;

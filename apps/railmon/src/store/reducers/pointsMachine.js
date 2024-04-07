@@ -5,6 +5,7 @@ const initialState = {
     error: null,
     pointsMachines: [],
     pointsMachine: null,
+    pointsMachinePerformanceData: [],
     identifier: null,
     redirectPath: ''
 }

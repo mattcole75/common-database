@@ -3,7 +3,7 @@
     text-transform: uppercase;
     color: transparent;
     height: 100%;
-    background-image: linear-gradient(to right bottom, rgba(14, 81, 136, 0.8), rgba(40, 180, 133, 0.8));
+    background-image: linear-gradient(to right bottom, rgba(216, 250, 8, 0.8), rgba(255, 240, 0, 0.8));
     background-clip: text;
     -webkit-background-clip: text;
     letter-spacing: .2rem;
@@ -25,6 +25,29 @@
     cursor: pointer;
 }
 
+.map-container {
+    height: 25rem;
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.form-error {
+    margin: 0;
+    color: #bf1650;
+}
+
+.form-error::before {
+    display: inline;
+    content: "⚠ ";
+}
+
+.mapboxgl-popup {
+    max-width: 400px;
+    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    color: black;
+}
+
 @media (max-width: 768px) {
     .points-machine_table {
         display: none;
@@ -32,5 +55,4 @@
     .points-machine_card {
         display: block;
     }
-
 }

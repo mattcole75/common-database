@@ -705,17 +705,16 @@ create table railmon_points_machine_performance (
 
 create table railmon_sensor_monitoring_point (
 	id int not null auto_increment,
-    name varchar(64) not null, -- the name of the monitoring point
-    purpose varchar(256) not null, -- a description of the thing being monitored
-    stop_ref smallInt not null, -- the location the sensor can be found
+    name varchar(64) not null unique, -- the name of the monitoring point
+    area varchar(64) not null, -- the area the sensor can be found
+    -- location json null, -- the location json value for the map interface
     
     created timestamp(3) not null default now(3), -- when was this record created
     updated timestamp(3) not null default now(3) on update now(3), -- when was the last time this record was updated
     inuse boolean not null default true, -- can this record be used / viewed
     
     primary key (id),
-    constraint fk_railmon_sensor_monitoring_point_stop_ref foreign key (stop_ref) references tms_stop (id)
-		on update cascade on delete cascade
+    fulltext key text (name, area)
 );
 
 create table railmon_sensor (
@@ -723,13 +722,16 @@ create table railmon_sensor (
     railmon_sensor_monitoring_point_ref int not null,
 	prev_id_ref varchar(64) null, -- the id reference from the earlier database
     name varchar(64) not null, -- the name of the sensor
-    `type` varchar(64) not null, -- what type of sensor is it
-    `system` varchar(64) not null, -- the system being monitored
     department varchar(64) not null, -- the technical department carrying out the monitoring
-    location json null, -- the location json value for the map interface
-    location_description varchar(256) null, -- a brief description of the location
+    `system` varchar(64) not null, -- the system being monitored
+    `type` varchar(64) not null, -- what type of sensor is it
+    purpose varchar(64) not null, -- what purpose does this sensor serve
+    -- location json not null, -- the location json value for the map interface
+    upper_threshold int null, -- the upper sensor value threshold
+    lower_threshold int null, -- the lower sensor value threshold
     calibration_date date null, -- date the sensor was calibrated
     calibration_valid_weeks smallInt null, -- how many weeks in the calibration valid for
+    calibration_cert_url varchar(256) null, -- the url to the calibration cert
     installed_date date null, -- the date the sensor was installed
     commissioned_date date null, -- the date the sensor was commissioned
     uninstalled_date date null, -- the date the sensor was uninstalled
@@ -740,6 +742,7 @@ create table railmon_sensor (
     inuse boolean not null default true, -- can this record be used / viewed
     
     primary key (id),
+    fulltext key text (name, department, `system`, `type`),
     constraint fk_railmon_sensor_monitoring_point_ref foreign key (railmon_sensor_monitoring_point_ref) references railmon_sensor_monitoring_point (id)
 		on update cascade on delete cascade
 );
@@ -982,15 +985,146 @@ create procedure sp_calculate_current_avg_points_machine_swing_time (in p_points
                     swing_time_safety_limit = l_swing_time_safety_limit;
             end if;
         end;//
-create procedure sp_insert_sensor_monitoring_point (in p_name varchar(64), p_purpose varchar(256), p_stop_ref smallInt, out insertId int)
+
+create procedure sp_insert_sensor_monitoring_point (in p_name varchar(64), p_area varchar(64), out insertId int)
     begin
-        insert into railmon_sensor_monitoring_point (name, purpose, stop_ref)
-        values (p_name, p_purpose, p_stop_ref);
+        insert into railmon_sensor_monitoring_point (name, area)
+        values (p_name, p_area);
 
         set insertId := last_insert_id();
         select insertId;
     end//
-    
+
+create procedure sp_select_sensor_monitoring_points (in searchText varchar(64))
+	begin
+		if(searchText <> '') then
+			select id, name, area from railmon_sensor_monitoring_point where inuse = 1
+			and match(name, area) against(searchText in boolean mode)
+            order by area;
+        else
+			select id, name, area from railmon_sensor_monitoring_point where inuse = 1 order by area;
+        end if;
+    end//
+
+create procedure sp_select_sensor_monitoring_point (in p_id int)
+	begin
+		select id, name, area, created, updated, inuse from railmon_sensor_monitoring_point where id = p_id;
+    end//
+
+create procedure sp_update_sensor_monitoring_point (in p_id int, p_name varchar(64), p_area varchar(64))
+	begin
+		update railmon_sensor_monitoring_point
+        set
+			name = p_name,
+            area = p_area
+		where id = p_id;
+        
+        call sp_select_sensor_monitoring_point(p_id);
+    end//
+
+create procedure sp_insert_sensor (in p_railmon_sensor_monitoring_point_ref int, p_prev_id_ref varchar(64), p_name varchar(64), p_department varchar(64), p_system varchar(64), p_type varchar(64), p_purpose varchar(64), p_upper_threshold int, p_lower_threshold int, p_calibration_date date, p_calibration_valid_weeks smallInt, p_calibration_cert_url varchar(256), p_installed_date date, p_commissioned_date date, p_uninstalled_date date, p_status varchar(64), out insertId int)
+	begin
+		insert into railmon_sensor (
+			railmon_sensor_monitoring_point_ref,
+            prev_id_ref,
+			name,
+			department,
+			`system`,
+			`type`,
+			purpose,
+			upper_threshold,
+			lower_threshold,
+			calibration_date,
+			calibration_valid_weeks,
+			calibration_cert_url,
+			installed_date,
+			commissioned_date,
+			uninstalled_date,
+			`status`)
+		values (
+			p_railmon_sensor_monitoring_point_ref,
+            p_prev_id_ref,
+			p_name,
+			p_department,
+			p_system,
+			p_type,
+			p_purpose,
+			p_upper_threshold,
+			p_lower_threshold,
+			p_calibration_date,
+			p_calibration_valid_weeks,
+			p_calibration_cert_url,
+			p_installed_date,
+			p_commissioned_date,
+			p_uninstalled_date,
+			p_status
+        );
+
+        set insertId := last_insert_id();
+        select insertId;
+    end//
+
+create procedure sp_select_sensors (in p_railmon_sensor_monitoring_point_ref int, searchText varchar(64))
+	begin
+		if(searchText <> '') then
+			select id, prev_id_ref, name, department, `system`, `type`, purpose, 
+			upper_threshold, lower_threshold,
+            calibration_date, calibration_valid_weeks, calibration_cert_url,
+            installed_date, commissioned_date, uninstalled_date, `status`,
+            created, updated, inuse
+            from railmon_sensor
+            where railmon_sensor_monitoring_point_ref = p_railmon_sensor_monitoring_point_ref
+            and inuse = 1
+			and match(name, department, `system`, `type`) against(searchText in boolean mode)
+            order by name desc;
+        else
+			select id, prev_id_ref, name, department, `system`, `type`, purpose, 
+			upper_threshold, lower_threshold,
+            calibration_date, calibration_valid_weeks, calibration_cert_url,
+            installed_date, commissioned_date, uninstalled_date, `status`,
+            created, updated, inuse
+            from railmon_sensor
+            where railmon_sensor_monitoring_point_ref = p_railmon_sensor_monitoring_point_ref
+            and inuse = 1
+            order by name desc;
+        end if;
+    end//
+
+create procedure sp_select_sensor (in p_id int)
+	begin
+		select id, prev_id_ref, name, department, `system`, `type`, purpose, 
+			upper_threshold, lower_threshold,
+            calibration_date, calibration_valid_weeks, calibration_cert_url,
+            installed_date, commissioned_date, uninstalled_date, `status`,
+            created, updated, inuse
+		from railmon_sensor a
+        where id = p_id;
+    end//
+
+create procedure sp_update_sensor (in p_id int, p_railmon_sensor_monitoring_point_ref int, p_prev_id_ref varchar(64), p_name varchar(64), p_department varchar(64), p_system varchar(64), p_type varchar(64), p_purpose varchar(64), p_upper_threshold int, p_lower_threshold int, p_calibration_date date, p_calibration_valid_weeks smallInt, p_calibration_cert_url varchar(256), p_installed_date date, p_commissioned_date date, p_uninstalled_date date, p_status varchar(64))
+	begin
+		update railmon_sensor set
+			railmon_sensor_monitoring_point_ref = p_railmon_sensor_monitoring_point_ref,
+            prev_id_ref = p_prev_id_ref,
+			name = p_name,
+			department = p_department,
+			`system` = p_system,
+			`type` = p_type,
+			purpose = p_purpose,
+			upper_threshold = p_upper_threshold,
+			lower_threshold = p_lower_threshold,
+			calibration_date = p_calibration_date,
+			calibration_valid_weeks = p_calibration_valid_weeks,
+			calibration_cert_url = p_calibration_cert_url,
+			installed_date = p_installed_date,
+			commissioned_date = p_commissioned_date,
+			uninstalled_date = p_uninstalled_date,
+			`status` = p_status
+		where id = p_id;
+        
+        call sp_select_sensor(p_id);
+    end//
+
 -- *******************
 -- database triggers *
 -- *******************
