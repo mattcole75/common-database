@@ -47,7 +47,6 @@ const postPointsMachineSwingTime = (req, next) => {
         })
         .catch(authErr => {
             if(authErr.response) {
-                console.log(authErr.response);
                 log.error(`status: ${ authErr.response.status } POST approvetransaction in postPointsMachineSwingTime v${ version } result: ${ JSON.stringify(authErr.response.statusText) }`);
                 return(next({ status: authErr.response.status, msg: authErr.response.statusText }, null));
             } else if (authErr.cause) {

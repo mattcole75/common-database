@@ -581,7 +581,7 @@ create table railmon_points_machine_swing_time (
     id smallInt not null auto_increment,
     points_machine_ref varchar(6) not null, -- reference to the tms points machine table
     direction varchar(32), -- Points Set Right or Points Set Left
-    swing_time smallInt not null, -- the time in milliseconds it takes to loose detection and then gain detection
+    swing_time mediumInt not null, -- the time in milliseconds it takes to loose detection and then gain detection
     tms_timestamp timestamp(3) not null, -- the source timestamp
     created timestamp(3) not null default now(3), -- when was this record created
     updated timestamp(3) not null default now(3) on update now(3), -- when was the last time this record was updated
@@ -813,7 +813,7 @@ delimiter //
 -- *******************************
 -- application stored procedures *
 -- *******************************
-create procedure sp_insert_points_machine_swing_time (in p_points_machine_ref varchar(6), p_direction varchar(32), p_swing_time smallInt, p_tms_timestamp timestamp(3), out insertId int)
+create procedure sp_insert_points_machine_swing_time (in p_points_machine_ref varchar(6), p_direction varchar(32), p_swing_time mediumInt, p_tms_timestamp timestamp(3), out insertId int)
     begin
         insert into railmon_points_machine_swing_time (points_machine_ref, direction, swing_time, tms_timestamp)
         values (p_points_machine_ref, p_direction, p_swing_time, p_tms_timestamp);
