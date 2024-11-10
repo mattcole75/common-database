@@ -440,139 +440,139 @@ create table tms_physical_loop (
 -- transXchange database tables *
 -- ******************************
 
-create table txc_stop (
-    stop_point_ref varchar(11) not null unique,
-    common_name varchar(50) not null,
-    tla varchar(3) not null,
-    created timestamp not null default now(), -- when was this record created
-    updated timestamp not null default now() on update now(), -- when was the last time this record was updated
-    inuse boolean not null default true, -- can this record be used / viewed
-    primary key (stop_point_ref)
-);
+-- create table txc_stop (
+--     stop_point_ref varchar(11) not null unique,
+--     common_name varchar(50) not null,
+--     tla varchar(3) not null,
+--     created timestamp not null default now(), -- when was this record created
+--     updated timestamp not null default now() on update now(), -- when was the last time this record was updated
+--     inuse boolean not null default true, -- can this record be used / viewed
+--     primary key (stop_point_ref)
+-- );
 
-create table txc_operator (
-    id varchar(2) not null unique,
-    code varchar(3) not null unique,
-    name varchar(50) not null unique,
-    created timestamp not null default now(), -- when was this record created
-    updated timestamp not null default now() on update now(), -- when was the last time this record was updated
-    inuse boolean not null default true, -- can this record be used / viewed
-    primary key (id)
-);
+-- create table txc_operator (
+--     id varchar(2) not null unique,
+--     code varchar(3) not null unique,
+--     name varchar(50) not null unique,
+--     created timestamp not null default now(), -- when was this record created
+--     updated timestamp not null default now() on update now(), -- when was the last time this record was updated
+--     inuse boolean not null default true, -- can this record be used / viewed
+--     primary key (id)
+-- );
 
-create table txc_garage (
-    code varchar(3) not null unique,
-    operator_id varchar(2) not null,
-    name varchar(50) not null,
-    primary key (code),
-    created timestamp not null default now(), -- when was this record created
-    updated timestamp not null default now() on update now(), -- when was the last time this record was updated
-    inuse boolean not null default true, -- can this record be used / viewed
-    constraint fk_txc_garage_operator_id foreign key (operator_id) references txc_operator (id) on update cascade on delete cascade
-);
+-- create table txc_garage (
+--     code varchar(3) not null unique,
+--     operator_id varchar(2) not null,
+--     name varchar(50) not null,
+--     primary key (code),
+--     created timestamp not null default now(), -- when was this record created
+--     updated timestamp not null default now() on update now(), -- when was the last time this record was updated
+--     inuse boolean not null default true, -- can this record be used / viewed
+--     constraint fk_txc_garage_operator_id foreign key (operator_id) references txc_operator (id) on update cascade on delete cascade
+-- );
 
-create table txc_route_section (
-    id varchar(7) not null,
-    route_link_id varchar(10) not null unique,
-    from_stop_point_ref varchar(11) not null,
-    to_stop_point_ref varchar(11) not null,
-    direction varchar(50) not null,
-    primary key (id, route_link_id),
-    created timestamp not null default now(), -- when was this record created
-    updated timestamp not null default now() on update now(), -- when was the last time this record was updated
-    inuse boolean not null default true -- can this record be used / viewed
-);
+-- create table txc_route_section (
+--     id varchar(7) not null,
+--     route_link_id varchar(10) not null unique,
+--     from_stop_point_ref varchar(11) not null,
+--     to_stop_point_ref varchar(11) not null,
+--     direction varchar(50) not null,
+--     primary key (id, route_link_id),
+--     created timestamp not null default now(), -- when was this record created
+--     updated timestamp not null default now() on update now(), -- when was the last time this record was updated
+--     inuse boolean not null default true -- can this record be used / viewed
+-- );
 
-create table txc_route (
-    id varchar(10) not null unique,
-    private_code varchar(3) not null,
-    description varchar(100) not null,
-    route_section_ref varchar(7) not null,
-    line_number smallInt not null,
-    route_code smallInt not null,
-    primary key (id),
-    created timestamp not null default now(), -- when was this record created
-    updated timestamp not null default now() on update now(), -- when was the last time this record was updated
-    inuse boolean not null default true, -- can this record be used / viewed
-    constraint fk_txc_route_route_section_ref foreign key (route_section_ref) references txc_route_section (id) on update cascade on delete cascade,
-    constraint fk_txc_route_line_number foreign key (line_number) references tms_line (line_number) on update cascade on delete cascade,
-    constraint fk_txc_route_route_number foreign key (route_code) references tms_route_section (route_code) on update cascade on delete cascade
-);
+-- create table txc_route (
+--     id varchar(10) not null unique,
+--     private_code varchar(3) not null,
+--     description varchar(100) not null,
+--     route_section_ref varchar(7) not null,
+--     line_number smallInt not null,
+--     route_code smallInt not null,
+--     primary key (id),
+--     created timestamp not null default now(), -- when was this record created
+--     updated timestamp not null default now() on update now(), -- when was the last time this record was updated
+--     inuse boolean not null default true, -- can this record be used / viewed
+--     constraint fk_txc_route_route_section_ref foreign key (route_section_ref) references txc_route_section (id) on update cascade on delete cascade,
+--     constraint fk_txc_route_line_number foreign key (line_number) references tms_line (line_number) on update cascade on delete cascade,
+--     constraint fk_txc_route_route_number foreign key (route_code) references tms_route_section (route_code) on update cascade on delete cascade
+-- );
 
-create table txc_journey_pattern_section (
-    id varchar(5) not null,
-    timing_link_id varchar(10) not null,
-    from_id varchar(8) not null,
-    from_sequence_number smallInt not null,
-    from_stop_point_ref varchar(11) not null,
-    from_timing_status varchar(3) not null,
-    to_id varchar(8) not null,
-    to_sequence_number smallInt not null,
-    to_stop_point_ref varchar(11) not null,
-    to_timing_status varchar(3) not null,
-    route_link_ref varchar(10) not null,
-    run_time smallInt not null,
-    primary key (id, timing_link_id),
-    created timestamp not null default now(), -- when was this record created
-    updated timestamp not null default now() on update now(), -- when was the last time this record was updated
-    inuse boolean not null default true, -- can this record be used / viewed
-    constraint fk_txc_journey_pattern_section_route_link_ref foreign key (route_link_ref) references txc_route_section (route_link_id) on update cascade on delete cascade
-);
+-- create table txc_journey_pattern_section (
+--     id varchar(5) not null,
+--     timing_link_id varchar(10) not null,
+--     from_id varchar(8) not null,
+--     from_sequence_number smallInt not null,
+--     from_stop_point_ref varchar(11) not null,
+--     from_timing_status varchar(3) not null,
+--     to_id varchar(8) not null,
+--     to_sequence_number smallInt not null,
+--     to_stop_point_ref varchar(11) not null,
+--     to_timing_status varchar(3) not null,
+--     route_link_ref varchar(10) not null,
+--     run_time smallInt not null,
+--     primary key (id, timing_link_id),
+--     created timestamp not null default now(), -- when was this record created
+--     updated timestamp not null default now() on update now(), -- when was the last time this record was updated
+--     inuse boolean not null default true, -- can this record be used / viewed
+--     constraint fk_txc_journey_pattern_section_route_link_ref foreign key (route_link_ref) references txc_route_section (route_link_id) on update cascade on delete cascade
+-- );
 
-create table txc_service (
-    code smallInt not null unique,
-    line_id varchar(3) not null,
-    line_ref smallInt not null,
-    start_date date not null,
-    operator_ref varchar(2) not null,
-    direction varchar(50) not null,
-    origin varchar(50) not null,
-    destination varchar(50) not null,
-    primary key (code),
-    created timestamp not null default now(), -- when was this record created
-    updated timestamp not null default now() on update now(), -- when was the last time this record was updated
-    inuse boolean not null default true, -- can this record be used / viewed
-    constraint fk_txc_service_operator_ref foreign key (operator_ref) references txc_operator (id) on update cascade on delete cascade
-);
+-- create table txc_service (
+--     code smallInt not null unique,
+--     line_id varchar(3) not null,
+--     line_ref smallInt not null,
+--     start_date date not null,
+--     operator_ref varchar(2) not null,
+--     direction varchar(50) not null,
+--     origin varchar(50) not null,
+--     destination varchar(50) not null,
+--     primary key (code),
+--     created timestamp not null default now(), -- when was this record created
+--     updated timestamp not null default now() on update now(), -- when was the last time this record was updated
+--     inuse boolean not null default true, -- can this record be used / viewed
+--     constraint fk_txc_service_operator_ref foreign key (operator_ref) references txc_operator (id) on update cascade on delete cascade
+-- );
 
-create table txc_service_journey_pattern (
-    service_code smallInt not null,
-    journey_pattern_id varchar(6) not null unique,
-    direction varchar(50) not null,
-    route_ref varchar(10) not null,
-    journey_pattern_section_ref varchar(5) not null,
-    primary key (service_code, journey_pattern_id),
-    created timestamp not null default now(), -- when was this record created
-    updated timestamp not null default now() on update now(), -- when was the last time this record was updated
-    inuse boolean not null default true, -- can this record be used / viewed
-    constraint fk_txc_service_journey_pattern_route_ref foreign key (route_ref) references txc_route (id) on update cascade on delete cascade,
-    constraint fk_txc_service_journey_pattern_journey_pattern_section_ref foreign key (journey_pattern_section_ref) references txc_journey_pattern_section (id) on update cascade on delete cascade
-);
+-- create table txc_service_journey_pattern (
+--     service_code smallInt not null,
+--     journey_pattern_id varchar(6) not null unique,
+--     direction varchar(50) not null,
+--     route_ref varchar(10) not null,
+--     journey_pattern_section_ref varchar(5) not null,
+--     primary key (service_code, journey_pattern_id),
+--     created timestamp not null default now(), -- when was this record created
+--     updated timestamp not null default now() on update now(), -- when was the last time this record was updated
+--     inuse boolean not null default true, -- can this record be used / viewed
+--     constraint fk_txc_service_journey_pattern_route_ref foreign key (route_ref) references txc_route (id) on update cascade on delete cascade,
+--     constraint fk_txc_service_journey_pattern_journey_pattern_section_ref foreign key (journey_pattern_section_ref) references txc_journey_pattern_section (id) on update cascade on delete cascade
+-- );
 
-create table txc_vehicle_journey (
-    sequence smallInt not null,
-    block varchar(10) not null,
-    block_number smallInt not null,
-    ticket_journey_code varchar(10) not null,
-    vehicle_journey_code varchar(6) not null,
-    service_ref smallInt not null,
-    line_ref varchar(3) not null,
-    service_journey_pattern_ref varchar(6) not null,
-    dead_run_id varchar(10) null,
-    dead_run_positioning_link_id varchar(12) null,
-    dead_run_time smallInt null,
-    from_garage varchar(3) null,
-    to_stop_point_ref varchar(11) null,
-    departure_time time not null,
-    created timestamp not null default now(), -- when was this record created
-    updated timestamp not null default now() on update now(), -- when was the last time this record was updated
-    inuse boolean not null default true, -- can this record be used / viewed
-    primary key (sequence),
-    constraint fk_txc_vehicle_journey_service_ref foreign key (service_ref) references txc_service (code) on update cascade on delete cascade,
-    constraint fk_txc_vehicle_journey_service_journey_pattern_ref foreign key (service_journey_pattern_ref) references txc_service_journey_pattern (journey_pattern_id) on update cascade on delete cascade,
-    constraint fk_txc_vehicle_journey_from_garage foreign key (from_garage) references txc_garage (code) on update cascade on delete cascade,
-    constraint fk_txc_vehicle_journey_to_stop_point_ref foreign key (to_stop_point_ref) references txc_stop (stop_point_ref) on update cascade on delete cascade
-);
+-- create table txc_vehicle_journey (
+--     sequence smallInt not null,
+--     block varchar(10) not null,
+--     block_number smallInt not null,
+--     ticket_journey_code varchar(10) not null,
+--     vehicle_journey_code varchar(6) not null,
+--     service_ref smallInt not null,
+--     line_ref varchar(3) not null,
+--     service_journey_pattern_ref varchar(6) not null,
+--     dead_run_id varchar(10) null,
+--     dead_run_positioning_link_id varchar(12) null,
+--     dead_run_time smallInt null,
+--     from_garage varchar(3) null,
+--     to_stop_point_ref varchar(11) null,
+--     departure_time time not null,
+--     created timestamp not null default now(), -- when was this record created
+--     updated timestamp not null default now() on update now(), -- when was the last time this record was updated
+--     inuse boolean not null default true, -- can this record be used / viewed
+--     primary key (sequence),
+--     constraint fk_txc_vehicle_journey_service_ref foreign key (service_ref) references txc_service (code) on update cascade on delete cascade,
+--     constraint fk_txc_vehicle_journey_service_journey_pattern_ref foreign key (service_journey_pattern_ref) references txc_service_journey_pattern (journey_pattern_id) on update cascade on delete cascade,
+--     constraint fk_txc_vehicle_journey_from_garage foreign key (from_garage) references txc_garage (code) on update cascade on delete cascade,
+--     constraint fk_txc_vehicle_journey_to_stop_point_ref foreign key (to_stop_point_ref) references txc_stop (stop_point_ref) on update cascade on delete cascade
+-- );
 
 -- *****************************
 -- application database tables *
