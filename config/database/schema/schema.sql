@@ -335,9 +335,9 @@ create table tms_route_section_link (
     updated timestamp not null default now() on update now(), -- when was the last time this record was updated
     inuse boolean not null default true, -- can this record be used / viewed
     primary key (id, route_code, line_number),
-    constraint fk_route_section_link_line_number foreign key (line_number) references tms_line (line_number)
-		    on update cascade on delete cascade,
-    constraint fk_route_section_link_route_code foreign key (route_code) references tms_route_section (route_code)
+    -- constraint fk_route_section_link_line_number foreign key (line_number) references tms_line (line_number)
+	--	    on update cascade on delete cascade,
+    constraint fk_route_section_link_route_code foreign key (route_code, line_number) references tms_route_section (route_code, line_number)
 		    on update cascade on delete cascade
 );
 
