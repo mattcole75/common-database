@@ -1,7 +1,0 @@
-[
-    { "code": "E&M", "department": "Electrical & Mechanical" },
-    { "code": "ENG", "department": "Engineering" },
-    { "code": "P&F", "department": "Presentation & Facilities" },
-    { "code": "S&T", "department": "Signalling & Telecommunications" },
-    { "code": "T&C", "department": "Track & Civils" }
-]
