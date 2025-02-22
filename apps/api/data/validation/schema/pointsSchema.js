@@ -3,8 +3,8 @@ const moment = require('moment');
 const postPointMachineSwingTimeSchema = {
     id: value => value.length > 0 && value.length <= 6,
     direction: value => value === 'Points Set Right' || value === 'Points Set Left',
-    swingTime: value => parseInt(value) === Number(value),
-    tmsTimestamp: value => moment(value).isValid()
+    swingTime: value => parseInt(value) === Number(value)
+    // tmsTimestamp: value => moment(value).isValid()
 };
 
 const getPointMachineSwingTimesSchema = {

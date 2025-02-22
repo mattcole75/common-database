@@ -1,4 +1,4 @@
-const config = require('../../apps/tms/config/config');
+const config = require('../../apps/api/config/config');
 const service = config.get('service');
 const version = config.get('version');
 
